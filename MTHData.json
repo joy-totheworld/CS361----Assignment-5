@@ -1,0 +1,1340 @@
+[
+    [
+        {
+            "identifiers": [
+                "MTH 065",
+                " ELEMENTARY ALGEBRA"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 103",
+                " ALGEBRAIC REASONING"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 105",
+                " *INTRODUCTION TO CONTEMPORARY MATHEMATICS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 105Z",
+                " +*MATH IN SOCIETY"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 111",
+                " *COLLEGE ALGEBRA"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 111Z",
+                " +*PRECALCULUS I: FUNCTIONS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 112",
+                " *ELEMENTARY FUNCTIONS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 112Z",
+                " +*PRECALCULUS II: TRIGONOMETRY"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 199",
+                " SPECIAL TOPICS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 211",
+                " *FOUNDATIONS OF ELEMENTARY MATHEMATICS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 212",
+                " FOUNDATIONS OF ELEMENTARY MATHEMATICS"
+            ],
+            "prereqs": [
+                "MTH 211"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 227",
+                " *CALCULUS AND PROBABILITY FOR THE LIFE SCIENCES I"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 228",
+                " CALCULUS AND PROBABILITY FOR THE LIFE SCIENCES II"
+            ],
+            "prereqs": [
+                "MTH 227",
+                "MTH 227X -"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 231",
+                " ELEMENTS OF DISCRETE MATHEMATICS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 231H",
+                " ELEMENTS OF DISCRETE MATHEMATICS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 241",
+                " *CALCULUS FOR MANAGEMENT AND SOCIAL SCIENCE"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 241H",
+                " *CALCULUS FOR MANAGEMENT AND SOCIAL SCIENCE"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 245",
+                " *MATHEMATICS FOR MANAGEMENT",
+                " LIFE",
+                " AND SOCIAL SCIENCES"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 251",
+                " *DIFFERENTIAL CALCULUS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 251H",
+                " *DIFFERENTIAL CALCULUS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 252",
+                " INTEGRAL CALCULUS"
+            ],
+            "prereqs": [
+                "MTH 251",
+                "MTH 251H -"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 252H",
+                " INTEGRAL CALCULUS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 253",
+                " INFINITE SERIES AND SEQUENCES"
+            ],
+            "prereqs": [
+                "MTH 252",
+                "MTH 252H -"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 254",
+                " VECTOR CALCULUS I"
+            ],
+            "prereqs": [
+                "MTH 252",
+                "MTH 252H -"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 254H",
+                " VECTOR CALCULUS I"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 255",
+                " VECTOR CALCULUS II"
+            ],
+            "prereqs": [
+                "MTH 254",
+                "MTH 254H -"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 255H",
+                " VECTOR CALCULUS II"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 256",
+                " APPLIED DIFFERENTIAL EQUATIONS"
+            ],
+            "prereqs": [
+                "MTH 254",
+                "MTH 254H -"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 256H",
+                " APPLIED DIFFERENTIAL EQUATIONS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 264",
+                " INTRODUCTION TO MATRIX ALGEBRA"
+            ],
+            "prereqs": [
+                "MTH 252",
+                "MTH 252H -"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 264H",
+                " INTRODUCTION TO MATRIX ALGEBRA"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 265",
+                " INTRODUCTION TO SERIES"
+            ],
+            "prereqs": [
+                "MTH 252",
+                "MTH 252H -"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 265H",
+                " INTRODUCTION TO SERIES"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 299",
+                " SPECIAL TOPICS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 306",
+                " MATRIX AND POWER SERIES METHODS"
+            ],
+            "prereqs": [
+                "MTH 252",
+                "MTH 252H -"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 306H",
+                " MATRIX AND POWER SERIES METHODS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 310",
+                " FOUNDATIONS OF MATHEMATICS"
+            ],
+            "prereqs": [
+                "MTH 253",
+                ""
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 311",
+                " ADVANCED CALCULUS I"
+            ],
+            "prereqs": [
+                [
+                    [
+                        "MTH 254",
+                        "MTH 254H -"
+                    ]
+                ],
+                [
+                    [
+                        "MTH 355",
+                        "MTH 310"
+                    ]
+                ]
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 312",
+                " ADVANCED CALCULUS II"
+            ],
+            "prereqs": [
+                "MTH 311"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 321",
+                " INTRODUCTORY APPLICATIONS OF MATHEMATICAL SOFTWARE"
+            ],
+            "prereqs": [
+                "MTH 341",
+                "MTH 264    MTH 264H -",
+                "MTH 264",
+                "MTH 264H -",
+                "",
+                "MTH 306    MTH 306H -",
+                "MTH 306",
+                "MTH 306H -"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 323",
+                " ^MATHEMATICAL MODELING"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 333",
+                " ^FUNDAMENTAL CONCEPTS OF TOPOLOGY"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 338",
+                " ^NON-EUCLIDEAN GEOMETRY"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 341",
+                " LINEAR ALGEBRA I"
+            ],
+            "prereqs": [
+                "MTH 254",
+                "MTH 254H -"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 342",
+                " LINEAR ALGEBRA II"
+            ],
+            "prereqs": [
+                "MTH 341"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 343",
+                " INTRODUCTION TO MODERN ALGEBRA"
+            ],
+            "prereqs": [
+                [
+                    [
+                        "MTH 341"
+                    ]
+                ],
+                [
+                    [
+                        "MTH 355",
+                        "MTH 310"
+                    ]
+                ],
+                "MTH 355",
+                "MTH 310"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 351",
+                " INTRODUCTION TO NUMERICAL ANALYSIS"
+            ],
+            "prereqs": [
+                "MTH 253",
+                "MTH 306    MTH 306H -",
+                "MTH 306",
+                "MTH 306H -",
+                "MTH 306    MTH 306H -",
+                "(",
+                [
+                    [
+                        "MTH 264",
+                        "MTH 264H -"
+                    ]
+                ],
+                [
+                    [
+                        "MTH 265",
+                        "MTH 265H"
+                    ]
+                ],
+                ")"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 355",
+                " DISCRETE MATHEMATICS"
+            ],
+            "prereqs": [
+                "MTH 253"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 361",
+                " INTRODUCTION TO PROBABILITY"
+            ],
+            "prereqs": [
+                "MTH 253",
+                "MTH 306    MTH 306H -",
+                "MTH 306",
+                "MTH 306H -",
+                "",
+                "MTH 265    MTH 265H -",
+                "MTH 265",
+                "MTH 265H -"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 390",
+                " FOUNDATIONS OF ELEMENTARY MATHEMATICS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 399",
+                " SPECIAL TOPICS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 399H",
+                " SPECIAL TOPICS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 401",
+                " RESEARCH"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 403",
+                " THESIS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 405",
+                " READING AND CONFERENCE"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 406",
+                " PROJECTS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 407",
+                " SEMINAR"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 410",
+                " OCCUPATIONAL INTERNSHIP"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 411",
+                " REAL ANALYSIS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 419",
+                " MULTIVARIABLE ADVANCED CALCULUS"
+            ],
+            "prereqs": [
+                "MTH 312 with B"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 420",
+                " MODELS AND METHODS OF APPLIED MATHEMATICS"
+            ],
+            "prereqs": [
+                "MTH 256",
+                "MTH 256H -",
+                [
+                    [
+                        "MTH 256",
+                        "MTH 256H -"
+                    ]
+                ],
+                [
+                    [
+                        "MTH 341"
+                    ]
+                ]
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 427",
+                " INTRODUCTION TO MATHEMATICAL BIOLOGY"
+            ],
+            "prereqs": [
+                "MTH 256",
+                "MTH 256H -",
+                [
+                    [
+                        "MTH 256",
+                        "MTH 256H -"
+                    ]
+                ],
+                [
+                    [
+                        "MTH 341"
+                    ]
+                ]
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 428",
+                " STOCHASTIC ELEMENTS IN MATHEMATICAL BIOLOGY"
+            ],
+            "prereqs": [
+                [
+                    [
+                        "MTH 341"
+                    ]
+                ],
+                [
+                    [
+                        "MTH 361",
+                        "MTH 463"
+                    ]
+                ],
+                "MTH 361",
+                "MTH 463"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 430",
+                " METRIC SPACES AND TOPOLOGY"
+            ],
+            "prereqs": [
+                "MTH 311"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 434",
+                " INTRODUCTION TO DIFFERENTIAL GEOMETRY"
+            ],
+            "prereqs": [
+                "MTH 255",
+                "MTH 255H -",
+                [
+                    [
+                        "MTH 255",
+                        "MTH 255H -"
+                    ]
+                ],
+                [
+                    [
+                        "MTH 342"
+                    ]
+                ]
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 435",
+                " DIFFERENTIAL GEOMETRY"
+            ],
+            "prereqs": [
+                "MTH 434"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 437",
+                " GENERAL RELATIVITY"
+            ],
+            "prereqs": [
+                "MTH 434",
+                "MTH 534 -"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 440",
+                " COMPUTATIONAL NUMBER THEORY"
+            ],
+            "prereqs": [
+                "MTH 231",
+                "MTH 231H -",
+                "MTH 343",
+                "MTH 355 -",
+                "MTH 310"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 441",
+                " APPLIED AND COMPUTATIONAL ALGEBRA"
+            ],
+            "prereqs": [
+                [
+                    [
+                        "MTH 343"
+                    ]
+                ],
+                [
+                    [
+                        "MTH 342",
+                        "MTH 440"
+                    ]
+                ],
+                "MTH 342",
+                "MTH 440"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 442",
+                " APPLIED AND COMPUTATIONAL ALGEBRA"
+            ],
+            "prereqs": [
+                [
+                    [
+                        "MTH 343"
+                    ]
+                ],
+                [
+                    [
+                        "MTH 342",
+                        "MTH 440",
+                        "MTH 441"
+                    ]
+                ],
+                "MTH 342",
+                "MTH 440",
+                "MTH 441"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 443",
+                " ABSTRACT LINEAR ALGEBRA"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 444",
+                " ABSTRACT ALGEBRA"
+            ],
+            "prereqs": [
+                "MTH 343"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 451",
+                " NUMERICAL LINEAR ALGEBRA"
+            ],
+            "prereqs": [
+                "MTH 341"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 452",
+                " NUMERICAL SOLUTION OF ORDINARY DIFFERENTIAL EQUATIONS"
+            ],
+            "prereqs": [
+                "MTH 256",
+                "MTH 256H -",
+                [
+                    [
+                        "MTH 256",
+                        "MTH 256H -"
+                    ]
+                ],
+                [
+                    [
+                        "("
+                    ]
+                ],
+                "MTH 306",
+                "MTH 306H -",
+                "MTH 306    MTH 306H -",
+                "MTH 341   or",
+                "MTH 264",
+                "MTH 264H -",
+                "MTH 265",
+                "MTH 265H",
+                ")"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 453",
+                " NUMERICAL SOLUTION OF PARTIAL DIFFERENTIAL EQUATIONS"
+            ],
+            "prereqs": [
+                "MTH 452"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 463",
+                " PROBABILITY I"
+            ],
+            "prereqs": [
+                "MTH 311",
+                ""
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 464",
+                " PROBABILITY II"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 465",
+                " PROBABILITY III"
+            ],
+            "prereqs": [
+                "MTH 464"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 467",
+                " ACTUARIAL MATHEMATICS"
+            ],
+            "prereqs": [
+                "MTH 361",
+                "MTH 463 -",
+                "ST 421"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 480",
+                " SYSTEMS OF ORDINARY DIFFERENTIAL EQUATIONS"
+            ],
+            "prereqs": [
+                "MTH 256",
+                "MTH 256H -",
+                [
+                    [
+                        "MTH 256",
+                        "MTH 256H -"
+                    ]
+                ],
+                [
+                    [
+                        "MTH 341"
+                    ]
+                ]
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 481",
+                " APPLIED ORDINARY DIFFERENTIAL EQUATIONS"
+            ],
+            "prereqs": [
+                "MTH 256",
+                "MTH 256H -",
+                [
+                    [
+                        "MTH 256",
+                        "MTH 256H -"
+                    ]
+                ],
+                [
+                    [
+                        "("
+                    ]
+                ],
+                "MTH 253",
+                "MTH 253H -",
+                "",
+                "MTH 265    MTH 265H -",
+                "MTH 265",
+                "MTH 265H -",
+                [
+                    [
+                        "MTH 265",
+                        "MTH 265H -"
+                    ]
+                ],
+                [
+                    [
+                        []
+                    ]
+                ],
+                "MTH 264",
+                "MTH 264H",
+                "",
+                "MTH 306   MTH 306H",
+                "MTH 306",
+                "MTH 306H",
+                ") )"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 482",
+                " APPLIED PARTIAL DIFFERENTIAL EQUATIONS"
+            ],
+            "prereqs": [
+                "MTH 480",
+                "MTH 481 -"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 483",
+                " COMPLEX VARIABLES"
+            ],
+            "prereqs": [
+                "MTH 256",
+                "MTH 256H -",
+                [
+                    [
+                        "MTH 256",
+                        "MTH 256H -"
+                    ]
+                ],
+                [
+                    [
+                        []
+                    ]
+                ],
+                "MTH 306",
+                "MTH 306H",
+                "",
+                "MTH 265   MTH 265H",
+                "MTH 265",
+                "MTH 265H",
+                ")"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 490",
+                " INTENSIVE SUMMER RESEARCH IN MATHEMATICS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 491",
+                " ALGEBRA AND GEOMETRIC TRANSFORMATIONS"
+            ],
+            "prereqs": [
+                "MTH 341"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 492",
+                " ALGEBRA AND GEOMETRIC TRANSFORMATIONS"
+            ],
+            "prereqs": [
+                "MTH 491"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 493",
+                " ALGEBRA AND GEOMETRIC TRANSFORMATIONS"
+            ],
+            "prereqs": [
+                "MTH 492"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 499",
+                " SPECIAL TOPICS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 501",
+                " RESEARCH"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 503",
+                " THESIS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 505",
+                " READING AND CONFERENCE"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 506",
+                " PROJECTS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 507",
+                " SEMINAR"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 508",
+                " WORKSHOP"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 510",
+                " OCCUPATIONAL INTERNSHIP"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 511",
+                " REAL ANALYSIS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 512",
+                " REAL ANALYSIS"
+            ],
+            "prereqs": [
+                "MTH 511"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 513",
+                " REAL ANALYSIS"
+            ],
+            "prereqs": [
+                "MTH 512"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 520",
+                " MODELS AND METHODS OF APPLIED MATHEMATICS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 524",
+                " DYNAMICAL SYSTEMS I"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 525",
+                " DYNAMICAL SYSTEMS II"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 527",
+                " INTRODUCTION TO MATHEMATICAL BIOLOGY"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 528",
+                " STOCHASTIC ELEMENTS IN MATHEMATICAL BIOLOGY"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 531",
+                " GENERAL TOPOLOGY AND FUNDAMENTAL GROUPS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 532",
+                " GENERAL TOPOLOGY AND FUNDAMENTAL GROUPS"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 534",
+                " INTRODUCTION TO DIFFERENTIAL GEOMETRY"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 535",
+                " DIFFERENTIAL GEOMETRY"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 537",
+                " GENERAL RELATIVITY"
+            ],
+            "prereqs": [
+                "MTH 434",
+                "MTH 534"
+            ]
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 540",
+                " COMPUTATIONAL NUMBER THEORY"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 541",
+                " APPLIED AND COMPUTATIONAL ALGEBRA"
+            ],
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "identifiers": [
+                "MTH 542",
+                " APPLIED AND COMPUTATIONAL ALGEBRA"
+            ],
+            "prereqs": [
+                "MTH 540",
+                "MTH 541"
+            ]
+        }
+    ]
+]

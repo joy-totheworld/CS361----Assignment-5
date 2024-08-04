@@ -1,3 +1,8 @@
+function Class(identifiers, prereqs) {
+    this.identifiers = identifiers;
+    this.prereqs = prereqs;
+}
+  
 function isEmpty(value) {
     return (value !== "");
 }
@@ -339,8 +344,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         var courseNamesArray = courseNamesString.split(",");
         courseNamesArray.pop()
         // console.log("course names array: ", courseNamesArray);
-        courseArray[i].push(courseNamesArray)
-        courseArray[i].push([])
+        courseArray[i].push(new Class(courseNamesArray, []))
 
         var coursePrereqsStringSource = (CS_courses[i].getElementsByClassName("courseblockextra noindent"))[0];
         // console.log("coursePrereqsStringSource: ", coursePrereqsStringSource)
@@ -394,9 +398,34 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 coursePrereqsString = coursePrereqsString.filter(isNotMathTest)
                 console.log("coursePrereqsString: ", coursePrereqsString)
 
-                coursePrereqsString = conjunctionCheckArray(coursePrereqsString)
-                courseArray[i][1] = coursePrereqsString
-                console.log("OUTPUT PREREQS", coursePrereqsString)
+                var coursePrereqsData = conjunctionCheckArray(coursePrereqsString)
+                currClass = courseArray[i][0]
+                console.log("currClass: ",currClass)
+                currClass.prereqs = coursePrereqsData
+                console.log("OUTPUT PREREQS", coursePrereqsData)
+
+                page = document.getElementsByClassName("page-title")[0].innerText
+                console.log(page)
+
+                if (page.includes("Computer Science")) {
+                    fetch("/CSDATA", {
+                        method: "POST",
+                        headers: {
+                          "Content-type": "application/json"
+                        },
+                        body: JSON.stringify({courseArray})
+                    })
+                } else if (page.includes("Math")) {
+                    fetch("/MTHDATA", {
+                        method: "POST",
+                        headers: {
+                          "Content-type": "application/json"
+                        },
+                        body: JSON.stringify({courseArray})
+                    })
+                }
+                
+
 
 
                 // for (let l = 0; l < coursePrereqsString.length; l++) {
