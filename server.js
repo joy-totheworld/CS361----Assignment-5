@@ -1,6 +1,10 @@
 var express = require('express')
 var app = express()
 var fs = require('fs');
+var classDataCS = require("./CSData.json")
+var classDataMTH = require("./MTHData.json")
+
+
 
 // middleware
 app.use(express.static('static'))
@@ -11,8 +15,17 @@ app.listen(3000, function () {
 });
 
 app.get('', function (req, res, next) {
-    res.status(200).sendFile(__dirname + '/static/sourceCS.html')
-  })
+    res.status(200).sendFile(__dirname + '/static/home.html')
+})
+
+app.get('/classDataCS', function (req, res, next) {
+    res.status(200).json(JSON.stringify(classDataCS));
+})
+
+app.get('/classDataMTH', function (req, res, next) {
+    res.status(200).json(JSON.stringify(classDataMTH));
+})
+
 
 app.post('/CSDATA', function (req, res, next) {
     console.log("POST request body: ",req.body.courseArray);

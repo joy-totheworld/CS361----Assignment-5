@@ -1,100 +1,78 @@
 [
     [
         {
-            "identifiers": [
-                "MTH 065",
-                " ELEMENTARY ALGEBRA"
-            ],
+            "courseID": "MTH 065",
+            "courseName": " ELEMENTARY ALGEBRA",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 103",
-                " ALGEBRAIC REASONING"
-            ],
+            "courseID": "MTH 103",
+            "courseName": " ALGEBRAIC REASONING",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 105",
-                " *INTRODUCTION TO CONTEMPORARY MATHEMATICS"
-            ],
+            "courseID": "MTH 105",
+            "courseName": " *INTRODUCTION TO CONTEMPORARY MATHEMATICS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 105Z",
-                " +*MATH IN SOCIETY"
-            ],
+            "courseID": "MTH 105Z",
+            "courseName": " +*MATH IN SOCIETY",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 111",
-                " *COLLEGE ALGEBRA"
-            ],
+            "courseID": "MTH 111",
+            "courseName": " *COLLEGE ALGEBRA",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 111Z",
-                " +*PRECALCULUS I: FUNCTIONS"
-            ],
+            "courseID": "MTH 111Z",
+            "courseName": " +*PRECALCULUS I: FUNCTIONS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 112",
-                " *ELEMENTARY FUNCTIONS"
-            ],
+            "courseID": "MTH 112",
+            "courseName": " *ELEMENTARY FUNCTIONS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 112Z",
-                " +*PRECALCULUS II: TRIGONOMETRY"
-            ],
+            "courseID": "MTH 112Z",
+            "courseName": " +*PRECALCULUS II: TRIGONOMETRY",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 199",
-                " SPECIAL TOPICS"
-            ],
+            "courseID": "MTH 199",
+            "courseName": " SPECIAL TOPICS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 211",
-                " *FOUNDATIONS OF ELEMENTARY MATHEMATICS"
-            ],
+            "courseID": "MTH 211",
+            "courseName": " *FOUNDATIONS OF ELEMENTARY MATHEMATICS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 212",
-                " FOUNDATIONS OF ELEMENTARY MATHEMATICS"
-            ],
+            "courseID": "MTH 212",
+            "courseName": " FOUNDATIONS OF ELEMENTARY MATHEMATICS",
             "prereqs": [
                 "MTH 211"
             ]
@@ -102,19 +80,15 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 227",
-                " *CALCULUS AND PROBABILITY FOR THE LIFE SCIENCES I"
-            ],
+            "courseID": "MTH 227",
+            "courseName": " *CALCULUS AND PROBABILITY FOR THE LIFE SCIENCES I",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 228",
-                " CALCULUS AND PROBABILITY FOR THE LIFE SCIENCES II"
-            ],
+            "courseID": "MTH 228",
+            "courseName": " CALCULUS AND PROBABILITY FOR THE LIFE SCIENCES II",
             "prereqs": [
                 "MTH 227",
                 "MTH 227X -"
@@ -123,75 +97,57 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 231",
-                " ELEMENTS OF DISCRETE MATHEMATICS"
-            ],
+            "courseID": "MTH 231",
+            "courseName": " ELEMENTS OF DISCRETE MATHEMATICS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 231H",
-                " ELEMENTS OF DISCRETE MATHEMATICS"
-            ],
+            "courseID": "MTH 231H",
+            "courseName": " ELEMENTS OF DISCRETE MATHEMATICS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 241",
-                " *CALCULUS FOR MANAGEMENT AND SOCIAL SCIENCE"
-            ],
+            "courseID": "MTH 241",
+            "courseName": " *CALCULUS FOR MANAGEMENT AND SOCIAL SCIENCE",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 241H",
-                " *CALCULUS FOR MANAGEMENT AND SOCIAL SCIENCE"
-            ],
+            "courseID": "MTH 241H",
+            "courseName": " *CALCULUS FOR MANAGEMENT AND SOCIAL SCIENCE",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 245",
-                " *MATHEMATICS FOR MANAGEMENT",
-                " LIFE",
-                " AND SOCIAL SCIENCES"
-            ],
+            "courseID": "MTH 245",
+            "courseName": " *MATHEMATICS FOR MANAGEMENT",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 251",
-                " *DIFFERENTIAL CALCULUS"
-            ],
+            "courseID": "MTH 251",
+            "courseName": " *DIFFERENTIAL CALCULUS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 251H",
-                " *DIFFERENTIAL CALCULUS"
-            ],
+            "courseID": "MTH 251H",
+            "courseName": " *DIFFERENTIAL CALCULUS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 252",
-                " INTEGRAL CALCULUS"
-            ],
+            "courseID": "MTH 252",
+            "courseName": " INTEGRAL CALCULUS",
             "prereqs": [
                 "MTH 251",
                 "MTH 251H -"
@@ -200,19 +156,15 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 252H",
-                " INTEGRAL CALCULUS"
-            ],
+            "courseID": "MTH 252H",
+            "courseName": " INTEGRAL CALCULUS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 253",
-                " INFINITE SERIES AND SEQUENCES"
-            ],
+            "courseID": "MTH 253",
+            "courseName": " INFINITE SERIES AND SEQUENCES",
             "prereqs": [
                 "MTH 252",
                 "MTH 252H -"
@@ -221,10 +173,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 254",
-                " VECTOR CALCULUS I"
-            ],
+            "courseID": "MTH 254",
+            "courseName": " VECTOR CALCULUS I",
             "prereqs": [
                 "MTH 252",
                 "MTH 252H -"
@@ -233,19 +183,15 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 254H",
-                " VECTOR CALCULUS I"
-            ],
+            "courseID": "MTH 254H",
+            "courseName": " VECTOR CALCULUS I",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 255",
-                " VECTOR CALCULUS II"
-            ],
+            "courseID": "MTH 255",
+            "courseName": " VECTOR CALCULUS II",
             "prereqs": [
                 "MTH 254",
                 "MTH 254H -"
@@ -254,19 +200,15 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 255H",
-                " VECTOR CALCULUS II"
-            ],
+            "courseID": "MTH 255H",
+            "courseName": " VECTOR CALCULUS II",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 256",
-                " APPLIED DIFFERENTIAL EQUATIONS"
-            ],
+            "courseID": "MTH 256",
+            "courseName": " APPLIED DIFFERENTIAL EQUATIONS",
             "prereqs": [
                 "MTH 254",
                 "MTH 254H -"
@@ -275,19 +217,15 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 256H",
-                " APPLIED DIFFERENTIAL EQUATIONS"
-            ],
+            "courseID": "MTH 256H",
+            "courseName": " APPLIED DIFFERENTIAL EQUATIONS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 264",
-                " INTRODUCTION TO MATRIX ALGEBRA"
-            ],
+            "courseID": "MTH 264",
+            "courseName": " INTRODUCTION TO MATRIX ALGEBRA",
             "prereqs": [
                 "MTH 252",
                 "MTH 252H -"
@@ -296,19 +234,15 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 264H",
-                " INTRODUCTION TO MATRIX ALGEBRA"
-            ],
+            "courseID": "MTH 264H",
+            "courseName": " INTRODUCTION TO MATRIX ALGEBRA",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 265",
-                " INTRODUCTION TO SERIES"
-            ],
+            "courseID": "MTH 265",
+            "courseName": " INTRODUCTION TO SERIES",
             "prereqs": [
                 "MTH 252",
                 "MTH 252H -"
@@ -317,28 +251,22 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 265H",
-                " INTRODUCTION TO SERIES"
-            ],
+            "courseID": "MTH 265H",
+            "courseName": " INTRODUCTION TO SERIES",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 299",
-                " SPECIAL TOPICS"
-            ],
+            "courseID": "MTH 299",
+            "courseName": " SPECIAL TOPICS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 306",
-                " MATRIX AND POWER SERIES METHODS"
-            ],
+            "courseID": "MTH 306",
+            "courseName": " MATRIX AND POWER SERIES METHODS",
             "prereqs": [
                 "MTH 252",
                 "MTH 252H -"
@@ -347,19 +275,15 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 306H",
-                " MATRIX AND POWER SERIES METHODS"
-            ],
+            "courseID": "MTH 306H",
+            "courseName": " MATRIX AND POWER SERIES METHODS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 310",
-                " FOUNDATIONS OF MATHEMATICS"
-            ],
+            "courseID": "MTH 310",
+            "courseName": " FOUNDATIONS OF MATHEMATICS",
             "prereqs": [
                 "MTH 253",
                 ""
@@ -368,10 +292,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 311",
-                " ADVANCED CALCULUS I"
-            ],
+            "courseID": "MTH 311",
+            "courseName": " ADVANCED CALCULUS I",
             "prereqs": [
                 [
                     [
@@ -390,10 +312,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 312",
-                " ADVANCED CALCULUS II"
-            ],
+            "courseID": "MTH 312",
+            "courseName": " ADVANCED CALCULUS II",
             "prereqs": [
                 "MTH 311"
             ]
@@ -401,10 +321,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 321",
-                " INTRODUCTORY APPLICATIONS OF MATHEMATICAL SOFTWARE"
-            ],
+            "courseID": "MTH 321",
+            "courseName": " INTRODUCTORY APPLICATIONS OF MATHEMATICAL SOFTWARE",
             "prereqs": [
                 "MTH 341",
                 "MTH 264    MTH 264H -",
@@ -419,37 +337,29 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 323",
-                " ^MATHEMATICAL MODELING"
-            ],
+            "courseID": "MTH 323",
+            "courseName": " ^MATHEMATICAL MODELING",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 333",
-                " ^FUNDAMENTAL CONCEPTS OF TOPOLOGY"
-            ],
+            "courseID": "MTH 333",
+            "courseName": " ^FUNDAMENTAL CONCEPTS OF TOPOLOGY",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 338",
-                " ^NON-EUCLIDEAN GEOMETRY"
-            ],
+            "courseID": "MTH 338",
+            "courseName": " ^NON-EUCLIDEAN GEOMETRY",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 341",
-                " LINEAR ALGEBRA I"
-            ],
+            "courseID": "MTH 341",
+            "courseName": " LINEAR ALGEBRA I",
             "prereqs": [
                 "MTH 254",
                 "MTH 254H -"
@@ -458,10 +368,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 342",
-                " LINEAR ALGEBRA II"
-            ],
+            "courseID": "MTH 342",
+            "courseName": " LINEAR ALGEBRA II",
             "prereqs": [
                 "MTH 341"
             ]
@@ -469,10 +377,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 343",
-                " INTRODUCTION TO MODERN ALGEBRA"
-            ],
+            "courseID": "MTH 343",
+            "courseName": " INTRODUCTION TO MODERN ALGEBRA",
             "prereqs": [
                 [
                     [
@@ -492,10 +398,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 351",
-                " INTRODUCTION TO NUMERICAL ANALYSIS"
-            ],
+            "courseID": "MTH 351",
+            "courseName": " INTRODUCTION TO NUMERICAL ANALYSIS",
             "prereqs": [
                 "MTH 253",
                 "MTH 306    MTH 306H -",
@@ -521,10 +425,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 355",
-                " DISCRETE MATHEMATICS"
-            ],
+            "courseID": "MTH 355",
+            "courseName": " DISCRETE MATHEMATICS",
             "prereqs": [
                 "MTH 253"
             ]
@@ -532,10 +434,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 361",
-                " INTRODUCTION TO PROBABILITY"
-            ],
+            "courseID": "MTH 361",
+            "courseName": " INTRODUCTION TO PROBABILITY",
             "prereqs": [
                 "MTH 253",
                 "MTH 306    MTH 306H -",
@@ -550,100 +450,78 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 390",
-                " FOUNDATIONS OF ELEMENTARY MATHEMATICS"
-            ],
+            "courseID": "MTH 390",
+            "courseName": " FOUNDATIONS OF ELEMENTARY MATHEMATICS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 399",
-                " SPECIAL TOPICS"
-            ],
+            "courseID": "MTH 399",
+            "courseName": " SPECIAL TOPICS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 399H",
-                " SPECIAL TOPICS"
-            ],
+            "courseID": "MTH 399H",
+            "courseName": " SPECIAL TOPICS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 401",
-                " RESEARCH"
-            ],
+            "courseID": "MTH 401",
+            "courseName": " RESEARCH",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 403",
-                " THESIS"
-            ],
+            "courseID": "MTH 403",
+            "courseName": " THESIS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 405",
-                " READING AND CONFERENCE"
-            ],
+            "courseID": "MTH 405",
+            "courseName": " READING AND CONFERENCE",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 406",
-                " PROJECTS"
-            ],
+            "courseID": "MTH 406",
+            "courseName": " PROJECTS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 407",
-                " SEMINAR"
-            ],
+            "courseID": "MTH 407",
+            "courseName": " SEMINAR",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 410",
-                " OCCUPATIONAL INTERNSHIP"
-            ],
+            "courseID": "MTH 410",
+            "courseName": " OCCUPATIONAL INTERNSHIP",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 411",
-                " REAL ANALYSIS"
-            ],
+            "courseID": "MTH 411",
+            "courseName": " REAL ANALYSIS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 419",
-                " MULTIVARIABLE ADVANCED CALCULUS"
-            ],
+            "courseID": "MTH 419",
+            "courseName": " MULTIVARIABLE ADVANCED CALCULUS",
             "prereqs": [
                 "MTH 312 with B"
             ]
@@ -651,10 +529,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 420",
-                " MODELS AND METHODS OF APPLIED MATHEMATICS"
-            ],
+            "courseID": "MTH 420",
+            "courseName": " MODELS AND METHODS OF APPLIED MATHEMATICS",
             "prereqs": [
                 "MTH 256",
                 "MTH 256H -",
@@ -674,10 +550,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 427",
-                " INTRODUCTION TO MATHEMATICAL BIOLOGY"
-            ],
+            "courseID": "MTH 427",
+            "courseName": " INTRODUCTION TO MATHEMATICAL BIOLOGY",
             "prereqs": [
                 "MTH 256",
                 "MTH 256H -",
@@ -697,10 +571,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 428",
-                " STOCHASTIC ELEMENTS IN MATHEMATICAL BIOLOGY"
-            ],
+            "courseID": "MTH 428",
+            "courseName": " STOCHASTIC ELEMENTS IN MATHEMATICAL BIOLOGY",
             "prereqs": [
                 [
                     [
@@ -720,10 +592,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 430",
-                " METRIC SPACES AND TOPOLOGY"
-            ],
+            "courseID": "MTH 430",
+            "courseName": " METRIC SPACES AND TOPOLOGY",
             "prereqs": [
                 "MTH 311"
             ]
@@ -731,10 +601,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 434",
-                " INTRODUCTION TO DIFFERENTIAL GEOMETRY"
-            ],
+            "courseID": "MTH 434",
+            "courseName": " INTRODUCTION TO DIFFERENTIAL GEOMETRY",
             "prereqs": [
                 "MTH 255",
                 "MTH 255H -",
@@ -754,10 +622,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 435",
-                " DIFFERENTIAL GEOMETRY"
-            ],
+            "courseID": "MTH 435",
+            "courseName": " DIFFERENTIAL GEOMETRY",
             "prereqs": [
                 "MTH 434"
             ]
@@ -765,10 +631,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 437",
-                " GENERAL RELATIVITY"
-            ],
+            "courseID": "MTH 437",
+            "courseName": " GENERAL RELATIVITY",
             "prereqs": [
                 "MTH 434",
                 "MTH 534 -"
@@ -777,10 +641,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 440",
-                " COMPUTATIONAL NUMBER THEORY"
-            ],
+            "courseID": "MTH 440",
+            "courseName": " COMPUTATIONAL NUMBER THEORY",
             "prereqs": [
                 "MTH 231",
                 "MTH 231H -",
@@ -792,10 +654,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 441",
-                " APPLIED AND COMPUTATIONAL ALGEBRA"
-            ],
+            "courseID": "MTH 441",
+            "courseName": " APPLIED AND COMPUTATIONAL ALGEBRA",
             "prereqs": [
                 [
                     [
@@ -815,10 +675,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 442",
-                " APPLIED AND COMPUTATIONAL ALGEBRA"
-            ],
+            "courseID": "MTH 442",
+            "courseName": " APPLIED AND COMPUTATIONAL ALGEBRA",
             "prereqs": [
                 [
                     [
@@ -840,19 +698,15 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 443",
-                " ABSTRACT LINEAR ALGEBRA"
-            ],
+            "courseID": "MTH 443",
+            "courseName": " ABSTRACT LINEAR ALGEBRA",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 444",
-                " ABSTRACT ALGEBRA"
-            ],
+            "courseID": "MTH 444",
+            "courseName": " ABSTRACT ALGEBRA",
             "prereqs": [
                 "MTH 343"
             ]
@@ -860,10 +714,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 451",
-                " NUMERICAL LINEAR ALGEBRA"
-            ],
+            "courseID": "MTH 451",
+            "courseName": " NUMERICAL LINEAR ALGEBRA",
             "prereqs": [
                 "MTH 341"
             ]
@@ -871,10 +723,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 452",
-                " NUMERICAL SOLUTION OF ORDINARY DIFFERENTIAL EQUATIONS"
-            ],
+            "courseID": "MTH 452",
+            "courseName": " NUMERICAL SOLUTION OF ORDINARY DIFFERENTIAL EQUATIONS",
             "prereqs": [
                 "MTH 256",
                 "MTH 256H -",
@@ -903,10 +753,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 453",
-                " NUMERICAL SOLUTION OF PARTIAL DIFFERENTIAL EQUATIONS"
-            ],
+            "courseID": "MTH 453",
+            "courseName": " NUMERICAL SOLUTION OF PARTIAL DIFFERENTIAL EQUATIONS",
             "prereqs": [
                 "MTH 452"
             ]
@@ -914,10 +762,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 463",
-                " PROBABILITY I"
-            ],
+            "courseID": "MTH 463",
+            "courseName": " PROBABILITY I",
             "prereqs": [
                 "MTH 311",
                 ""
@@ -926,19 +772,15 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 464",
-                " PROBABILITY II"
-            ],
+            "courseID": "MTH 464",
+            "courseName": " PROBABILITY II",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 465",
-                " PROBABILITY III"
-            ],
+            "courseID": "MTH 465",
+            "courseName": " PROBABILITY III",
             "prereqs": [
                 "MTH 464"
             ]
@@ -946,10 +788,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 467",
-                " ACTUARIAL MATHEMATICS"
-            ],
+            "courseID": "MTH 467",
+            "courseName": " ACTUARIAL MATHEMATICS",
             "prereqs": [
                 "MTH 361",
                 "MTH 463 -",
@@ -959,10 +799,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 480",
-                " SYSTEMS OF ORDINARY DIFFERENTIAL EQUATIONS"
-            ],
+            "courseID": "MTH 480",
+            "courseName": " SYSTEMS OF ORDINARY DIFFERENTIAL EQUATIONS",
             "prereqs": [
                 "MTH 256",
                 "MTH 256H -",
@@ -982,10 +820,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 481",
-                " APPLIED ORDINARY DIFFERENTIAL EQUATIONS"
-            ],
+            "courseID": "MTH 481",
+            "courseName": " APPLIED ORDINARY DIFFERENTIAL EQUATIONS",
             "prereqs": [
                 "MTH 256",
                 "MTH 256H -",
@@ -1029,10 +865,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 482",
-                " APPLIED PARTIAL DIFFERENTIAL EQUATIONS"
-            ],
+            "courseID": "MTH 482",
+            "courseName": " APPLIED PARTIAL DIFFERENTIAL EQUATIONS",
             "prereqs": [
                 "MTH 480",
                 "MTH 481 -"
@@ -1041,10 +875,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 483",
-                " COMPLEX VARIABLES"
-            ],
+            "courseID": "MTH 483",
+            "courseName": " COMPLEX VARIABLES",
             "prereqs": [
                 "MTH 256",
                 "MTH 256H -",
@@ -1071,19 +903,15 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 490",
-                " INTENSIVE SUMMER RESEARCH IN MATHEMATICS"
-            ],
+            "courseID": "MTH 490",
+            "courseName": " INTENSIVE SUMMER RESEARCH IN MATHEMATICS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 491",
-                " ALGEBRA AND GEOMETRIC TRANSFORMATIONS"
-            ],
+            "courseID": "MTH 491",
+            "courseName": " ALGEBRA AND GEOMETRIC TRANSFORMATIONS",
             "prereqs": [
                 "MTH 341"
             ]
@@ -1091,10 +919,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 492",
-                " ALGEBRA AND GEOMETRIC TRANSFORMATIONS"
-            ],
+            "courseID": "MTH 492",
+            "courseName": " ALGEBRA AND GEOMETRIC TRANSFORMATIONS",
             "prereqs": [
                 "MTH 491"
             ]
@@ -1102,10 +928,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 493",
-                " ALGEBRA AND GEOMETRIC TRANSFORMATIONS"
-            ],
+            "courseID": "MTH 493",
+            "courseName": " ALGEBRA AND GEOMETRIC TRANSFORMATIONS",
             "prereqs": [
                 "MTH 492"
             ]
@@ -1113,91 +937,71 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 499",
-                " SPECIAL TOPICS"
-            ],
+            "courseID": "MTH 499",
+            "courseName": " SPECIAL TOPICS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 501",
-                " RESEARCH"
-            ],
+            "courseID": "MTH 501",
+            "courseName": " RESEARCH",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 503",
-                " THESIS"
-            ],
+            "courseID": "MTH 503",
+            "courseName": " THESIS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 505",
-                " READING AND CONFERENCE"
-            ],
+            "courseID": "MTH 505",
+            "courseName": " READING AND CONFERENCE",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 506",
-                " PROJECTS"
-            ],
+            "courseID": "MTH 506",
+            "courseName": " PROJECTS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 507",
-                " SEMINAR"
-            ],
+            "courseID": "MTH 507",
+            "courseName": " SEMINAR",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 508",
-                " WORKSHOP"
-            ],
+            "courseID": "MTH 508",
+            "courseName": " WORKSHOP",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 510",
-                " OCCUPATIONAL INTERNSHIP"
-            ],
+            "courseID": "MTH 510",
+            "courseName": " OCCUPATIONAL INTERNSHIP",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 511",
-                " REAL ANALYSIS"
-            ],
+            "courseID": "MTH 511",
+            "courseName": " REAL ANALYSIS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 512",
-                " REAL ANALYSIS"
-            ],
+            "courseID": "MTH 512",
+            "courseName": " REAL ANALYSIS",
             "prereqs": [
                 "MTH 511"
             ]
@@ -1205,10 +1009,8 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 513",
-                " REAL ANALYSIS"
-            ],
+            "courseID": "MTH 513",
+            "courseName": " REAL ANALYSIS",
             "prereqs": [
                 "MTH 512"
             ]
@@ -1216,91 +1018,71 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 520",
-                " MODELS AND METHODS OF APPLIED MATHEMATICS"
-            ],
+            "courseID": "MTH 520",
+            "courseName": " MODELS AND METHODS OF APPLIED MATHEMATICS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 524",
-                " DYNAMICAL SYSTEMS I"
-            ],
+            "courseID": "MTH 524",
+            "courseName": " DYNAMICAL SYSTEMS I",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 525",
-                " DYNAMICAL SYSTEMS II"
-            ],
+            "courseID": "MTH 525",
+            "courseName": " DYNAMICAL SYSTEMS II",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 527",
-                " INTRODUCTION TO MATHEMATICAL BIOLOGY"
-            ],
+            "courseID": "MTH 527",
+            "courseName": " INTRODUCTION TO MATHEMATICAL BIOLOGY",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 528",
-                " STOCHASTIC ELEMENTS IN MATHEMATICAL BIOLOGY"
-            ],
+            "courseID": "MTH 528",
+            "courseName": " STOCHASTIC ELEMENTS IN MATHEMATICAL BIOLOGY",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 531",
-                " GENERAL TOPOLOGY AND FUNDAMENTAL GROUPS"
-            ],
+            "courseID": "MTH 531",
+            "courseName": " GENERAL TOPOLOGY AND FUNDAMENTAL GROUPS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 532",
-                " GENERAL TOPOLOGY AND FUNDAMENTAL GROUPS"
-            ],
+            "courseID": "MTH 532",
+            "courseName": " GENERAL TOPOLOGY AND FUNDAMENTAL GROUPS",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 534",
-                " INTRODUCTION TO DIFFERENTIAL GEOMETRY"
-            ],
+            "courseID": "MTH 534",
+            "courseName": " INTRODUCTION TO DIFFERENTIAL GEOMETRY",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 535",
-                " DIFFERENTIAL GEOMETRY"
-            ],
+            "courseID": "MTH 535",
+            "courseName": " DIFFERENTIAL GEOMETRY",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 537",
-                " GENERAL RELATIVITY"
-            ],
+            "courseID": "MTH 537",
+            "courseName": " GENERAL RELATIVITY",
             "prereqs": [
                 "MTH 434",
                 "MTH 534"
@@ -1309,31 +1091,202 @@
     ],
     [
         {
-            "identifiers": [
-                "MTH 540",
-                " COMPUTATIONAL NUMBER THEORY"
-            ],
+            "courseID": "MTH 540",
+            "courseName": " COMPUTATIONAL NUMBER THEORY",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 541",
-                " APPLIED AND COMPUTATIONAL ALGEBRA"
-            ],
+            "courseID": "MTH 541",
+            "courseName": " APPLIED AND COMPUTATIONAL ALGEBRA",
             "prereqs": []
         }
     ],
     [
         {
-            "identifiers": [
-                "MTH 542",
-                " APPLIED AND COMPUTATIONAL ALGEBRA"
-            ],
+            "courseID": "MTH 542",
+            "courseName": " APPLIED AND COMPUTATIONAL ALGEBRA",
             "prereqs": [
                 "MTH 540",
                 "MTH 541"
+            ]
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 543",
+            "courseName": " ABSTRACT LINEAR ALGEBRA",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 551",
+            "courseName": " NUMERICAL LINEAR ALGEBRA",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 552",
+            "courseName": " NUMERICAL SOLUTION OF ORDINARY DIFFERENTIAL EQUATIONS",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 553",
+            "courseName": " NUMERICAL SOLUTION OF PARTIAL DIFFERENTIAL EQUATIONS",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 563",
+            "courseName": " PROBABILITY I",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 564",
+            "courseName": " PROBABILITY II",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 565",
+            "courseName": " PROBABILITY III",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 567",
+            "courseName": " ACTUARIAL MATHEMATICS",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 581",
+            "courseName": " APPLIED ORDINARY DIFFERENTIAL EQUATIONS",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 582",
+            "courseName": " APPLIED PARTIAL DIFFERENTIAL EQUATIONS",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 583",
+            "courseName": " COMPLEX VARIABLES",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 591",
+            "courseName": " ALGEBRA AND GEOMETRIC TRANSFORMATIONS",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 592",
+            "courseName": " ALGEBRA AND GEOMETRIC TRANSFORMATIONS",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 593",
+            "courseName": " ALGEBRA AND GEOMETRIC TRANSFORMATIONS",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 599",
+            "courseName": " SPECIAL TOPICS",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 601",
+            "courseName": " RESEARCH",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 603",
+            "courseName": " THESIS",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 605",
+            "courseName": " READING AND CONFERENCE",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 606",
+            "courseName": " SPECIAL PROJECTS",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 607",
+            "courseName": " SEMINAR",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 611",
+            "courseName": " COMPLEX ANALYSIS",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 614",
+            "courseName": " FUNCTIONAL ANALYSIS",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 619",
+            "courseName": " TOPICS IN ANALYSIS",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 621",
+            "courseName": " PARTIAL DIFFERENTIAL EQUATIONS",
+            "prereqs": []
+        }
+    ],
+    [
+        {
+            "courseID": "MTH 622",
+            "courseName": " PARTIAL DIFFERENTIAL EQUATIONS",
+            "prereqs": [
+                "MTH 621"
             ]
         }
     ]

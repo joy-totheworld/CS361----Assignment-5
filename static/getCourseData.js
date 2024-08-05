@@ -1,5 +1,6 @@
-function Class(identifiers, prereqs) {
-    this.identifiers = identifiers;
+function Class(courseID, courseName, prereqs) {
+    this.courseID = courseID;
+    this.courseName = courseName;
     this.prereqs = prereqs;
 }
   
@@ -344,7 +345,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         var courseNamesArray = courseNamesString.split(",");
         courseNamesArray.pop()
         // console.log("course names array: ", courseNamesArray);
-        courseArray[i].push(new Class(courseNamesArray, []))
+        courseArray[i].push(new Class(courseNamesArray[0], courseNamesArray[1], []))
 
         var coursePrereqsStringSource = (CS_courses[i].getElementsByClassName("courseblockextra noindent"))[0];
         // console.log("coursePrereqsStringSource: ", coursePrereqsStringSource)
