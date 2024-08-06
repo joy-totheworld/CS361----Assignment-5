@@ -29,17 +29,18 @@
             <div id="terms-container">
                 <div class="term">
                     <div class="term-year-input-element">
-                        <input type="text" class="term-name" placeholder="School Year" value="2024-25">
+                        <input type="text" class="term-name" placeholder="School Year" value="All Prior Years">
                     </div>
                     <div class="term-name-input-element">
-                        <input type="text" class="term-name" placeholder="Term" value="Fall">
+                        <input type="text" class="term-name" placeholder="Term" value="Completed Credits">
                     </div>
                     <hr>
-                    <button class="add-class-button" id="0">
-                        <div class="add-class-icon">+</div>
-                        <p>Add Class</p>
-                    </button>
-                    
+                    <div class="vertical-button-container">
+                        <button class="add-class-button" id="3">
+                            <div class="add-class-icon">+</div>
+                            <p>Add Class</p>
+                        </button>
+                    </div>
             
                 </div>
                 <div class="term">
@@ -50,10 +51,12 @@
                         <input type="text" class="term-name" placeholder="Term" value="Winter">
                     </div>
                     <hr>
-                    <button class="add-class-button" id="1">
-                        <div class="add-class-icon">+</div>
-                        <p>Add Class</p>
-                    </button>
+                    <div class="vertical-button-container">
+                        <button class="add-class-button" id="3">
+                            <div class="add-class-icon">+</div>
+                            <p>Add Class</p>
+                        </button>
+                    </div>
             
                 </div>
                 <div class="term">
@@ -64,10 +67,12 @@
                         <input type="text" class="term-name" placeholder="Term" value="Spring">
                     </div>
                     <hr>
-                    <button class="add-class-button" id="2">
-                        <div class="add-class-icon">+</div>
-                        <p>Add Class</p>
-                    </button>
+                    <div class="vertical-button-container">
+                        <button class="add-class-button" id="3">
+                            <div class="add-class-icon">+</div>
+                            <p>Add Class</p>
+                        </button>
+                    </div>
                 </div>
                 <div class="term">
                     <div class="term-year-input-element">
@@ -77,10 +82,13 @@
                         <input type="text" class="term-name" placeholder="Term" value="Summer">
                     </div>
                     <hr>
-                    <button class="add-class-button" id="3">
-                        <div class="add-class-icon">+</div>
-                        <p>Add Class</p>
-                    </button>
+                    <div class="vertical-button-container">
+                        <button class="add-class-button" id="3">
+                            <div class="add-class-icon">+</div>
+                            <p>Add Class</p>
+                        </button>
+                    </div>
+                    
                 </div>
                 <div class="term">
                     <div class="term-year-input-element">
@@ -90,15 +98,38 @@
                         <input type="text" class="term-name" placeholder="Term" value="Fall">
                     </div>
                     <hr>
-                    <button class="add-class-button" id="4">
-                        <div class="add-class-icon">+</div>
-                        <p>Add Class</p>
-                    </button>
+                    <div class="vertical-button-container">
+                        <button class="add-class-button" id="3">
+                            <div class="add-class-icon">+</div>
+                            <p>Add Class</p>
+                        </button>
+                    </div>
                 </div>
             </div>
 
             <button onClick="javascript:window.location.href='/review.html'" id="submit-button">Submit Plan</button>
-            <div id="modal-backdrop" class="hidden"></div>
+            <div id="notification-modal">
+                <div id="exit-notification-button"> x</div>
+                <div id = "notification-text-container">
+                    <h3>Please read before continuing:</h3>
+                    <p>This program does not differentiate how it proccesses prerequisites that can be taken concurrently from how it proccesses prerequisites that must be compleated beforehand.</p>
+                    <p>This program does not reflect that some prerequisites can be alternatively bypassed with a math placement test.</p>
+                    <p>This program is intended for use as a precursory tool, displayed results should be verified by the user.</p>
+                    <p>Any data you input will not be retained or shared.</p>
+                    <p>This program is free to use.</p>
+                </div>
+                
+                <button id="continue-button">Continue</button>
+            </div>
+
+            <div id="detail-modal" class="hidden">
+                <div id="exit-detail-button"> x</div>
+                <div id = "detail-text-container">
+                </div>
+                <button id="remove-button">Remove Course</button>
+            </div>
+
+                <div id="modal-backdrop"></div>
             <div id="post-activity-modal" class="hidden">
                 <div class="modal-dialog">
                     <div id="exit-modal-button"> x</div>
@@ -114,7 +145,7 @@
                     <select id="term-selection">
                         <option value="" style="display:none">Select Term</option>
                     </select>
-
+                    <div id="error-container"></div>
                     <button id="submit-selection-button">Add Selected</button>
 
                 </div>

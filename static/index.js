@@ -12,8 +12,16 @@ for (var i = 0; i < addButtons.length; i += 1) {
 
 const closeButton = document.getElementById("exit-modal-button")
 closeButton.addEventListener("click", hideModal)
+const closeDetailButton = document.getElementById("exit-detail-button")
+closeDetailButton.addEventListener("click", hideDetailModal)
+const closeButtonNotification = document.getElementById("exit-notification-button")
+closeButtonNotification.addEventListener("click", hideNotificationModal)
+const contButtonNotification = document.getElementById("continue-button")
+contButtonNotification.addEventListener("click", hideNotificationModal)
 const selectionButton = document.getElementById("submit-selection-button")
 selectionButton.addEventListener("click", addSelections)
+const selectionRemoveButton = document.getElementById("remove-button")
+selectionRemoveButton.addEventListener("click", removeSelection)
 
 
 function Class(courseID, courseName, prereqs) {
@@ -22,55 +30,180 @@ function Class(courseID, courseName, prereqs) {
     this.prereqs = prereqs;
 }
 
+function removeSelection (){
+    var removalID = document.getElementById("detail-text-container").getElementsByTagName("h3")[0].textContent
+    var allPlanned = document.getElementsByClassName("planned-class")
+    var removalIdx = -1
+    var removalnodeidx;
+    console.log("removalID: ",removalID)
+
+    for (var i = 0; i < allPlanned.length; i++) {
+        console.log(allPlanned[i])
+        if (allPlanned[i].dataset.id== removalID) {
+            console.log("found element to remove: ", allPlanned[i])
+            removalIdx = allPlanned[i].dataset.parentidx
+        }
+    }
+
+    var parentContainer = document.getElementsByClassName("term")[removalIdx].getElementsByClassName("vertical-button-container")[0]
+    console.log(parentContainer.childNodes)
+    for (var j = 0; j < parentContainer.childNodes.length; j++) {
+        // console.log(parentContainer.childNodes[j])
+        // console.log("parentContainer[j].nodeName",((parentContainer.childNodes[j]).nodeName))
+        if (parentContainer.childNodes[j].nodeName == "BUTTON") {
+            if (parentContainer.childNodes[j].className == "planned-class") {
+                if (parentContainer.childNodes[j].dataset.id == removalID) {
+                    removalnodeidx = j
+                    console.log(removalIdx)
+                }
+            }
+        }
+    }
+
+    parentContainer.removeChild(parentContainer.childNodes[removalnodeidx])
+    
+
+    hideDetailModal()
+}
+
 function addSelections() {
 
+    var openTerm = document.getElementById('term-selection');
     var addedClass = document.getElementById('class-input');
-    console.log(addedClass.value)
+    // console.log(addedClass.value)
 
     var selectedClass;
-    var classDiv = document.createElement("div")
+    var classDiv = document.createElement("button")
 
     div = document.getElementById("brow");
     allClassOptions = div.getElementsByTagName("option");
-    for ( var i = 0; i < allClassOptions.length; i++) {
+    for (var i = 0; i < allClassOptions.length; i++) {
         if (allClassOptions[i].value == addedClass.value) {
             selectedClass = allClassOptions[i]
             console.log(selectedClass)
         }
     }
 
-    courseIdentfiers = selectedClass.value.split(",")
-    console.log("course ids: ", courseIdentfiers)
-    var courseID = document.createElement("p")
-    courseID.innerHTML = courseIdentfiers[0]
-    var courseName = document.createElement("p")
-    courseName.innerHTML = courseIdentfiers[1]
+    if ((typeof selectedClass == "undefined")||(typeof openTerm.selectedIndex == "undefined")) {
+        var errorContainer = document.getElementById('error-container')
+        var errorNotice = document.createElement("p")
+        errorNotice.classList.add("error-message")
+        errorNotice.innerHTML = "Error: Both input fields must be populated to submit."
+        errorContainer.appendChild(errorNotice)
+    } else {
     
-    classDiv.appendChild(courseID);
-    classDiv.appendChild(courseName);
+        var parentidx = -1
+        var openTermID = openTerm.options[openTerm.selectedIndex].value
+    
+        var selectedTermContainer;
+        termContainers = document.getElementsByClassName("term")
+        for (var i = 0; i < termContainers.length; i++) {
+            if (termContainers[i].dataset.id == openTermID) {
+                selectedTermContainer = termContainers[i]
+                parentidx = i
+                // console.log("selected term container: ", selectedTermContainer)
+            }
+        }
+        selectedTermContainer = selectedTermContainer.getElementsByClassName("vertical-button-container")[0]
+    
+        courseIdentfiers = selectedClass.value.split(",")
+        // console.log("course ids: ", courseIdentfiers)
+        var courseID = document.createElement("p")
+        courseID.innerHTML = courseIdentfiers[0]
+        var courseName = document.createElement("p")
+        courseName.innerHTML = courseIdentfiers[1]
+    
+        classDiv.appendChild(courseID);
+        classDiv.appendChild(courseName);
+    
+        classDiv.dataset.id = selectedClass.dataset.id;
+        classDiv.dataset.name = selectedClass.dataset.name;
+        classDiv.dataset.parentidx = parentidx
+        classDiv.classList.add("planned-class");
+        classDiv.addEventListener("click", function () {
+            var detailTextContainer = document.getElementById("detail-text-container");
+            var detailsID = document.createElement("h3")
+            var detailsName = document.createElement("h3")
+            var detailsPrereq = document.createElement("h3")
+            var detailsIDHeader = document.createElement("p")
+            var detailsNameHeader = document.createElement("p")
+            var detailsPrereqHeader = document.createElement("p")
+    
+    
+            console.log("allClasses: ", allClasses)
+            // console.log(courseID.textContent)
+            var classDetailArray;
+            for (var i = 0; i < allClasses.length; i++) {
+                if (allClasses[i][0] == courseID.textContent) {
+                    classDetailArray = allClasses[i]
+                    // console.log(allClasses[i])
+                }
+            }
+            detailsIDHeader.innerHTML = "Subject and Course ID: "
+            detailsID.innerHTML = classDetailArray[0]
+            detailsNameHeader.innerHTML = "Class Name: "
+            detailsName.innerHTML = classDetailArray[1]
+            detailsPrereqHeader.innerHTML = "Prerequisites: "
+            if (classDetailArray[2].length == 0) {
+                detailsPrereq.innerHTML = "none"
+            } else {
+                detailsPrereq.innerHTML = unnestToString(classDetailArray[2])
+            }
+            detailTextContainer.appendChild(detailsIDHeader)
+            detailTextContainer.appendChild(detailsID)
+            detailTextContainer.appendChild(detailsNameHeader)
+            detailTextContainer.appendChild(detailsName)
+            detailTextContainer.appendChild(detailsPrereqHeader)
+            detailTextContainer.appendChild(detailsPrereq)
+            
+            showDetails();
+        }, false);
+    
+        // console.log(classDiv)
+    
 
-    classDiv.dataset.id = selectedClass.dataset.id;
-    classDiv.dataset.name = selectedClass.dataset.name;
-    classDiv.classList.add("planned-class");
+        selectedTermContainer.appendChild(classDiv);
+    
+        hideModal();
+    }
+}
 
-    console.log(classDiv)
+function unnestToString(prereqArray) {
+    var prereqString = ""
 
-    var openTerm = document.getElementById('term-selection');
-    var openTermID = openTerm.options[openTerm.selectedIndex].value
-
-    var selectedTermContainer;
-    termContainers = document.getElementsByClassName("term")
-    for ( var i = 0; i < termContainers.length; i++) {
-        if (termContainers[i].dataset.id == openTermID) {
-            selectedTermContainer = termContainers[i]
-            console.log("selected term container: ", selectedTermContainer)
+    if (prereqArray.length > 1) {
+        for (var i = 0; i < (prereqArray.length - 1); i++) {
+            if (Array.isArray(prereqArray[i])) {
+                prereqString = prereqString + combineWithOr((prereqArray[i]))
+            } else {
+                prereqString = prereqString + prereqArray[i] + " and "
+            }
+        }
+        if (Array.isArray(prereqArray[prereqArray.length - 1])) {
+            prereqString = prereqString + combineWithOr((prereqArray[prereqArray.length - 1]))
+        } else {
+            prereqString = prereqString + " and " + prereqArray[prereqArray.length - 1]
+        }
+    } else {
+        if (Array.isArray(prereqArray[prereqArray.length - 1])) {
+            prereqString = combineWithOr((prereqArray[prereqArray.length - 1]))
+        } else {
+            prereqString = prereqArray[prereqArray.length - 1]
         }
     }
 
-    selectedTermContainer.appendChild(classDiv);
 
-    hideModal()
 
+    return prereqString
+}
+
+function combineWithOr(prereqSubArray) {
+    var prereqSubString = "("
+    for (var i = 0; i < (prereqSubArray.length - 1); i++) {
+        prereqSubString = prereqSubString + prereqSubArray[i] + " or "
+    }
+    prereqSubString = prereqSubString + " or " + prereqSubArray[prereqSubArray.length - 1] + ")"
+    return prereqSubString
 }
 
 function addTermSelections() {
@@ -91,15 +224,12 @@ function addTermSelections() {
             classContainer.appendChild(newTerm);
         }
     }
-
-
-
-
 }
 
+
+
 function addClass(courseID, courseName, prereqs) {
-    var newClassObj = Class(courseID, courseName, prereqs);
-    allClasses.push(newClassObj)
+    allClasses.push([courseID, courseName, prereqs])
 
     var newClass = document.createElement("option");
     newClass.innerHTML = courseID + ", " + courseName;
@@ -107,8 +237,8 @@ function addClass(courseID, courseName, prereqs) {
     newClass.dataset.name = courseName;
     newClass.dataset.prereqs = prereqs;
     newClass.classList.add("dropdown-class")
-    console.log(newClass)
-    console.log(courseID.replace(" ", ""))
+    // console.log(newClass)
+    // console.log(courseID.replace(" ", ""))
 
     var classContainer = document.getElementById('brow');
     classContainer.appendChild(newClass);
@@ -126,17 +256,21 @@ var i = 0
 var allClasses = []
 getData("/classDataMTH", (data) => data.forEach((element) => addClass(element[0].courseID, element[0].courseName, element[0].prereqs)))
 getData("/classDataCS", (data) => data.forEach((element) => addClass(element[0].courseID, element[0].courseName, element[0].prereqs)))
-console.log(allClasses)
+// console.log(allClasses)
 
 
-for (let i = 0; i < allClasses.length; i++) {
-    console.log(allClasses[i])
+// for (let i = 0; i < allClasses.length; i++) {
+//     console.log(allClasses[i])
 
-}
+// }
 
 
-function showModal(sourceButton) {
-    console.log("show Modal")
+function showModal() {
+    // console.log("show Modal")
+    var loadedTerms = document.getElementById("term-selection");
+    while (loadedTerms.firstChild) {
+        loadedTerms.removeChild(loadedTerms.lastChild);
+    }
     var modal = document.getElementById('post-activity-modal');
     var modalBackdrop = document.getElementById('modal-backdrop');
 
@@ -154,10 +288,52 @@ function hideModal() {
 
     modal.classList.add('hidden');
     modalBackdrop.classList.add('hidden');
-    modal.dataset.termidx = "";
 
-    var loadedTerms = document.getElementById("term-selection");
-    while (loadedTerms.firstChild) {
-        loadedTerms.removeChild(loadedTerms.lastChild);
+    var inputToClear = document.getElementById('class-input');
+    inputToClear.value = ""
+    var errorContainer = document.getElementById('error-container')
+    while (errorContainer.firstChild) {
+        errorContainer.removeChild(errorContainer.lastChild);
     }
+}
+
+function hideNotificationModal() {
+    var modal = document.getElementById('notification-modal');
+    var modalBackdrop = document.getElementById('modal-backdrop');
+
+    modal.classList.add('hidden');
+    modalBackdrop.classList.add('hidden');
+
+    var notificationTextContainer = document.getElementById("notification-text-container");
+    while (notificationTextContainer.firstChild) {
+        notificationTextContainer.removeChild(notificationTextContainer.lastChild);
+    }
+}
+
+function hideDetailModal() {
+    var modal = document.getElementById('detail-modal');
+    var modalBackdrop = document.getElementById('modal-backdrop');
+
+    modal.classList.add('hidden');
+    modalBackdrop.classList.add('hidden');
+
+    var detailTextContainer = document.getElementById("detail-text-container");
+    while (detailTextContainer.firstChild) {
+        detailTextContainer.removeChild(detailTextContainer.lastChild);
+    }
+}
+
+
+function showDetails() {
+
+
+    var modal = document.getElementById('detail-modal');
+    var modalBackdrop = document.getElementById('modal-backdrop');
+
+    addTermSelections()
+
+    // modal.dataset.termidx = addButtons.dataset.idx
+    modal.classList.remove('hidden');
+    modalBackdrop.classList.remove('hidden');
+
 }

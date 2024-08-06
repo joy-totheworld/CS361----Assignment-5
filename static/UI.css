@@ -187,20 +187,20 @@ main {
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
-  
-    .term {
-      display: inline-block;
-    }
 }
 
 .term {
+    vertical-align: top;
+    position: relative;
+    margin-top: 0px;
     background-color: #ffffff;
     border-radius: 5px;
     border: 1px solid #2c2c2cb6;
     height: 100%;
     width: 250px;
     box-shadow: 2px 2px #eaeaea;
-    display: inline-block
+    display: inline-block;
+
 }
 
 .term-name {
@@ -254,6 +254,10 @@ main {
 
 }
 
+.vertical-button-container {
+    background-color: #ffffff;
+}
+
 .add-class-icon{
     border-radius: 48%;
     height: 25px;
@@ -268,6 +272,7 @@ main {
 }
 
 .add-class-button {
+    position: relative;
     background-color: #f9f9f9;
     border-radius: 7px;
     border: 0px solid #ffffff;
@@ -276,11 +281,43 @@ main {
     padding-top: 5px;
     margin-right: 5px;
     margin-left: 5px;
+    margin-bottom: 5px;
     box-shadow: 2px 2px #eaeaea;
+    display: block;
+    white-space: initial;
+}
+
+.planned-class {
+    position: relative;
+    background-color: #f9f9f9;
+    border-radius: 7px;
+    border: 0px solid #ffffff;
+    min-height: 40px;
+    width: 240px;
+    padding-top: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    box-shadow: 2px 2px #eaeaea;
+    display: block;
+    white-space: initial;
+}
+
+
+
+.add-class-button:hover, .planned-class:hover {
+    background-color: #f9f9f9;
+    border-radius: 7px;
+    border: 0px solid #ffffff;
+    width: 240px;
+    padding-top: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+    box-shadow: 2px 2px #6f6f6f;
 
 }
 
-.add-class-button p {
+.add-class-button p{
     background-color: #f9f9f900;
     top: -40px;
     left: 5px;
@@ -291,19 +328,19 @@ main {
 
 }
 
-
-.add-class-button:hover {
-    background-color: #f9f9f9;
-    border-radius: 7px;
-    border: 0px solid #ffffff;
-    height: 40px;
-    width: 240px;
-    padding-top: 5px;
-    margin-right: 5px;
-    margin-left: 5px;
-    box-shadow: 2px 2px #6f6f6f;
-
+.planned-class p{
+    background-color: #f9f9f900;
+    left: 5px;
+    width: 150px;
+    position: relative;
+    font-size: 12px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0px;
+    text-align: left;
 }
+
+
+
 
 #modal-backdrop {
     position: fixed;
@@ -315,7 +352,7 @@ main {
     background-color: rgba(0, 0, 0, 0.85);
 }
   
-#post-activity-modal {
+#post-activity-modal, #notification-modal, #detail-modal {
     position: fixed;
     top: 150px;
     bottom: 200px;
@@ -338,12 +375,53 @@ main {
 
 }
 
-#post-activity-modal h3 {
+#post-activity-modal h3, #notification-modal h3, #detail-modal h3 {
     background-color:#fbfbf3;
-    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
-#exit-modal-button {
+#notification-modal h3, #detail-modal h3 {
+    background-color:#fbfbf3;
+    font-size: 14px;
+    font-weight: bolder;
+}
+
+#post-activity-modal p {
+    background-color:#fbfbf3;
+    color: #E7A76B;
+    text-shadow: #4c4c4c;
+    font-size: 12px;
+    position: absolute;
+    top: 180px;
+    left: 50px;
+}
+
+#notification-modal p, #notification-modal div #detail-modal div {
+    background-color:#fbfbf3;
+    font-size: 12px;
+}
+
+#notification-modal p, #notification-modal div, #detail-modal p, #detail-modal div {
+    background-color:#fbfbf3;
+    font-size: 12px;
+}
+
+
+
+#notification-text-container, #detail-text-container {
+    min-height: 200px;
+    max-height: 60%;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    overflow-y: scroll;
+    margin-bottom: 15px;
+}
+
+
+
+
+#exit-modal-button, #exit-notification-button, #exit-detail-button {
     border-radius: 48%;
     height: 20px;
     width: 20px;
@@ -351,7 +429,7 @@ main {
     color: #000000;
     border: 1px solid #1f1f1f;
     font-weight:bolder;
-    font-size: 16px;
+    font-size:100%;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-align: center;
     position: relative;
@@ -359,20 +437,10 @@ main {
     cursor: pointer;
 }
 
-#exit-modal-button:hover {
-    border-radius: 48%;
-    height: 20px;
-    width: 20px;
+#exit-modal-button:hover, #exit-notification-button:hover, #exit-detail-button:hover {
     background-color: #eaeaea;
     color: #000000;
     border: 1px solid #1f1f1f;
-    font-weight:bolder;
-    font-size: 16px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    text-align: center;
-    position: relative;
-    margin-left: 96%;
-    cursor: pointer;
 }
 
 .modal-dialog {
@@ -408,7 +476,7 @@ input[list=brow] {
     background-color: #ffffff;
 }
 
-#submit-selection-button {
+#submit-selection-button, #continue-button {
     font-size: 16px;
     color: #ffffff;
     padding: 10px;
@@ -421,11 +489,11 @@ input[list=brow] {
     margin: 0;
     position: relative;
     left: 50%;
-    top: 15px;
+    top: 20px;
     transform: translateX(-50%);
 }
 
-#submit-selection-button:hover {
+#submit-selection-button:hover, #continue-button:hover {
     background-color: #4c4c4c;
     border: 2px solid #3d3d3d;
     color: #ffffff;
@@ -433,10 +501,39 @@ input[list=brow] {
     height: 47px;
     font-size: 16px;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
-    top: 14px;
+    top: 19px;
 }
 
-.planned-class {
+#remove-button {
+    font-size: 16px;
+    color: #ffffff;
+    padding: 10px;
+    background-color: #E7A76B;
+    border: 1px solid #4c4c4c;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 190px;
+    height: 45px;
+    margin: 0;
+    position: relative;
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+}
+
+#remove-button:hover {
+    background-color: #bc926a;
+    border: 2px solid #3d3d3d;
+    color: #ffffff;
+    width: 192px;
+    height: 47px;
+    font-size: 16px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    top: 19px;
+}
+
+
+/* .planned-class {
     background-color: #f9f9f9;
     border-radius: 7px;
     border: 0px solid #ffffff;
@@ -457,4 +554,4 @@ input[list=brow] {
     padding-left: 10px;
     white-space: initial;
 
-}
+} */
