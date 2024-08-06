@@ -517,7 +517,7 @@ input[list=brow] {
     margin: 0;
     position: relative;
     left: 50%;
-    top: 20px;
+    top: 10px;
     transform: translateX(-50%);
 }
 
@@ -529,7 +529,35 @@ input[list=brow] {
     height: 47px;
     font-size: 16px;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
-    top: 19px;
+    top: 9px;
+}
+
+.confirm-submit {
+    font-size: 16px;
+    color: #ffffff;
+    padding: 10px;
+    background-color: #E7A76B;
+    border: 1px solid #4c4c4c;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 190px;
+    height: 45px;
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    top: 220px;
+    transform: translateX(-50%);
+}
+
+.confirm-submit:hover {
+    background-color: #bc926a;
+    border: 2px solid #3d3d3d;
+    color: #ffffff;
+    width: 192px;
+    height: 47px;
+    font-size: 16px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    top: 219px;
 }
 
 

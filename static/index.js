@@ -23,6 +23,9 @@ selectionButton.addEventListener("click", addSelections)
 const selectionRemoveButton = document.getElementById("remove-button")
 selectionRemoveButton.addEventListener("click", removeSelection)
 
+const submitButton = document.getElementById("submit-button")
+submitButton.addEventListener("click", displayWarning)
+
 
 function Class(courseID, courseName, prereqs) {
     this.courseID = courseID;
@@ -308,6 +311,36 @@ function hideNotificationModal() {
     while (notificationTextContainer.firstChild) {
         notificationTextContainer.removeChild(notificationTextContainer.lastChild);
     }
+}
+
+function displayWarning() {
+    var modal = document.getElementById('notification-modal');
+    var modalBackdrop = document.getElementById('modal-backdrop');
+
+    var notificationTextContainer = document.getElementById("notification-text-container");
+    var noticeHeader = document.createElement("h3")
+    noticeHeader.textContent = "Warning: "
+    var notice1 = document.createElement("p")
+    notice1.textContent = "Once you submit this plan, you will no longer be able to revise it."
+    var notice2 = document.createElement("p")
+    notice2.textContent = "Would you still like to submit it?."
+    var submit2 = document.createElement("button")
+    submit2.textContent = "Submit"
+    submit2.classList.add("confirm-submit")
+    var cancelButton = document.getElementById("continue-button")
+    cancelButton.textContent = "Cancel"
+    var fill1 = document.createElement("p")
+    var fill2 = document.createElement("p")
+
+    notificationTextContainer.append(noticeHeader)
+    notificationTextContainer.append(notice1)
+    notificationTextContainer.append(notice2)
+    notificationTextContainer.append(submit2)
+    notificationTextContainer.append(fill1)
+    notificationTextContainer.append(fill2)
+
+    modal.classList.remove('hidden');
+    modalBackdrop.classList.remove('hidden');
 }
 
 function hideDetailModal() {
