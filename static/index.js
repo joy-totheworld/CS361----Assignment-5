@@ -177,7 +177,7 @@ function unnestToString(prereqArray) {
     if (prereqArray.length > 1) {
         for (var i = 0; i < (prereqArray.length - 1); i++) {
             if (Array.isArray(prereqArray[i])) {
-                prereqString = prereqString + combineWithOr((prereqArray[i]))
+                prereqString = prereqString + combineWithOr((prereqArray[i])) + " and "
             } else {
                 prereqString = prereqString + prereqArray[i] + " and "
             }
@@ -201,12 +201,33 @@ function unnestToString(prereqArray) {
 }
 
 function combineWithOr(prereqSubArray) {
-    var prereqSubString = "("
-    for (var i = 0; i < (prereqSubArray.length - 1); i++) {
-        prereqSubString = prereqSubString + prereqSubArray[i] + " or "
+    var prereqSubString =""
+    console.log(prereqSubArray)
+    console.log(prereqSubArray.length)
+
+    if (prereqSubArray.length > 1) {
+        prereqSubString = "("
+        for (var i = 0; i < (prereqSubArray.length - 1); i++) {
+            prereqSubString = prereqSubString + prereqSubArray[i] + " or "
+        }
+        prereqSubString = prereqSubString + prereqSubArray[prereqSubArray.length-1] + ")"
+        console.log("multi element: ", prereqSubString)
+
+    } else if ((prereqSubArray.length == 1) && (Array.isArray(prereqSubArray[0]))) {
+        prereqSubString = combineWithOr(prereqSubArray[0])
+        console.log("single nested element: ", prereqSubString)
+        console.log("single nested element: ", prereqSubArray[0])
+        console.log("single nested element: ", prereqSubArray)
+    } else {
+        prereqSubString = prereqSubArray[0]
+        console.log("non nested, single element: ", prereqSubString)
+        console.log("non nested, single element: ", prereqSubArray[0])
     }
-    prereqSubString = prereqSubString + " or " + prereqSubArray[prereqSubArray.length - 1] + ")"
+
+    // console.log(prereqSubString)
+    
     return prereqSubString
+
 }
 
 function addTermSelections() {
