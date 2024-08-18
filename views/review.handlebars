@@ -1,0 +1,51 @@
+<head>
+    <meta charset="utf-8">
+    <title>Microservice Main Program - Review Page</title>
+
+    <link rel="stylesheet" href="./UI.css">
+
+    <script src="./review.js" charset="utf-8" defer></script>
+
+
+</head>
+
+<body>
+
+    <header>
+        <div class="header-image-container">
+            <a id="logo-link" href="/">
+                <img id="logo" src="./logo.jpg" alt="Check for PreReqs!!">
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <div>
+            <div id="terms-container">
+
+                <div class="review-category">
+                    <p>Missing Prerequisites</p>
+                    <hr>
+                    <div class="vertical-button-container">
+                        {{#each missingClasses}}
+                        {{> reviewclass}}
+                        {{/each}}
+                    </div>
+                </div>
+
+                <div class="review-category">
+                    <p>Misordered Prerequisites</p>
+                    <hr>
+                    <div class="vertical-button-container">
+                        {{#each misorderedClasses}}
+                        {{> reviewclass}}
+                        {{/each}}
+                    </div>
+                </div>
+
+            </div>
+
+            <button id="back-button">Generate Report</button>
+        </div>
+    </main>
+</body>

@@ -1,0 +1,194 @@
+<head>
+    <meta charset="utf-8">
+    <title>Microservice Main Program - Planner </title>
+
+    <link rel="stylesheet" href="./UI.css">
+
+    <script src="./planner.js" charset="utf-8" defer></script>
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet" /> -->
+
+
+</head>
+
+<body>
+
+    <header>
+        <div class="header-image-container">
+            <a id="logo-link" href="/">
+                <img id="logo" src="./logo.jpg" alt="Check for PreReqs!!">
+            </a>
+        </div>
+    </header>
+
+    <main>
+
+        <div>
+            <div id="terms-container">
+                <div class="term">
+                    <div class="term-year-input-element">
+                        <input type="text" class="term-name" placeholder="School Year" value="All Prior Years">
+                    </div>
+                    <div class="term-name-input-element">
+                        <input type="text" class="term-name" placeholder="Term" value="Completed Credits">
+                    </div>
+                    <hr>
+                    <div class="vertical-button-container">
+                        {{#each addedClasses}}
+                        {{#if (idxChecker parentIdx 0)}}
+                        {{> class}}
+                        {{/if}}
+                        {{/each}}
+                        <button class="add-class-button" >
+                            <div class="add-class-icon">+</div>
+                            <p>Add Class</p>
+                        </button>
+                    </div>
+            
+                </div>
+                <div class="term">
+                    <div class="term-year-input-element">
+                        <input type="date" class="term-name" placeholder="School Year (Start)" value ="2024-01-01"> 
+                        <p>-</p>
+                        <input type="date" class="term-name" placeholder="School Year (End) " value ="2025-01-01">
+                    </div>
+                    <div class="term-name-input-element">
+                        <input type="text" class="term-name" placeholder="Term" value="Summer">
+                    </div>
+                    <hr>
+                    <div class="vertical-button-container">
+                        {{#each addedClasses}}
+                        {{#if (idxChecker parentIdx 1)}}
+                        {{> class}}
+                        {{/if}}
+                        {{/each}}
+                        <button class="add-class-button" >
+                            <div class="add-class-icon">+</div>
+                            <p>Add Class</p>
+                        </button>
+                    </div>
+            
+                </div>
+                <div class="term">
+                    <div class="term-year-input-element">
+                        <input type="date" class="term-name" placeholder="School Year (Start)" value ="2024-01-01"> 
+                        <p>-</p>
+                        <input type="date" class="term-name" placeholder="School Year (End) " value ="2025-01-01">
+                    </div>
+                    <div class="term-name-input-element">
+                        <input type="text" class="term-name" placeholder="Term" value="Fall">
+                    </div>
+                    <hr>
+                    <div class="vertical-button-container">
+                        {{#each addedClasses}}
+                        {{#if (idxChecker parentIdx 2)}}
+                        {{> class}}
+                        {{/if}}
+                        {{/each}}
+                        <button class="add-class-button" >
+                            <div class="add-class-icon">+</div>
+                            <p>Add Class</p>
+                        </button>
+                    </div>
+                </div>
+                <div class="term">
+                    <div class="term-year-input-element">
+                        <input type="date" class="term-name" placeholder="School Year (Start)" value ="2024-01-01"> 
+                        <p>-</p>
+                        <input type="date" class="term-name" placeholder="School Year (End) " value ="2025-01-01">
+                    </div>
+                    <div class="term-name-input-element">
+                        <input type="text" class="term-name" placeholder="Term" value="Winter">
+                    </div>
+                    <hr>
+                    <div class="vertical-button-container">
+                        {{#each addedClasses}}
+                        {{#if (idxChecker parentIdx 3)}}
+                        {{> class}}
+                        {{/if}}
+                        {{/each}}
+                        <button class="add-class-button" >
+                            <div class="add-class-icon">+</div>
+                            <p>Add Class</p>
+                        </button>
+                    </div>
+                    
+                </div>
+                <div class="term">
+                    <div class="term-year-input-element">
+                        <input type="date" class="term-name" placeholder="School Year (Start)" value ="2024-01-01"> 
+                        <p>-</p>
+                        <input type="date" class="term-name" placeholder="School Year (End) " value ="2025-01-01">
+                    </div>
+                    <div class="term-name-input-element">
+                        <input type="text" class="term-name" placeholder="Term" value="Spring">
+                    </div>
+                    <hr>
+                    <div class="vertical-button-container">
+                        {{#each addedClasses}}
+                        {{#if (idxChecker parentIdx 4)}}
+                        {{> class}}
+                        {{/if}}
+                        {{/each}}
+                        <button class="add-class-button" >
+                            <div class="add-class-icon">+</div>
+                            <p>Add Class</p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="planner-buttons-container">
+                <button id="clear-button">Clear Plan</button>
+                <button id="submit-button">Submit Plan</button>
+
+            </div>
+            
+            <div id="notification-modal">
+                <div id="exit-notification-button"> x</div>
+                <div id = "notification-text-container">
+                    <h3>Please read before continuing:</h3>
+                    <p>This program does not differentiate how it proccesses prerequisites that can be taken concurrently from how it proccesses prerequisites that must be compleated beforehand.</p>
+                    <p>This program does not reflect that some prerequisites can be alternatively bypassed with a math placement test.</p>
+                    <p>This program is intended for use as a precursory tool, displayed results should be verified by the user.</p>
+                    <p>Any data you input will not be retained or shared.</p>
+                    <p>This program is free to use.</p>
+                </div>
+                
+                <button id="continue-button">Continue</button>
+            </div>
+
+            <div id="detail-modal" class="hidden">
+                <div id="exit-detail-button"> x</div>
+                <div id = "detail-text-container">
+                </div>
+                <button id="remove-button">Remove Course</button>
+            </div>
+
+                <div id="modal-backdrop"></div>
+            <div id="post-activity-modal" class="hidden">
+                <div class="modal-dialog">
+                    <div id="exit-modal-button"> x</div>
+                    <div class="modal-header">
+                        <h3>Select Class</h3>
+                    </div>
+
+                    <!-- credit for dropdown format: https://stackoverflow.com/questions/18796221/creating-a-select-box-with-a-search-option -->
+                    <input id="class-input" list="brow">
+                    <datalist id="brow">
+                        {{#each classes}}
+                        {{> options}}
+                        {{/each}}
+                    </datalist>
+
+                    <select id="term-selection">
+                        <option value="" style="display:none">Select Term</option>
+                    </select>
+                    <div id="error-container"></div>
+                    <button id="submit-selection-button">Add Selected</button>
+
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </main>
+</body>

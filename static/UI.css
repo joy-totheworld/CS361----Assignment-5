@@ -78,21 +78,38 @@ pre {
 
 }
 
-#submit-button {
+#planner-buttons-container {
+    width: 400px;
+    margin: auto;
+}
+
+#submit-button, #clear-button {
     font-size: 20px;
-    color: #ffffff;
     padding: 10px;
-    background-color: #2C2C2C;
-    border: 1px solid #1e1e1e;
     border-radius: 10px;
     cursor: pointer;
     width: 190px;
     height: 45px;
     margin: 0;
     position: relative;
-    left: 50%;
     top: 15px;
-    transform: translateX(-50%);
+}
+
+#submit-button {
+    color: #ffffff;
+    background-color: #2C2C2C;
+    border: 1px solid #1e1e1e;
+
+    float: right;
+    margin-right: 1px;
+}
+
+#clear-button {
+    color: #2C2C2C;
+    background-color: #e8e8e8;
+    border: 1px solid #d3d3d3;
+    float: left;
+    margin-left: 1px;
 }
 
 #submit-button:hover {
@@ -104,6 +121,20 @@ pre {
     font-size: 20px;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     top: 14px;
+    margin-right: 0px;
+
+}
+
+#clear-button:hover {
+    color: #2C2C2C;
+    background-color: #ffffff;
+    border: 2px solid #e8e8e8;
+    width: 192px;
+    height: 47px;
+    font-size: 20px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    top: 14px;
+    margin-left: 0px;
 
 }
 
@@ -175,6 +206,35 @@ main {
 
 }
 
+.review-category {
+    vertical-align: top;
+    position: relative;
+    margin-left: 2px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 1px solid #2c2c2cb6;
+    height: 100%;
+    width: 49%;
+    box-shadow: 2px 2px #eaeaea;
+    display: inline-block;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.review-category hr {
+    width: 80%;
+    margin:auto;
+    box-shadow: 1px 1px #eaeaea;
+}
+
+.review-category p {
+    color: #1f1f1f;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: medium;
+    background: #ffffff;
+    text-align: center;
+}
+
 #terms-container {
     background-color: #ffffff;
     border-radius: 10px;
@@ -197,9 +257,11 @@ main {
     border-radius: 5px;
     border: 1px solid #2c2c2cb6;
     height: 100%;
-    width: 250px;
+    width: 270px;
     box-shadow: 2px 2px #eaeaea;
     display: inline-block;
+    overflow-y: scroll;
+    overflow-x: hidden;
 
 }
 
@@ -208,7 +270,7 @@ main {
 }
 
 .term-year-input-element{
-    width: 235px;
+    width: 240px;
     margin-left: 5px;
     margin-right: 5px;
     margin-top: 5px;
@@ -217,6 +279,19 @@ main {
     background-color: #ffffff;
     box-shadow: 0px 0px #ffffff;
 
+}
+
+.term-year-input-element input{
+    width: 108px;
+    color: #4c4c4c;
+    display: inline;
+    border: 0px solid #ffffff;
+}
+
+.term-year-input-element p{
+    display: inline;
+    width: 10px;
+    background-color: #ffffff;
 }
 
 .term-name-input-element{
@@ -532,7 +607,7 @@ input[list=brow] {
     top: 9px;
 }
 
-.confirm-submit {
+.confirm-submit, .confirm-clear {
     font-size: 16px;
     color: #ffffff;
     padding: 10px;
@@ -549,7 +624,7 @@ input[list=brow] {
     transform: translateX(-50%);
 }
 
-.confirm-submit:hover {
+.confirm-submit:hover, .confirm-clear:hover {
     background-color: #bc926a;
     border: 2px solid #3d3d3d;
     color: #ffffff;

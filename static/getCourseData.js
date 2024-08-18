@@ -57,6 +57,16 @@ function conjunctionCheckString(stringC) {
     return processedForConjunctions;
 }
 
+function removeEmpty(inputArray) {
+    for (let i = 0; i < inputArray.length; i++) {
+        if (inputArray[i] == ""){
+            inputArray.splice(i,1)
+        }
+    }
+    
+    return inputArray
+}
+
 function conjunctionCheckArray(stringC) {
     processedForConjunctions = []
 
@@ -339,13 +349,12 @@ document.addEventListener("DOMContentLoaded", function (e) {
     for (let i = 0; i < CS_courses.length; i++) {
 
         // console.log(CS_courses[i]);
-        courseArray.push([])
         var courseNamesString = (CS_courses[i].getElementsByClassName("courseblocktitle"))[0].innerText;
         // console.log("course name: ", courseNamesString);
         var courseNamesArray = courseNamesString.split(",");
         courseNamesArray.pop()
         // console.log("course names array: ", courseNamesArray);
-        courseArray[i].push(new Class(courseNamesArray[0], courseNamesArray[1], []))
+        courseArray.push(new Class(courseNamesArray[0], courseNamesArray[1], []))
 
         var coursePrereqsStringSource = (CS_courses[i].getElementsByClassName("courseblockextra noindent"))[0];
         // console.log("coursePrereqsStringSource: ", coursePrereqsStringSource)
@@ -400,7 +409,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 console.log("coursePrereqsString: ", coursePrereqsString)
 
                 var coursePrereqsData = conjunctionCheckArray(coursePrereqsString)
-                currClass = courseArray[i][0]
+                coursePrereqsData = removeEmpty(coursePrereqsData )
+                currClass = courseArray[i]
                 console.log("currClass: ",currClass)
                 currClass.prereqs = coursePrereqsData
                 console.log("OUTPUT PREREQS", coursePrereqsData)
