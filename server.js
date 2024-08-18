@@ -137,6 +137,10 @@ app.get('', function (req, res, next) {
     res.status(200).render("home")
 })
 
+app.get('/classdata', function (req, res, next) {
+    res.status(200).render("classdata")
+})
+
 app.get('/home.html', function (req, res, next) {
     res.status(200).render("home")
 })
@@ -189,16 +193,7 @@ app.get('/planner.html', function (req, res, next) {
     })
 })
 
-app.get('/classDataCS', function (req, res, next) {
-    res.status(200).json(JSON.stringify(classDataCS));
-})
-
-app.get('/classDataMTH', function (req, res, next) {
-    res.status(200).json(JSON.stringify(classDataMTH));
-})
-
-
-app.post('/CSDATA', function (req, res, next) {
+app.post('/URLFORPREREQS', function (req, res, next) {
     // console.log("POST request body: ", req.body.courseArray);
     res.status(200).send()
     fs.writeFileSync("./classData/CSData.json", JSON.stringify(req.body.courseArray));
@@ -210,15 +205,36 @@ app.post('/CSDATA', function (req, res, next) {
 
 })
 
-app.post('/MTHDATA', function (req, res, next) {
-    // console.log("POST request body: ", req.body.courseArray);
-    res.status(200).send()
-    fs.writeFileSync("./classData/MTHData.json", JSON.stringify(req.body.courseArray));
-    const dataNamesAggregate = fs.readdirSync("./classData");
-    for (const name of dataNamesAggregate) {
-        currJSON = require("./classData/" + name)
-        classDataAggregate = classDataAggregate.concat(currJSON);
-        // fs.writeFileSync("./classDataAggregate.json", JSON.stringify(classDataAggregate));
-    }
+// app.get('/classDataCS', function (req, res, next) {
+//     res.status(200).json(JSON.stringify(classDataCS));
+// })
 
-})
+// app.get('/classDataMTH', function (req, res, next) {
+//     res.status(200).json(JSON.stringify(classDataMTH));
+// })
+
+
+// app.post('/CSDATA', function (req, res, next) {
+//     // console.log("POST request body: ", req.body.courseArray);
+//     res.status(200).send()
+//     fs.writeFileSync("./classData/CSData.json", JSON.stringify(req.body.courseArray));
+//     for (const name of dataNamesAggregate) {
+//         currJSON = require("./classData/" + name)
+//         classDataAggregate = classDataAggregate.concat(currJSON);
+//         // fs.writeFileSync("./classDataAggregate.json", JSON.stringify(classDataAggregate));
+//     }
+
+// })
+
+// app.post('/MTHDATA', function (req, res, next) {
+//     // console.log("POST request body: ", req.body.courseArray);
+//     res.status(200).send()
+//     fs.writeFileSync("./classData/MTHData.json", JSON.stringify(req.body.courseArray));
+//     const dataNamesAggregate = fs.readdirSync("./classData");
+//     for (const name of dataNamesAggregate) {
+//         currJSON = require("./classData/" + name)
+//         classDataAggregate = classDataAggregate.concat(currJSON);
+//         // fs.writeFileSync("./classDataAggregate.json", JSON.stringify(classDataAggregate));
+//     }
+// 
+// })
