@@ -209,12 +209,14 @@ main {
 .review-category {
     vertical-align: top;
     position: relative;
-    margin-left: 2px;
+    align-self: center;
+    margin-left: 12%;
+    margin-right: 12%;
     background-color: #ffffff;
     border-radius: 5px;
     border: 1px solid #2c2c2cb6;
     height: 100%;
-    width: 49%;
+    width: 270px;
     box-shadow: 2px 2px #eaeaea;
     display: inline-block;
     overflow-y: scroll;

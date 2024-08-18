@@ -26,7 +26,66 @@ async function callPrereqChecker() {
 
     console.log('Received ', result.toString());
     // return result;
-    return result.toString();
+    return JSON.parse(result.toString());
+}
+
+function unnestToString(prereqArray) {
+    var prereqString = ""
+    console.log(prereqArray)
+    if (prereqArray.length > 1) {
+        for (var i = 0; i < (prereqArray.length - 1); i++) {
+            if (Array.isArray(prereqArray[i])) {
+                prereqString = prereqString + combineWithOr((prereqArray[i])) + " and "
+            } else {
+                prereqString = prereqString + prereqArray[i] + " and "
+            }
+        }
+        if (Array.isArray(prereqArray[prereqArray.length - 1])) {
+            prereqString = prereqString + combineWithOr((prereqArray[prereqArray.length - 1]))
+        } else {
+            prereqString = prereqString + " and " + prereqArray[prereqArray.length - 1]
+        }
+    } else {
+        if (Array.isArray(prereqArray[prereqArray.length - 1])) {
+            prereqString = combineWithOr((prereqArray[prereqArray.length - 1]))
+        } else {
+            prereqString = prereqArray[prereqArray.length - 1]
+        }
+    }
+
+
+
+    return prereqString
+}
+
+function combineWithOr(prereqSubArray) {
+    var prereqSubString = ""
+    console.log(prereqSubArray)
+    console.log(prereqSubArray.length)
+
+    if (prereqSubArray.length > 1) {
+        prereqSubString = "("
+        for (var i = 0; i < (prereqSubArray.length - 1); i++) {
+            prereqSubString = prereqSubString + prereqSubArray[i] + " or "
+        }
+        prereqSubString = prereqSubString + prereqSubArray[prereqSubArray.length - 1] + ")"
+        console.log("multi element: ", prereqSubString)
+
+    } else if ((prereqSubArray.length == 1) && (Array.isArray(prereqSubArray[0]))) {
+        prereqSubString = combineWithOr(prereqSubArray[0])
+        console.log("single nested element: ", prereqSubString)
+        console.log("single nested element: ", prereqSubArray[0])
+        console.log("single nested element: ", prereqSubArray)
+    } else {
+        prereqSubString = prereqSubArray[0]
+        console.log("non nested, single element: ", prereqSubString)
+        console.log("non nested, single element: ", prereqSubArray[0])
+    }
+
+    // console.log(prereqSubString)
+
+    return prereqSubString
+
 }
 
 var fs = require('fs');
@@ -82,18 +141,38 @@ app.get('/home.html', function (req, res, next) {
     res.status(200).render("home")
 })
 
-app.get('/review', function (req, res, next) {
-    resultJSON = callPrereqChecker()
-    res.status(200).render("review")
-    // res.status(200).render("review", {
-    //     missingClasses: classDataMissing.classes,
-    //     missorderedClasses: classDataMisordered.classes
-    // })
+app.get('/review', async (req, res) => {
+    var resultJSON = await callPrereqChecker()
+    // console.log("resultJSON: ", resultJSON)
+    console.log("resultJSON.misorderedClasses: ", resultJSON.misorderedClasses)
+    console.log("resultJSON.missingClasses: ", resultJSON.missingClasses)
+    for (var i = 0; i < (resultJSON.misorderedClasses.length); i++) {
+        if (Array.isArray(resultJSON.misorderedClasses[i].misorderedPrereq)) {
+            resultJSON.misorderedClasses[i].misorderedPrereqs = unnestToString(resultJSON.misorderedClasses[i].misorderedPrereqs)
+        }
+    }
+    for (var i = 0; i < (resultJSON.missingClasses.length); i++) {
+        if (Array.isArray(resultJSON.missingClasses[i].courseID)) {
+            resultJSON.missingClasses[i].courseID = unnestToString(resultJSON.missingClasses[i].courseID)
+        }
+    }
+
+    res.status(200).render("review", {
+        misorderedClasses: resultJSON.misorderedClasses,
+        missingClasses: resultJSON.missingClasses
+    })
 })
 
-app.get('/review.html', function (req, res, next) {
-    resultJSON = callPrereqChecker()
-    res.status(200).render("review")
+app.get('/review.html', async (req, res) => {
+    var resultJSON = await callPrereqChecker()
+    // console.log("resultJSON: ", resultJSON)
+    console.log("resultJSON.misorderedClasses: ", resultJSON.misorderedClasses)
+    console.log("resultJSON.missingClasses: ", resultJSON.missingClasses)
+
+    res.status(200).render("review", {
+        misorderedClasses: resultJSON.misorderedClasses,
+        missingClasses: resultJSON.missingClasses
+    })
 })
 
 app.get('/planner', function (req, res, next) {

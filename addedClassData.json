@@ -1,1 +1,1 @@
-{"classes":[]}
+{"classes":[{"courseID":"CS 290","courseName":" WEB DEVELOPMENT","prereqs":["CS 162","CS 162H","CS 165"],"parentIdx":0},{"courseID":"CS 162","courseName":" INTRODUCTION TO COMPUTER SCIENCE II","prereqs":["CS 161","EECS 161","ENGR 103","ENGR 103H"],"parentIdx":2},{"courseID":"CS 261","courseName":" DATA STRUCTURES","prereqs":[[["CS 162","CS 162H","CS 165"]],[["CS 225","MTH 231","MTH 231H"]]],"parentIdx":0}]}

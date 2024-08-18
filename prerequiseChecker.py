@@ -63,6 +63,7 @@ while True:
     print('len(plannedClasses): ', len(plannedClasses))
     print('plannedClasses[0]: ', plannedClasses[0])
     
+    
     # looking for missing and misordered prereqs
     for i in range(len(plannedClasses)):
         for j in range (len(plannedClasses[i]["prereqs"])):
@@ -87,12 +88,12 @@ while True:
                         if (plannedClasses[i]["parentIdx"] > plannedClasses[k]["parentIdx"]):
                             prior = True
             if (found == False):
-                missingClasses.append(plannedClasses[i]["prereqs"][j])
+                missingClasses.append({"courseID": plannedClasses[i]["prereqs"][j], "requiredFor": plannedClasses[i]["courseID"]})
             elif (prior == False):
-                misorderedClasses.append([plannedClasses[i]["prereqs"][j], plannedClasses[i]["courseID"]])
-                print(plannedClasses[i]["prereqs"][j], " is a misordered req for ", plannedClasses[i]["courseID"])
-                print(plannedClasses[i]["parentIdx"], " is the term idx of ", plannedClasses[i]["courseID"])
-                print('misorderedClasses: ', misorderedClasses)
+                misorderedClasses.append({"misorderedPrereqs":plannedClasses[i]["prereqs"][j], "requiredFor": plannedClasses[i]["courseID"]})
+                # print(plannedClasses[i]["prereqs"][j], " is a misordered req for ", plannedClasses[i]["courseID"])
+                # print(plannedClasses[i]["parentIdx"], " is the term idx of ", plannedClasses[i]["courseID"])
+                # print('misorderedClasses: ', misorderedClasses)
                 
     
     print()
