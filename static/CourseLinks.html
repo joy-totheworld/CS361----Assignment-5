@@ -1,0 +1,473 @@
+<!-- 
+ reference: the content of this html page is from:
+ https://catalog.oregonstate.edu/courses/
+
+ This is not my work and just used a source for data.
+ I have only commented out some links that I do not need and added a 
+ link for the js file I wrote to process the data from this page. 
+ -->
+ 
+ 
+ <!doctype html>
+<html class="no-js" xml:lang="en" lang="en" dir="ltr">
+
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+<title>Course Descriptions &lt; Oregon State University</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="search" type="application/opensearchdescription+xml"
+			href="/search/opensearch.xml" title="Catalog" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+<link href="/favicon.ico" rel="shortcut icon" />
+<!-- <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+<link rel="stylesheet" type="text/css" href="/css/courseleaf.css" />
+<link rel="stylesheet" type="text/css" href="/fonts/font-awesome/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="/sam/cat.css" />
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,700,700italic" />
+<link rel="stylesheet" type="text/css" href="/css/screen.css?v=20220706" media="screen" />
+<link rel="stylesheet" type="text/css" href="/css/print.css" media="print" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/lfjs.js"></script>
+<script type="text/javascript" src="/js/lfjs_any.js"></script>
+<link rel="stylesheet" type="text/css" href="/js/lfjs.css" />
+<script type="text/javascript" src="/js/courseleaf.js"></script>
+<script type="text/javascript" src="/sam/cat.js"></script>
+<script type="text/javascript" src="/js/multitables.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/multitables.css" />
+<script type="text/javascript" src="/js/custom.js?v=20220706"></script> -->
+<script type="text/javascript" src="./getDeptURLs.js"></script>
+
+
+
+
+
+</head>
+
+
+
+<body class="sam-pending">
+
+
+
+
+
+<!--htdig_noindex-->
+<nav aria-label="Skip content menu" class="accessible">
+	<div class="accessible-menu">
+		<ul>
+			<li><a href="#content" rel="section">Skip to Content</a></li>
+			<li><a href="/azindex/">AZ Index</a></li>
+			<li><a href="/">Catalog Home</a></li>
+		</ul>
+	</div>
+</nav>
+<!--/htdig_noindex-->
+
+<!--htdig_noindex-->
+<header id="header">
+   <div id="hdr-main">
+      <div class="wrap clearfix">
+         <div id="logo">
+            <a href="https://oregonstate.edu" target="_blank">
+               <h1 class="sr-only">Oregon State University</h1>
+               <!-- <img src="/images/logo.png" alt="Oregon State logo" /> -->
+            </a>
+         </div><!-- end #logo -->
+         <button class="hdr-btn" id="search-toggle" data-toggle="#search" aria-expanded="false" aria-controls="search">
+            <span class="sr-only">Toggle search</span>
+            <i class="fa fa-search" aria-hidden="true"></i>
+         </button>
+         <button class="hdr-btn" id="hamburger" data-toggle="#navigation" aria-expanded="true" aria-controls="navigation">
+            <span class="sr-only">Toggle menu</span>
+            <i class="fa fa-bars" aria-hidden="true"></i>
+         </button>
+      </div><!-- end .wrap -->
+   </div>
+   <div id="site-title">
+      <div class="wrap">
+         <h2><a href="/">Academic Catalog</a></h2>
+      </div>
+   </div>
+   <div id="search" class="search" role="search" aria-hidden="true">
+      <div class="wrap">
+         <form action="/search/" class="cl-search clearfix">
+<!--%?caturl?%	      <input type="hidden" name="caturl" value="%caturl%" /> -->
+<!--	<input type="hidden" name="caturl" value="/courses" />-->
+            <label for="name" class="sr-only">Search Catalog</label>
+            <input type="text" name="search" size="25" placeholder="Search this site" class="searchbox" id="name" title="Search Catalog">
+            <button type="submit" class="submit"><i class="fa fa-search" aria-hidden="true"></i><span class="sr-only">Search</span></button>
+         </form>
+         <button id="close-search" data-toggle="#search" aria-expanded="true" aria-controls="search">Exit Search</button>
+      </div>
+   </div><!-- end #search -->
+</header> <!-- end header -->
+<!--/htdig_noindex-->
+
+<div id="content-wrapper" class="wrap">
+
+   <nav id="navigation" aria-hidden="false" aria-label="Secondary">
+      <ul id="main-nav" class="clearfix">
+         <li><a href="/course-search/">Schedule of Classes</a></li>
+         <li><a href="/courses/">Courses</a></li>
+         <li><a href="http://registrar.oregonstate.edu/osu-academic-calendar/" target="_blank">Academic Calendar</a></li>
+         <li><a href="/college-departments/">Colleges</a></li>
+         <li><a href="/programs/">Programs</a></li>
+         <li><a href="/regulations/">Academic Regulations</a></li>
+		 <li><a href="/grades-regulations-records/">Catalog Rights Policy</a></li>
+         <li><a href="#print-dialog" role="button" title="Opens modal" onclick="showPrintDialog(); return false;">Print Options</a></li>
+      </ul>
+    </nav>
+    <!-- end navigation -->
+    
+<!-- <link rel="stylesheet" type="text/css" href="/css/courseleaf.css" />
+<link rel="stylesheet" type="text/css" href="/fonts/font-awesome/font-awesome.min.css" /> -->
+
+   <!--htdig_noindex-->
+   <nav id="breadcrumb" aria-label="Breadcrumbs">
+<ul><li><a href="/">Home</a><span class="crumbsep">/</span></li><li><span class="active">Course Descriptions</span></li></ul>
+   </nav><!-- end #breadcrumb -->
+   <!--/htdig_noindex-->
+
+   <div class="clearfix">
+      <div id="left-col">
+         <div id="content" role="main">
+			   <h1 class="page-title">Course Descriptions</h1>
+
+
+
+
+
+<div id="textcontainer" class="page_content">
+
+<p><em>Disclaimer:  All term data are continually updated and may change at any time as necessary. Refer to the Schedule of Classes frequently for the most current information. In particular, any courses that are designated as having in-person components are subject to change at any time before or during the term.</em></p>
+<p>Refer to the glossary below for how to read each course description. Additional enrollment information, such as registration restrictions, fees and class notes, are available in the <a href="https://classes.oregonstate.edu/">Schedule of Classes</a>.</p>
+<ul>
+	<li><strong>Subject Code</strong> – An abbreviation used with a course number to indicate an academic subject area</li>
+	<li><strong>Course Number</strong> – Each course is assigned a course level. Courses numbered 100–499 are undergraduate courses (100–299 are lower division, 300–499 are upper division). Courses numbered 500 and above are graduate or professional/technical (500-699 are for masters or doctoral students and 700-899 are professional or technical courses for advanced degrees)
+	<ul style="list-style-type:circle">
+		<li><em>Some graduate level courses may be completed by senior undergraduates but interested students should consult their advisor or the department offering the course before enrolling</em></li>
+	</ul>
+	</li>
+	<li><strong>Credits</strong> – The number of quarter credits awarded for successful completion of the course</li>
+	<li><strong>Description</strong> – A brief overview of the course content. If no description is listed, refer to the <a href="https://classes.oregonstate.edu/">Schedule of Classes</a> for details</li>
+	<li><strong>Attributes</strong> – Courses that meet a specific educational requirement
+	<ul style="list-style-type:circle">
+		<li>Baccalaureate Core Courses (BCC) and Writing Intensive Courses (WIC) are indicated by attributes beginning with 'Bacc Core.' Titles with an asterisk (*) are BCC courses and titles with a carat (^) are WIC courses. All BCC and WIC courses are listed in the <a href="/earning-degrees/bcc/">Baccalaureate Core</a> section of this Catalog
+		<ul>
+			<li><em>PAC courses always meet the lower-division Fitness Core requirement and are therefore not indicated with the BCC attribute or asterisk</em></li>
+		</ul>
+		</li>
+		<li>Core Education courses are indicated by attributes beginning with 'Core Ed' and titles with a plus sign (+). Core Education will replace the Baccalaureate Core in Summer 2025. Courses may carry both Core Ed and Bacc Core attributes and those courses include both the plus sign and asterisk in the title (+*). </li>
+		<li>Honors courses for students registered with the Honors College are indicated by the HNRS attribute</li>
+		<li>Courses that meet the College of Liberal Arts core requirement begin with the LA attribute</li>
+	</ul>
+	</li>
+	<li><strong>Prerequisites</strong> – Courses or other educational requirements (eg. placement test) that must be completed prior to registering for another course or before proceeding to more advanced study.  Concurrency will be indicated if you are allowed to enroll in the prerequisite at the same time. Minimum passing grade is indicated in brackets or parentheses
+	<ul style="list-style-type:circle">
+		<li>If you do not meet the prerequisites but you believe you have the necessary knowledge to be successful in the course, consult your advisor. The department has the final say on whether you are permitted to enroll in a course without the specific prerequisite</li>
+		<li>Some classes may be restricted by campus, degree, program or class standing, or require departmental approval. Registration restrictions are indicated in the <a href="https://classes.oregonstate.edu/">Schedule of Classes</a> not the Catalog</li>
+	</ul>
+	</li>
+	<li><strong>Corequisites</strong> – Courses you must enroll in at the same time with another course</li>
+	<li><strong>Equivalency</strong> – A course that is equivalent to the selected course. Credit will only be awarded for one of these courses. Crosslisted courses are indicated with equivalency and in the course description as ‘CROSSLISTED'</li>
+	<li><strong>Repeatability</strong> – If the course can be taken multiple times for credit towards graduation, it will be indicated as <em>“This course is repeatable for...credits”</em></li>
+	<li><strong>Recommended</strong> – Suggested background knowledge or courses that you are encouraged to have completed prior to enrolling in the selected course. If you do not have the recommended background or equivalent, consult your advisor or the instructor regarding your suitability</li>
+	<li><strong>Available via Ecampus</strong> – The course has been taught online in the past two years. Refer to the <a href="https://classes.oregonstate.edu/" target="_blank">Schedule of Classes</a> for current scheduling and campus availability.</li>
+</ul>
+<div class="az_sitemap"><a id="2253321" name="azTop"></a>
+<br/><div class="azMenu">
+<ul class="letternav clearfix"><li class="inactive">#</li><li><a href="#a2253321">A</a></li><li><a href="#b2253321">B</a></li><li><a href="#c2253321">C</a></li><li><a href="#d2253321">D</a></li><li><a href="#e2253321">E</a></li><li><a href="#f2253321">F</a></li><li><a href="#g2253321">G</a></li><li><a href="#h2253321">H</a></li><li><a href="#i2253321">I</a></li><li><a href="#j2253321">J</a></li><li><a href="#k2253321">K</a></li><li><a href="#l2253321">L</a></li><li><a href="#m2253321">M</a></li><li><a href="#n2253321">N</a></li><li><a href="#o2253321">O</a></li><li><a href="#p2253321">P</a></li><li><a href="#q2253321">Q</a></li><li><a href="#r2253321">R</a></li><li><a href="#s2253321">S</a></li><li><a href="#t2253321">T</a></li><li><a href="#u2253321">U</a></li><li><a href="#v2253321">V</a></li><li><a href="#w2253321">W</a></li><li class="inactive">X</li><li class="inactive">Y</li><li><a href="#z2253321">Z</a></li></ul>
+</div>
+<h2 id="a2253321" class="letternav-head">A</h2>
+<ul><li><a href="/courses/als/">Academic Learning Services (ALS)</a></li><li><a href="/courses/actg/">Accounting (ACTG)</a></li><li><a href="/courses/ahe/">Adult Education &amp; Higher Education Leadership (AHE)</a></li><li><a href="/courses/aae/">Aeronautical &amp; Astronautical Engineering (AAE)</a></li><li><a href="/courses/as/">Aerospace Studies (AS)</a></li><li><a href="/courses/aed/">Agricultural Education (AED)</a></li><li><a href="/courses/agri/">Agricultural Sciences (AGRI)</a></li><li><a href="/courses/ag/">Agriculture-General (AG)</a></li><li><a href="/courses/asl/">American Sign Language (ASL)</a></li><li><a href="/courses/ams/">American Studies Program (AMS)</a></li><li><a href="/courses/ans/">Animal Sciences (ANS)</a></li><li><a href="/courses/anth/">Anthropology (ANTH)</a></li><li><a href="/courses/aec/">Applied Economics (AEC)</a></li><li><a href="/courses/aj/">Applied Journalism (AJ)</a></li><li><a href="/courses/are/">Architectural Engineering (ARE)</a></li><li><a href="/courses/art/">Art (ART)</a></li><li><a href="/courses/ai/">Artificial Intelligence (AI)</a></li><li><a href="/courses/at/">Athletic Training (AT)</a></li><li><a href="/courses/ats/">Atmospheric Sciences (ATS)</a></li>
+</ul><h2 id="b2253321" class="letternav-head">B</h2>
+<ul><li><a href="/courses/bb/">Biochemistry and Biophysics (BB)</a></li><li><a href="/courses/bhs/">BioHealth Sciences (BHS)</a></li><li><a href="/courses/bee/">Biological &amp; Ecological Engineering (BEE)</a></li><li><a href="/courses/bds/">Biological Data Sciences (BDS)</a></li><li><a href="/courses/bioe/">Biological Engineering (BIOE)</a></li><li><a href="/courses/bi/">Biology (BI)</a></li><li><a href="/courses/brr/">Bioresource Research (BRR)</a></li><li><a href="/courses/bot/">Botany and Plant Pathology (BOT)</a></li><li><a href="/courses/ba/">Business Administration (BA)</a></li><li><a href="/courses/bana/">Business Analytics (BANA)</a></li><li><a href="/courses/bis/">Business Information Systems (BIS)</a></li>
+</ul><h2 id="c2253321" class="letternav-head">C</h2>
+<ul><li><a href="/courses/che/">Chemical Engineering (CHE)</a></li><li><a href="/courses/cbee/">Chemical, Biological &amp; Environmental Engineering (CBEE)</a></li><li><a href="/courses/ch/">Chemistry (CH)</a></li><li><a href="/courses/chn/">Chinese (CHN)</a></li><li><a href="/courses/cce/">Civil and Construction Engineering (CCE)</a></li><li><a href="/courses/ce/">Civil Engineering (CE)</a></li><li><a href="/courses/cssa/">College Student Services Administration (CSSA)</a></li><li><a href="/courses/comm/">Communication (COMM)</a></li><li><a href="/courses/cs/">Computer Science (CS)</a></li><li><a href="/courses/cem/">Construction Engineering Management (CEM)</a></li><li><a href="/courses/coun/">Counseling (COUN)</a></li><li><a href="/courses/css/">Crop &amp; Soil Science (CSS)</a></li><li><a href="/courses/crop/">Crop Science (CROP)</a></li>
+</ul><h2 id="d2253321" class="letternav-head">D</h2>
+<ul><li><a href="/courses/dsgn/">Design (DSGN)</a></li>
+</ul><h2 id="e2253321" class="letternav-head">E</h2>
+<ul><li><a href="/courses/econ/">Economics (ECON)</a></li><li><a href="/courses/ed/">Education (ED)</a></li><li><a href="/courses/ece/">Electrical &amp; Computer Engineering (ECE)</a></li><li><a href="/courses/ese/">Energy Systems Engineering (ESE)</a></li><li><a href="/courses/emgt/">Engineering Management (EMGT)</a></li><li><a href="/courses/engr/">Engineering Science (ENGR)</a></li><li><a href="/courses/eng/">English (ENG)</a></li><li><a href="/courses/ent/">Entomology (ENT)</a></li><li><a href="/courses/eah/">Environmental Arts &amp; Humanities (EAH)</a></li><li><a href="/courses/enve/">Environmental Engineering (ENVE)</a></li><li><a href="/courses/ensc/">Environmental Sciences (ENSC)</a></li><li><a href="/courses/es/">Ethnic Studies (ES)</a></li>
+</ul><h2 id="f2253321" class="letternav-head">F</h2>
+<ul><li><a href="/courses/film/">Film Studies (FILM)</a></li><li><a href="/courses/fin/">Finance (FIN)</a></li><li><a href="/courses/fw/">Fisheries and Wildlife (FW)</a></li><li><a href="/courses/fcsj/">Food in Culture &amp; Social Justice (FCSJ)</a></li><li><a href="/courses/fst/">Food Science and Technology (FST)</a></li><li><a href="/courses/fes/">Forest Ecosystems and Society (FES)</a></li><li><a href="/courses/fe/">Forest Engineering (FE)</a></li><li><a href="/courses/for/">Forestry (FOR)</a></li><li><a href="/courses/fr/">French (FR)</a></li>
+</ul><h2 id="g2253321" class="letternav-head">G</h2>
+<ul><li><a href="/courses/geog/">Geography (GEOG)</a></li><li><a href="/courses/gph/">Geophysics (GPH)</a></li><li><a href="/courses/geo/">Geosciences (GEO)</a></li><li><a href="/courses/ger/">German (GER)</a></li><li><a href="/courses/grad/">Graduate Education (GRAD)</a></li><li><a href="/courses/gd/">Graphic Design (GD)</a></li>
+</ul><h2 id="h2253321" class="letternav-head">H</h2>
+<ul><li><a href="/courses/hhs/">Health and Human Sciences (HHS)</a></li><li><a href="/courses/hst/">History (HST)</a></li><li><a href="/courses/hsts/">History of Science (HSTS)</a></li><li><a href="/courses/hc/">Honors College (HC)</a></li><li><a href="/courses/hort/">Horticulture (HORT)</a></li><li><a href="/courses/hm/">Hospitality Management (HM)</a></li><li><a href="/courses/hdfs/">Human Development and Family Sciences (HDFS)</a></li><li><a href="/courses/hest/">Humanitarian Engineering, Science &amp; Technology (HEST)</a></li>
+</ul><h2 id="i2253321" class="letternav-head">I</h2>
+<ul><li><a href="/courses/ie/">Industrial and Manufacturing Engineering (IE)</a></li><li><a href="/courses/ib/">Integrative Biology (IB)</a></li><li><a href="/courses/iepa/">Intensive English Program Academic English (IEPA)</a></li><li><a href="/courses/iepg/">Intensive English Program General English (IEPG)</a></li><li><a href="/courses/ieph/">Intensive English Program General English (IEPH)</a></li><li><a href="/courses/ist/">Interdisciplinary Programs (IST)</a></li><li><a href="/courses/intl/">International Degree (INTL)</a></li><li><a href="/courses/it/">Italian (IT)</a></li>
+</ul><h2 id="j2253321" class="letternav-head">J</h2>
+<ul><li><a href="/courses/jpn/">Japanese (JPN)</a></li>
+</ul><h2 id="k2253321" class="letternav-head">K</h2>
+<ul><li><a href="/courses/kin/">Kinesiology (KIN)</a></li><li><a href="/courses/kor/">Korean (KOR)</a></li>
+</ul><h2 id="l2253321" class="letternav-head">L</h2>
+<ul><li><a href="/courses/lead/">Leadership (LEAD)</a></li><li><a href="/courses/ls/">Liberal Studies (LS)</a></li><li><a href="/courses/ling/">Linguistics (LING)</a></li>
+</ul><h2 id="m2253321" class="letternav-head">M</h2>
+<ul><li><a href="/courses/mgmt/">Management (MGMT)</a></li><li><a href="/courses/mfge/">Manufacturing Engineering (MFGE)</a></li><li><a href="/courses/mrm/">Marine Resource Management (MRM)</a></li><li><a href="/courses/mast/">Marine Studies (MAST)</a></li><li><a href="/courses/mrkt/">Marketing (MRKT)</a></li><li><a href="/courses/mnr/">Master of Natural Resources (MNR)</a></li><li><a href="/courses/mats/">Materials Science (MATS)</a></li><li><a href="/courses/mth/">Mathematics (MTH)</a></li><li><a href="/courses/me/">Mechanical Engineering (ME)</a></li><li><a href="/courses/mime/">Mechanical, Industrial and Manufacturing Engineering (MIME)</a></li><li><a href="/courses/mb/">Microbiology (MB)</a></li><li><a href="/courses/ms/">Military Science (MS)</a></li><li><a href="/courses/mus/">Music (MUS)</a></li><li><a href="/courses/mup/">Music (Studio) (MUP)</a></li><li><a href="/courses/mued/">Music Education (MUED)</a></li>
+</ul><h2 id="n2253321" class="letternav-head">N</h2>
+<ul><li><a href="/courses/nr/">Natural Resources (NR)</a></li><li><a href="/courses/ns/">Naval Science (NS)</a></li><li><a href="/courses/nmc/">New Media Communications (NMC)</a></li><li><a href="/courses/nse/">Nuclear Science &amp; Engineering (NSE)</a></li><li><a href="/courses/nur/">Nursing (NUR)</a></li><li><a href="/courses/nutr/">Nutrition (NUTR)</a></li>
+</ul><h2 id="o2253321" class="letternav-head">O</h2>
+<ul><li><a href="/courses/oeas/">Ocean, Earth &amp; Atmospheric Sciences (OEAS)</a></li><li><a href="/courses/oc/">Oceanography (OC)</a></li><li><a href="/courses/op/">Outdoor Products (OP)</a></li>
+</ul><h2 id="p2253321" class="letternav-head">P</h2>
+<ul><li><a href="/courses/pax/">Peace Studies (PAX)</a></li><li><a href="/courses/phar/">Pharmacy (PHAR)</a></li><li><a href="/courses/phl/">Philosophy (PHL)</a></li><li><a href="/courses/pac/">Physical Activity Courses (PAC)</a></li><li><a href="/courses/pt/">Physical Therapy/Therapist (PT)</a></li><li><a href="/courses/ph/">Physics (PH)</a></li><li><a href="/courses/pbg/">Plant Breeding &amp; Genetics (PBG)</a></li><li><a href="/courses/ps/">Political Science (PS)</a></li><li><a href="/courses/psy/">Psychology (PSY)</a></li><li><a href="/courses/h/">Public Health (H)</a></li><li><a href="/courses/ppol/">Public Policy (PPOL)</a></li>
+</ul><h2 id="q2253321" class="letternav-head">Q</h2>
+<ul><li><a href="/courses/qs/">Queer Studies (QS)</a></li>
+</ul><h2 id="r2253321" class="letternav-head">R</h2>
+<ul><li><a href="/courses/rng/">Rangeland Ecology &amp; Management (RNG)</a></li><li><a href="/courses/rel/">Religious Studies (REL)</a></li><li><a href="/courses/rob/">Robotics (ROB)</a></li>
+</ul><h2 id="s2253321" class="letternav-head">S</h2>
+<ul><li><a href="/courses/sed/">Science &amp; Mathematics Education (SED)</a></li><li><a href="/courses/sci/">Science (SCI)</a></li><li><a href="/courses/esc/">Science of Engineering (ESC)</a></li><li><a href="/courses/ssci/">Social Science (SSCI)</a></li><li><a href="/courses/soc/">Sociology (SOC)</a></li><li><a href="/courses/se/">Software Engineering (SE)</a></li><li><a href="/courses/soil/">Soil Science (SOIL)</a></li><li><a href="/courses/span/">Spanish (SPAN)</a></li><li><a href="/courses/st/">Statistics (ST)</a></li><li><a href="/courses/sclm/">Supply Chain and Logistics Management (SCLM)</a></li><li><a href="/courses/sus/">Sustainability (SUS)</a></li><li><a href="/courses/snr/">Sustainable Natural Resources (SNR)</a></li>
+</ul><h2 id="t2253321" class="letternav-head">T</h2>
+<ul><li><a href="/courses/ta/">Theatre Arts (TA)</a></li><li><a href="/courses/tral/">Tourism, Recreation &amp; Adventure Leadership (TRAL)</a></li><li><a href="/courses/tox/">Toxicology (TOX)</a></li>
+</ul><h2 id="u2253321" class="letternav-head">U</h2>
+<ul><li><a href="/courses/uexp/">University Experience (UEXP)</a></li>
+</ul><h2 id="v2253321" class="letternav-head">V</h2>
+<ul><li><a href="/courses/vmb/">Veterinary Medicine Biomedical (VMB)</a></li><li><a href="/courses/vmc/">Veterinary Medicine Clinical (VMC)</a></li>
+</ul><h2 id="w2253321" class="letternav-head">W</h2>
+<ul><li><a href="/courses/wre/">Water Resources Engineering (WRE)</a></li><li><a href="/courses/wrp/">Water Resources Policy and Management (WRP)</a></li><li><a href="/courses/wrs/">Water Resources Science (WRS)</a></li><li><a href="/courses/wgss/">Women, Gender &amp; Sexuality Studies (WGSS)</a></li><li><a href="/courses/wse/">Wood Science and Engineering (WSE)</a></li><li><a href="/courses/wlc/">World Languages and Cultures (WLC)</a></li><li><a href="/courses/wr/">Written English (WR)</a></li>
+</ul><h2 id="z2253321" class="letternav-head">Z</h2>
+<ul><li><a href="/courses/z/">Zoology (Z)</a></li></ul></div></div><!--end #textcontainer -->
+
+		</div> <!-- end #content -->
+	</div> <!-- left-col -->
+   <aside id="right-col">
+      <div id="sidebar" aria-hidden="false">
+         <h2 id="edition">2024-2025 Catalog</h2>
+
+         <!-- Begin Regular Nav -->
+         <nav id="cl-menu" aria-label="Primary">
+<ul class="nav levelzero" id="/">
+	<li><a href="/advising/">Academic Advising</a></li>
+	<li><a href="/regulations/">Academic Regulations</a></li>
+	<li><a href="/administration-accreditation/">Administration &amp;&#8203; Accreditation</a></li>
+	<li class="isparent"><a href="/admission/">Admission to Oregon State University</a></li>
+	<li><a href="/archives/">Archives</a></li>
+	<li class="isparent"><a href="/college-departments/">Colleges, Schools, Departments &amp;&#8203; Programs</a></li>
+	<li class="active isparent self"><a href="#" onclick="return false;">Course Descriptions</a>
+	<ul class="nav levelone" id="/courses/">
+		<li><a href="/courses/als/">Academic Learning Services (ALS)</a></li>
+		<li><a href="/courses/actg/">Accounting (ACTG)</a></li>
+		<li><a href="/courses/ahe/">Adult Education &amp;&#8203; Higher Education Leadership (AHE)</a></li>
+		<li><a href="/courses/aae/">Aeronautical &amp;&#8203; Astronautical Engineering (AAE)</a></li>
+		<li><a href="/courses/as/">Aerospace Studies (AS)</a></li>
+		<li><a href="/courses/aed/">Agricultural Education (AED)</a></li>
+		<li><a href="/courses/agri/">Agricultural Sciences (AGRI)</a></li>
+		<li><a href="/courses/ag/">Agriculture-&#8203;General (AG)</a></li>
+		<li><a href="/courses/asl/">American Sign Language (ASL)</a></li>
+		<li><a href="/courses/ams/">American Studies Program (AMS)</a></li>
+		<li><a href="/courses/ans/">Animal Sciences (ANS)</a></li>
+		<li><a href="/courses/anth/">Anthropology (ANTH)</a></li>
+		<li><a href="/courses/aec/">Applied Economics (AEC)</a></li>
+		<li><a href="/courses/aj/">Applied Journalism (AJ)</a></li>
+		<li><a href="/courses/are/">Architectural Engineering (ARE)</a></li>
+		<li><a href="/courses/art/">Art (ART)</a></li>
+		<li><a href="/courses/ai/">Artificial Intelligence (AI)</a></li>
+		<li><a href="/courses/at/">Athletic Training (AT)</a></li>
+		<li><a href="/courses/ats/">Atmospheric Sciences (ATS)</a></li>
+		<li><a href="/courses/bb/">Biochemistry and Biophysics (BB)</a></li>
+		<li><a href="/courses/bhs/">BioHealth Sciences (BHS)</a></li>
+		<li><a href="/courses/bee/">Biological &amp;&#8203; Ecological Engineering (BEE)</a></li>
+		<li><a href="/courses/bds/">Biological Data Sciences (BDS)</a></li>
+		<li><a href="/courses/bioe/">Biological Engineering (BIOE)</a></li>
+		<li><a href="/courses/bi/">Biology (BI)</a></li>
+		<li><a href="/courses/brr/">Bioresource Research (BRR)</a></li>
+		<li><a href="/courses/bot/">Botany and Plant Pathology (BOT)</a></li>
+		<li><a href="/courses/ba/">Business Administration (BA)</a></li>
+		<li><a href="/courses/bana/">Business Analytics (BANA)</a></li>
+		<li><a href="/courses/bis/">Business Information Systems (BIS)</a></li>
+		<li><a href="/courses/che/">Chemical Engineering (CHE)</a></li>
+		<li><a href="/courses/cbee/">Chemical, Biological &amp;&#8203; Environmental Engineering (CBEE)</a></li>
+		<li><a href="/courses/ch/">Chemistry (CH)</a></li>
+		<li><a href="/courses/chn/">Chinese (CHN)</a></li>
+		<li><a href="/courses/cce/">Civil and Construction Engineering (CCE)</a></li>
+		<li><a href="/courses/ce/">Civil Engineering (CE)</a></li>
+		<li><a href="/courses/cssa/">College Student Services Administration (CSSA)</a></li>
+		<li><a href="/courses/comm/">Communication (COMM)</a></li>
+		<li><a href="/courses/cs/">Computer Science (CS)</a></li>
+		<li><a href="/courses/cem/">Construction Engineering Management (CEM)</a></li>
+		<li><a href="/courses/coun/">Counseling (COUN)</a></li>
+		<li><a href="/courses/css/">Crop &amp;&#8203; Soil Science (CSS)</a></li>
+		<li><a href="/courses/crop/">Crop Science (CROP)</a></li>
+		<li><a href="/courses/dsgn/">Design (DSGN)</a></li>
+		<li><a href="/courses/econ/">Economics (ECON)</a></li>
+		<li><a href="/courses/ed/">Education (ED)</a></li>
+		<li><a href="/courses/ece/">Electrical &amp;&#8203; Computer Engineering (ECE)</a></li>
+		<li><a href="/courses/ese/">Energy Systems Engineering (ESE)</a></li>
+		<li><a href="/courses/emgt/">Engineering Management (EMGT)</a></li>
+		<li><a href="/courses/engr/">Engineering Science (ENGR)</a></li>
+		<li><a href="/courses/eng/">English (ENG)</a></li>
+		<li><a href="/courses/ent/">Entomology (ENT)</a></li>
+		<li><a href="/courses/eah/">Environmental Arts &amp;&#8203; Humanities (EAH)</a></li>
+		<li><a href="/courses/enve/">Environmental Engineering (ENVE)</a></li>
+		<li><a href="/courses/ensc/">Environmental Sciences (ENSC)</a></li>
+		<li><a href="/courses/es/">Ethnic Studies (ES)</a></li>
+		<li><a href="/courses/film/">Film Studies (FILM)</a></li>
+		<li><a href="/courses/fin/">Finance (FIN)</a></li>
+		<li><a href="/courses/fw/">Fisheries and Wildlife (FW)</a></li>
+		<li><a href="/courses/fcsj/">Food in Culture &amp;&#8203; Social Justice (FCSJ)</a></li>
+		<li><a href="/courses/fst/">Food Science and Technology (FST)</a></li>
+		<li><a href="/courses/fes/">Forest Ecosystems and Society (FES)</a></li>
+		<li><a href="/courses/fe/">Forest Engineering (FE)</a></li>
+		<li><a href="/courses/for/">Forestry (FOR)</a></li>
+		<li><a href="/courses/fr/">French (FR)</a></li>
+		<li><a href="/courses/geog/">Geography (GEOG)</a></li>
+		<li><a href="/courses/gph/">Geophysics (GPH)</a></li>
+		<li><a href="/courses/geo/">Geosciences (GEO)</a></li>
+		<li><a href="/courses/ger/">German (GER)</a></li>
+		<li><a href="/courses/grad/">Graduate Education (GRAD)</a></li>
+		<li><a href="/courses/gd/">Graphic Design (GD)</a></li>
+		<li><a href="/courses/hhs/">Health and Human Sciences (HHS)</a></li>
+		<li><a href="/courses/hst/">History (HST)</a></li>
+		<li><a href="/courses/hsts/">History of Science (HSTS)</a></li>
+		<li><a href="/courses/hc/">Honors College (HC)</a></li>
+		<li><a href="/courses/hort/">Horticulture (HORT)</a></li>
+		<li><a href="/courses/hm/">Hospitality Management (HM)</a></li>
+		<li><a href="/courses/hdfs/">Human Development and Family Sciences (HDFS)</a></li>
+		<li><a href="/courses/hest/">Humanitarian Engineering, Science &amp;&#8203; Technology (HEST)</a></li>
+		<li><a href="/courses/ie/">Industrial and Manufacturing Engineering (IE)</a></li>
+		<li><a href="/courses/ib/">Integrative Biology (IB)</a></li>
+		<li><a href="/courses/iepa/">Intensive English Program Academic English (IEPA)</a></li>
+		<li><a href="/courses/iepg/">Intensive English Program General English (IEPG)</a></li>
+		<li><a href="/courses/ieph/">Intensive English Program General English (IEPH)</a></li>
+		<li><a href="/courses/ist/">Interdisciplinary Programs (IST)</a></li>
+		<li><a href="/courses/intl/">International Degree (INTL)</a></li>
+		<li><a href="/courses/it/">Italian (IT)</a></li>
+		<li><a href="/courses/jpn/">Japanese (JPN)</a></li>
+		<li><a href="/courses/kin/">Kinesiology (KIN)</a></li>
+		<li><a href="/courses/kor/">Korean (KOR)</a></li>
+		<li><a href="/courses/lead/">Leadership (LEAD)</a></li>
+		<li><a href="/courses/ls/">Liberal Studies (LS)</a></li>
+		<li><a href="/courses/ling/">Linguistics (LING)</a></li>
+		<li><a href="/courses/mgmt/">Management (MGMT)</a></li>
+		<li><a href="/courses/mfge/">Manufacturing Engineering (MFGE)</a></li>
+		<li><a href="/courses/mrm/">Marine Resource Management (MRM)</a></li>
+		<li><a href="/courses/mast/">Marine Studies (MAST)</a></li>
+		<li><a href="/courses/mrkt/">Marketing (MRKT)</a></li>
+		<li><a href="/courses/mnr/">Master of Natural Resources (MNR)</a></li>
+		<li><a href="/courses/mats/">Materials Science (MATS)</a></li>
+		<li><a href="/courses/mth/">Mathematics (MTH)</a></li>
+		<li><a href="/courses/me/">Mechanical Engineering (ME)</a></li>
+		<li><a href="/courses/mime/">Mechanical, Industrial and Manufacturing Engineering (MIME)</a></li>
+		<li><a href="/courses/mb/">Microbiology (MB)</a></li>
+		<li><a href="/courses/ms/">Military Science (MS)</a></li>
+		<li><a href="/courses/mus/">Music (MUS)</a></li>
+		<li><a href="/courses/mup/">Music (Studio) (MUP)</a></li>
+		<li><a href="/courses/mued/">Music Education (MUED)</a></li>
+		<li><a href="/courses/nr/">Natural Resources (NR)</a></li>
+		<li><a href="/courses/ns/">Naval Science (NS)</a></li>
+		<li><a href="/courses/nmc/">New Media Communications (NMC)</a></li>
+		<li><a href="/courses/nse/">Nuclear Science &amp;&#8203; Engineering (NSE)</a></li>
+		<li><a href="/courses/nur/">Nursing (NUR)</a></li>
+		<li><a href="/courses/nutr/">Nutrition (NUTR)</a></li>
+		<li><a href="/courses/oeas/">Ocean, Earth &amp;&#8203; Atmospheric Sciences (OEAS)</a></li>
+		<li><a href="/courses/oc/">Oceanography (OC)</a></li>
+		<li><a href="/courses/op/">Outdoor Products (OP)</a></li>
+		<li><a href="/courses/pax/">Peace Studies (PAX)</a></li>
+		<li><a href="/courses/phar/">Pharmacy (PHAR)</a></li>
+		<li><a href="/courses/phl/">Philosophy (PHL)</a></li>
+		<li><a href="/courses/pac/">Physical Activity Courses (PAC)</a></li>
+		<li><a href="/courses/pt/">Physical Therapy/&#8203;Therapist (PT)</a></li>
+		<li><a href="/courses/ph/">Physics (PH)</a></li>
+		<li><a href="/courses/pbg/">Plant Breeding &amp;&#8203; Genetics (PBG)</a></li>
+		<li><a href="/courses/ps/">Political Science (PS)</a></li>
+		<li><a href="/courses/psy/">Psychology (PSY)</a></li>
+		<li><a href="/courses/h/">Public Health (H)</a></li>
+		<li><a href="/courses/ppol/">Public Policy (PPOL)</a></li>
+		<li><a href="/courses/qs/">Queer Studies (QS)</a></li>
+		<li><a href="/courses/rng/">Rangeland Ecology &amp;&#8203; Management (RNG)</a></li>
+		<li><a href="/courses/rel/">Religious Studies (REL)</a></li>
+		<li><a href="/courses/rob/">Robotics (ROB)</a></li>
+		<li><a href="/courses/sed/">Science &amp;&#8203; Mathematics Education (SED)</a></li>
+		<li><a href="/courses/sci/">Science (SCI)</a></li>
+		<li><a href="/courses/esc/">Science of Engineering (ESC)</a></li>
+		<li><a href="/courses/ssci/">Social Science (SSCI)</a></li>
+		<li><a href="/courses/soc/">Sociology (SOC)</a></li>
+		<li><a href="/courses/se/">Software Engineering (SE)</a></li>
+		<li><a href="/courses/soil/">Soil Science (SOIL)</a></li>
+		<li><a href="/courses/span/">Spanish (SPAN)</a></li>
+		<li><a href="/courses/st/">Statistics (ST)</a></li>
+		<li><a href="/courses/sclm/">Supply Chain and Logistics Management (SCLM)</a></li>
+		<li><a href="/courses/sus/">Sustainability (SUS)</a></li>
+		<li><a href="/courses/snr/">Sustainable Natural Resources (SNR)</a></li>
+		<li><a href="/courses/ta/">Theatre Arts (TA)</a></li>
+		<li><a href="/courses/tral/">Tourism, Recreation &amp;&#8203; Adventure Leadership (TRAL)</a></li>
+		<li><a href="/courses/tox/">Toxicology (TOX)</a></li>
+		<li><a href="/courses/uexp/">University Experience (UEXP)</a></li>
+		<li><a href="/courses/vmb/">Veterinary Medicine Biomedical (VMB)</a></li>
+		<li><a href="/courses/vmc/">Veterinary Medicine Clinical (VMC)</a></li>
+		<li><a href="/courses/wre/">Water Resources Engineering (WRE)</a></li>
+		<li><a href="/courses/wrp/">Water Resources Policy and Management (WRP)</a></li>
+		<li><a href="/courses/wrs/">Water Resources Science (WRS)</a></li>
+		<li><a href="/courses/wgss/">Women, Gender &amp;&#8203; Sexuality Studies (WGSS)</a></li>
+		<li><a href="/courses/wse/">Wood Science and Engineering (WSE)</a></li>
+		<li><a href="/courses/wlc/">World Languages and Cultures (WLC)</a></li>
+		<li><a href="/courses/wr/">Written English (WR)</a></li>
+		<li><a href="/courses/z/">Zoology (Z)</a></li>
+	</ul>
+	</li>
+	<li><a href="/subject-contacts/">Course Subject Area Contacts</a></li>
+	<li class="isparent"><a href="/earning-degrees/">Earning a Degree</a></li>
+	<li><a href="/ecampus/">Ecampus</a></li>
+	<li><a href="/faculty/">Faculty A-&#8203;Z</a></li>
+	<li class="isparent"><a href="/financial-aid-scholarships/">Financial Aid &amp;&#8203; Scholarships</a></li>
+	<li><a href="/glossary-catalog-definitions/">Glossary &amp;&#8203; Catalog Definitions</a></li>
+	<li class="isparent"><a href="/grades-regulations-records/">Grades, Regulations &amp;&#8203; Records</a></li>
+	<li><a href="/into-osu/">INTO OSU</a></li>
+	<li><a href="/museums-galleries-collections/">Museums, Galleries &amp;&#8203; Collections</a></li>
+	<li><a href="/osu-go/">OSU Office of Global Opportunities (OSU GO)</a></li>
+	<li><a href="/programs/">Programs</a></li>
+	<li><a href="/research/">Research</a></li>
+	<li class="isparent"><a href="/course-search/">Search Classes</a></li>
+	<li><a href="/student-support-services/">Student Support Services</a></li>
+	<li class="isparent"><a href="/tuition-fees-payment/">Tuition, Fees &amp;&#8203; Payment</a></li>
+</ul>
+         </nav>
+         <!-- End Nav -->
+      </div> <!-- end sidebar -->
+   </aside> <!-- end right-col -->
+</div> <!-- end clearfix -->
+
+</div> <!-- end content-wrapper -->
+
+<!--htdig_noindex-->
+<footer id="footer" role="contentinfo">
+   <div class="wrap">
+      <h2>Published by the Office of the Registrar</h2>
+	  <p>Oregon State University
+	  <br/>B102 Kerr Administration Building<p/>
+	  <p>Corvallis, OR 97331-2130</p>
+	  <p>Phone: 541-737-4331</p>
+	  <p>Email: <a href="mailto:catalog@oregonstate.edu">catalog@oregonstate.edu</a></p>
+	  <p>
+         <a href="http://oregonstate.edu/copyright">Copyright</a> &copy; 2024-2025
+         <br/>Oregon State University
+         <br/><a href="http://oregonstate.edu/official-web-disclaimer">Disclaimer</a>
+      </p>
+   </div>
+   <a href="#header" id="totop"><span class="sr-only">Back to Top</span></a>
+</footer><!-- end #footer -->
+<!--/htdig_noindex-->
+
+<div id="print-dialog" aria-labeledby="dialog-title" class="screen" role="dialog">
+	<div class="print-header">
+		<h2 id="dialog-title">Print Options</h2>
+	</div>
+	<div class="print-body">
+		<div class="print-option">
+			<div class="option-head">
+				<a href="#" onclick="hidePrintDialog();window.print();return false">Send Page to Printer</a>
+			</div>
+			<p>
+				<em>Print this page.</em>
+			</p>
+		</div>
+<div class="print-option"><div class="option-head"><a class="option-name" href="/courses/courses.pdf" role="button">Download Page (PDF)</a></div><p class="option-desc"><em>The PDF will include all information unique to this page.</em></p></div><div class="print-option"><div class="option-head"><a class="option-name" href="/pdf/2024-2025.pdf" target="_blank">Download PDF of the entire Bulletin</a></div><p class="option-desc"><em>All pages in Academic Catalog.</em></p></div>    </div>
+	<div class="buttons clearfix">
+		<div class="cancel">
+			<a href="#" onclick="hidePrintDialog(); return false;">Cancel</a>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
