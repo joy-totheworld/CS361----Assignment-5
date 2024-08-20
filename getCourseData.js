@@ -159,6 +159,27 @@ function Disjunction(arrayDis) {
   this.arrayDis = arrayDis
 }
 
+function processArrayForContent (inputArray) {
+  for (var contentArrayIdx = 0; contentArrayIdx < inputArray.length; contentArrayIdx += 1) {
+
+    inputArray[contentArrayIdx] = inputArray[contentArrayIdx].substring(1)
+    inputArray[contentArrayIdx] = inputArray[contentArrayIdx].replaceAll("or better", "").trim()
+    inputArray[contentArrayIdx] = inputArray[contentArrayIdx].replaceAll("with C-", "").trim()
+    inputArray[contentArrayIdx] = inputArray[contentArrayIdx].replaceAll("with C", "").trim()
+    inputArray[contentArrayIdx] = inputArray[contentArrayIdx].replaceAll("[C-]", "").trim()
+    inputArray[contentArrayIdx] = inputArray[contentArrayIdx].replaceAll("[C]", "").trim()
+    inputArray[contentArrayIdx] = inputArray[contentArrayIdx].replaceAll("with D-", "").trim()
+    inputArray[contentArrayIdx] = inputArray[contentArrayIdx].replaceAll("with D", "").trim()
+    inputArray[contentArrayIdx] = inputArray[contentArrayIdx].replaceAll("[D-]", "").trim()
+    inputArray[contentArrayIdx] = inputArray[contentArrayIdx].replaceAll("[D]", "").trim()
+  }
+  inputArray = inputArray.filter(isConcurrent)
+  inputArray = inputArray.filter(isNotMathTest)
+  inputArray = inputArray.filter(isEmpty)
+
+  return inputArray
+}
+
 function isEmpty(value) {
   if (typeof value == "string") {
 
@@ -207,7 +228,7 @@ function processPrereqString(inputString, coursename) {
 
   else {
     prereqArray = [conjunctionCheck(inputString)]
-    console.log("+++++++++++++++++++++++")
+    // console.log("+++++++++++++++++++++++")
   }
 
   // console.log("prereqArray1: ", prereqArray)
@@ -222,7 +243,7 @@ function unnest(nestedString, name) {
   var trySplitByParen = nestedString.split(/\(([^()]+)\)/g)
   if ((Array.isArray(trySplitByParen)) && (trySplitByParen.length > 1)) {
     tempArray = trySplitByParen.filter(isEmpty)
-    console.log("*********************")
+    // console.log("*********************")
     // console.log("inParenthesisArray Before: ", nestedString.match(/\(([^()]+)\)/g))
     inParenthesisArray = nestedString.match(/\(([^()]+)\)/g)
     for (let i = 0; i < inParenthesisArray.length; i++) {
@@ -253,22 +274,22 @@ function unnest(nestedString, name) {
       tempArray = tempArray.filter(isEmpty)
 
     }
-    console.log("tempArray before :", tempArray)
+    // console.log("tempArray before :", tempArray)
 
     // process array for nested parenthesis
     for (let j = 0; j < tempArray.length; j++) {
       // console.log()
-      console.log("j: ", j)
+      // console.log("j: ", j)
 
       if (typeof tempArray[j] == "string") {
         lookForOpeningPar = tempArray[j].match(/[(]/)
         lookForClosingPar = tempArray[j].match(/[)]/)
 
-        console.log("close:", lookForClosingPar)
-        console.log("open:", lookForOpeningPar)
+        // console.log("close:", lookForClosingPar)
+        // console.log("open:", lookForOpeningPar)
 
         if ((lookForOpeningPar == null) && (lookForClosingPar != null)) {
-          console.log("only close in string seg")
+          // console.log("only close in string seg")
           included = []
           conjunction = false
           disjunction = false
@@ -375,11 +396,11 @@ function unnest(nestedString, name) {
             }
             j = 1
           }
-          console.log("tempArray3: ", tempArray)
+          // console.log("tempArray3: ", tempArray)
         }
         else if ((lookForOpeningPar != null) && (lookForClosingPar != null)) {
           if (lookForClosingPar.index < lookForOpeningPar.index) {
-            console.log("close then open in string seg")
+            // console.log("close then open in string seg")
             included = []
             conjunction = false
             disjunction = false
@@ -465,7 +486,7 @@ function unnest(nestedString, name) {
               }
               j = 1
             }
-            console.log("tempArray4: ", tempArray)
+            // console.log("tempArray4: ", tempArray)
           }
           else if (lookForClosingPar.index > lookForOpeningPar.index) {
             console.log("open then close in string seg")
@@ -473,7 +494,7 @@ function unnest(nestedString, name) {
           }
         }
         else if ((lookForOpeningPar != null) && (lookForClosingPar == null)) {
-          console.log("only open in string seg")
+          // console.log("only open in string seg")
           leftstartidx = lookForOpeningPar.index
 
           spliceIdx = j + 1
@@ -498,15 +519,14 @@ function unnest(nestedString, name) {
           tempArray.splice(j, 1)
           j = spliceIdx
 
-          console.log("tempArray5: ", tempArray)
+          // console.log("tempArray5: ", tempArray)
           // console.log()
 
         }
       }
-      console.log("tempArray end of j: ", tempArray)
-      console.log("originalstring:", originalstring)
+      // console.log("tempArray end of j: ", tempArray)
+      // console.log("originalstring:", originalstring)
 
-      console.log()
 
     }
 
@@ -564,7 +584,7 @@ function unnest(nestedString, name) {
       console.log("originalstring:", originalstring)
       console.log("inQuestion:", inQuestion)
       console.log("inQuestionArray:", inQuestionArray)
-      console.log("tempArray6: ", tempArray)
+      // console.log("tempArray6: ", tempArray)
       console.log()
     }
     else if (containsAnd) {
