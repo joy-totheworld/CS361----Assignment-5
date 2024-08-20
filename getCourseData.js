@@ -2,6 +2,124 @@ var fs = require('fs');
 var bodyParser = require('body-parser');
 const { lookupService } = require('dns/promises');
 
+getData()
+
+function getData() {
+  // credit for following function, referenced:
+  // https://stackoverflow.com/questions/38235715/fetch-reject-promise-and-catch-the-error-if-status-is-not-ok
+  fetch("https://catalog.oregonstate.edu/courses/").then((response) => {
+    if (response.ok) {
+      return response.text();
+    }
+    throw new Error('Something went wrong');
+  })
+    .then((responseText) => {
+      // getting array of urls
+      var regURLel = /<li><a href=".courses.[a-zA-Z]*.">/gm
+      var found = [...responseText.matchAll(regURLel)]
+      linkStrings = []
+      for (var i = 0; i < found.length; i += 1) {
+        linkStrings.push(found[i][0])
+        linkStrings[i] = "https://catalog.oregonstate.edu" + linkStrings[i].substring(13, (linkStrings[i].length - 2))
+      }
+      console.log(linkStrings);
+
+      // getting HTML for each page
+      var courseArrayAggregate = []
+      for (var i = 38; i < 50; i += 1) {
+        // for (var i = 0; i < linkStrings.length; i += 1) {
+        setTimeout(() => { }, 500);
+        console.log(linkStrings[i])
+        fetch(linkStrings[i]).then((response) => {
+          if (response.ok) {
+            return response.text();
+          }
+          throw new Error('Something went wrong');
+        })
+          .then((deptResponseText) => {
+            var courseArrayDept = []
+            // console.log(deptResponseText.replace(/(?:\r\n|\r|\n)/g,""))
+            var regClassHTML = /<h2 class="courseblocktitle"><strong>.+?(?=<div class="courseblock">)/gm
+            var deptHTML = deptResponseText.replace(/(?:\r\n|\r|\n)/g, "")
+            // console.log(deptHTML)
+            var classHTMLArray = [...deptHTML.matchAll(regClassHTML)]
+            for (var j = 0; j < 2; j += 1) {
+              // for (var j = 0; j < classHTMLArray.length; j += 1) {
+              // create class object for each course lising of the department page
+
+              // course ID and Name
+              regCourseBlockTitle = /<h2 class="courseblocktitle"><strong>.+?(?=<.h2>)/gm
+              var courseNameString = classHTMLArray[j][0].match(regCourseBlockTitle)[0]
+              courseNameString = courseNameString.substring(37, courseNameString.length - 9)
+              var courseNamesArray = courseNameString.split(",");
+              courseNamesArray.pop()
+              courseArrayDept.push(new Class(courseNamesArray[0], courseNamesArray[1], []))
+
+              // course prereqs
+              var regCoursePrereqBlock = /<p class="courseblockextra noindent">.+?(?=<.p>)/gm
+              var coursePrereqSourceStrings = classHTMLArray[j][0].match(regCoursePrereqBlock)
+
+              if (coursePrereqSourceStrings !== null) {
+
+                // can be multiple array items for reccomended courses, equivilents, and how many times a course is repeatable
+                for (var l = 0; l < coursePrereqSourceStrings.length; l += 1) {
+
+                  // if statement to filter out elements on non-prerequisite topics
+                  if (coursePrereqSourceStrings[l].includes("Prerequisite")) {
+
+                    var regPrereqString = />(?!<).+?(?=<)/gm
+                    var coursePrereqStringArray = (coursePrereqSourceStrings[l] + "<").match(regPrereqString)
+                    var coursePrereqString = ""
+
+                    for (var k = 0; k < coursePrereqStringArray.length; k += 1) {
+
+                      coursePrereqStringArray[k] = coursePrereqStringArray[k].substring(1)
+                      coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("or better", "").trim()
+                      coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("with C-", "").trim()
+                      coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("with C", "").trim()
+                      coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("[C-]", "").trim()
+                      coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("[C]", "").trim()
+                      if ((coursePrereqStringArray[k].includes("Prerequisite:") == false) && (coursePrereqStringArray[k] != " ")) {
+                        coursePrereqString = coursePrereqString + coursePrereqStringArray[k]
+                      }
+                    }
+                    // console.log()
+                    // console.log("coursePrereqString:", coursePrereqString)
+                    courseArrayDept[j].prereqs = processPrereqString(coursePrereqString)
+                  }
+                }
+
+                // coursePrereqStringArray[k]= coursePrereqStringArray[k][0]
+              }
+              // console.log(coursePrereqString)
+
+              // console.log(coursePrereqStringArray)
+              // console.log()
+              // courseArrayDept.push()
+
+            }
+            // console.log(courseArrayDept)
+            console.log("courseArrayDept:", courseArrayDept)
+            courseArrayAggregate = courseArrayAggregate.concat(courseArrayDept)
+            console.log("courseArrayAggregate1:", courseArrayAggregate)
+
+          })
+          .catch((error) => {
+            console.log(error)
+          });
+
+      }
+      console.log("courseArrayAggregate2:", courseArrayAggregate)
+
+    })
+    .catch((error) => {
+      console.log(error)
+    });
+}
+/////////////////////////////////////////////////////////////////////////////
+// helper functions below
+////////////////////////////////////////////////////////////////////////////
+
 function Class(courseID, courseName, prereqs) {
   this.courseID = courseID;
   this.courseName = courseName;
@@ -32,128 +150,6 @@ function isNotMathTest(value) {
   return (value.includes("ALEKS") == false);
 }
 
-// credit for following function, referenced:
-// https://stackoverflow.com/questions/38235715/fetch-reject-promise-and-catch-the-error-if-status-is-not-ok
-fetch("https://catalog.oregonstate.edu/courses/").then((response) => {
-  if (response.ok) {
-    return response.text();
-  }
-  throw new Error('Something went wrong');
-})
-  .then((responseText) => {
-    // getting array of urls
-    var regURLel = /<li><a href=".courses.[a-zA-Z]*.">/gm
-    var found = [...responseText.matchAll(regURLel)]
-    linkStrings = []
-    for (var i = 0; i < found.length; i += 1) {
-      linkStrings.push(found[i][0])
-      linkStrings[i] = "https://catalog.oregonstate.edu" + linkStrings[i].substring(13, (linkStrings[i].length - 2))
-    }
-    console.log(linkStrings);
-
-    // getting HTML for each page
-    for (var i = 38; i < 39; i += 1) {
-      // for (var i = 0; i < linkStrings.length; i += 1) {
-      setTimeout(() => { }, 500);
-      console.log(linkStrings[i])
-      fetch(linkStrings[i]).then((response) => {
-        if (response.ok) {
-          return response.text();
-        }
-        throw new Error('Something went wrong');
-      })
-        .then((deptResponseText) => {
-          var courseArrayDept = []
-          // console.log(deptResponseText.replace(/(?:\r\n|\r|\n)/g,""))
-          var regClassHTML = /<h2 class="courseblocktitle"><strong>.+?(?=<div class="courseblock">)/gm
-          var deptHTML = deptResponseText.replace(/(?:\r\n|\r|\n)/g, "")
-          // console.log(deptHTML)
-          var classHTMLArray = [...deptHTML.matchAll(regClassHTML)]
-          // for (var j = 6; j < 7; j += 1) {
-          for (var j = 0; j < classHTMLArray.length; j += 1) {
-            // create class object for each course lising of the department page
-
-            // course ID and Name
-            regCourseBlockTitle = /<h2 class="courseblocktitle"><strong>.+?(?=<.h2>)/gm
-            var courseNameString = classHTMLArray[j][0].match(regCourseBlockTitle)[0]
-            courseNameString = courseNameString.substring(37, courseNameString.length - 9)
-            var courseNamesArray = courseNameString.split(",");
-            courseNamesArray.pop()
-            courseArrayDept.push(new Class(courseNamesArray[0], courseNamesArray[1], []))
-
-            // course prereqs
-            // console.log(classHTMLArray[j][0])
-            var regCoursePrereqBlock = /<p class="courseblockextra noindent">.+?(?=<.p>)/gm
-            // console.log("classHTMLArray[j][0]", classHTMLArray[j][0])
-            var coursePrereqSourceStrings = classHTMLArray[j][0].match(regCoursePrereqBlock)
-
-            if (coursePrereqSourceStrings !== null) {
-              // console.log("coursePrereqSourceStrings: ", coursePrereqSourceStrings)
-              // console.log("coursePrereqSourceStrings.length: ", coursePrereqSourceStrings.length)
-              // console.log()
-
-              // can be multiple array items for reccomended courses, equivilents, and how many times a course is repeatable
-              for (var l = 0; l < coursePrereqSourceStrings.length; l += 1) {
-
-                // if statement to filter out elements on non-prerequisite topics
-                if (coursePrereqSourceStrings[l].includes("Prerequisite")) {
-
-                  var regPrereqString = />(?!<).+?(?=<)/gm
-                  var coursePrereqStringArray = (coursePrereqSourceStrings[l] + "<").match(regPrereqString)
-                  var coursePrereqString = ""
-                  // console.log("coursePrereqSourceStrings: ", coursePrereqSourceStrings)
-                  // console.log("coursePrereqSourceStrings.length: ", coursePrereqSourceStrings.length)
-                  // console.log("coursePrereqStringArray: ", coursePrereqStringArray)
-
-                  for (var k = 0; k < coursePrereqStringArray.length; k += 1) {
-                    // console.log("coursePrereqStringArray[k] BEFORE: ", coursePrereqStringArray[k])
-
-                    coursePrereqStringArray[k] = coursePrereqStringArray[k].substring(1)
-                    coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("or better", "").trim()
-                    coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("with C-", "").trim()
-                    coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("with C", "").trim()
-                    coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("[C-]", "").trim()
-                    coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("[C]", "").trim()
-                    if ((coursePrereqStringArray[k].includes("Prerequisite:") == false) && (coursePrereqStringArray[k] != " ")) {
-                      // console.log("coursePrereqStringArray[k]: ", coursePrereqStringArray[k])
-                      coursePrereqString = coursePrereqString + coursePrereqStringArray[k]
-                      // coursePrereqString = coursePrereqString.replaceAll("\n", ' ').trim().replaceAll(/\s\s+/g, ' ')
-                    }
-                  }
-                  console.log()
-                  console.log("coursePrereqString:", coursePrereqString)
-
-                  courseArrayDept[j].prereqs = processPrereqString(coursePrereqString)
-
-                }
-                console.log(courseArrayDept)
-
-              }
-
-              // coursePrereqStringArray[k]= coursePrereqStringArray[k][0]
-            }
-            // console.log(coursePrereqString)
-
-            // console.log(coursePrereqStringArray)
-            // console.log()
-            // courseArrayDept.push()
-          }
-          // console.log(courseArrayDept)
-
-        })
-        .catch((error) => {
-          console.log(error)
-        });
-    }
-  })
-  .catch((error) => {
-    console.log(error)
-  });
-
-/////////////////////////////////////////////////////////////////////////////
-// helper functions below
-////////////////////////////////////////////////////////////////////////////
-
 function processPrereqString(inputString) {
   var prereqArray = []
   var trySplitByParen = inputString.split(/\(([^()]+)\)/g)
@@ -163,20 +159,20 @@ function processPrereqString(inputString) {
 
   else {
     prereqArray = [conjunctionCheck(inputString)]
-    console.log("+++++++++++++++++++++++")
+    // console.log("+++++++++++++++++++++++")
   }
 
-  console.log("prereqArray1: ", prereqArray)
+  // console.log("prereqArray1: ", prereqArray)
   return prereqArray
 }
 
 function unnest(nestedString) {
   prereqArrayUnnest = []
-  console.log("nestedString: ", nestedString)
+  // console.log("nestedString: ", nestedString)
   var trySplitByParen = nestedString.split(/\(([^()]+)\)/g)
   if ((Array.isArray(trySplitByParen)) && (trySplitByParen.length > 1)) {
     tempArray = trySplitByParen.filter(isEmpty)
-    console.log("*********************")
+    // console.log("*********************")
     // console.log("inParenthesisArray Before: ", nestedString.match(/\(([^()]+)\)/g))
     inParenthesisArray = nestedString.match(/\(([^()]+)\)/g)
     for (let i = 0; i < inParenthesisArray.length; i++) {
@@ -292,7 +288,7 @@ function unnest(nestedString) {
 
             j = nextIdx
           }
-          else{
+          else {
             if (conjunction == true) {
               newCon = new Conjuction(included)
               tempArray.push(newCon)
@@ -361,7 +357,7 @@ function unnest(nestedString) {
               else {
                 tempArray.splice(nextIdx, 1)
               }
-  
+
               if (conjunction == true) {
                 newCon = new Conjuction(included)
                 tempArray.splice(nextIdx, 0, newCon)
@@ -370,10 +366,10 @@ function unnest(nestedString) {
                 newDis = new Disjunction(included)
                 tempArray.splice(nextIdx, 0, newDis)
               }
-  
+
               j = nextIdx
             }
-            else{
+            else {
               if (conjunction == true) {
                 newCon = new Conjuction(included)
                 tempArray.push(newCon)
@@ -486,7 +482,7 @@ function unnest(nestedString) {
     else if (containsOr) {
       prereqArrayUnnest = [new Disjunction(tempArray)]
     }
-    else{
+    else {
       prereqArrayUnnest = tempArray
     }
 
