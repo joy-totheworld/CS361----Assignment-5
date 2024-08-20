@@ -175,7 +175,7 @@ function addSelections() {
             if (classDetailArray.prereqs.length == 0) {
                 detailsPrereq.innerHTML = "none"
             } else {
-                detailsPrereq.innerHTML = unnestToString(classDetailArray.prereqs)
+                detailsPrereq.innerHTML = unnestToString(classDetailArray.prereqs[0])
             }
             detailTextContainer.appendChild(detailsIDHeader)
             detailTextContainer.appendChild(detailsID)
@@ -235,58 +235,89 @@ function addSelections() {
 
 function unnestToString(prereqArray) {
     var prereqString = ""
+    console.log(prereqArray)
+    // if (prereqArray.length > 1) {
+    //     for (var i = 0; i < (prereqArray.length - 1); i++) {
+    //         if (Array.isArray(prereqArray[i])) {
+    //             prereqString = prereqString + combineWithOr((prereqArray[i])) + " and "
+    //         } else {
+    //             prereqString = prereqString + prereqArray[i] + " and "
+    //         }
+    //     }
+    //     if (Array.isArray(prereqArray[prereqArray.length - 1])) {
+    //         prereqString = prereqString + combineWithOr((prereqArray[prereqArray.length - 1]))
+    //     } else {
+    //         prereqString = prereqString + " and " + prereqArray[prereqArray.length - 1]
+    //     }
+    // } else {
+    //     if (Array.isArray(prereqArray[prereqArray.length - 1])) {
+    //         prereqString = combineWithOr((prereqArray[prereqArray.length - 1]))
+    //     } else {
+    //         prereqString = prereqArray[prereqArray.length - 1]
+    //     }
+    // }
 
-    if (prereqArray.length > 1) {
-        for (var i = 0; i < (prereqArray.length - 1); i++) {
-            if (Array.isArray(prereqArray[i])) {
-                prereqString = prereqString + combineWithOr((prereqArray[i])) + " and "
-            } else {
-                prereqString = prereqString + prereqArray[i] + " and "
-            }
-        }
-        if (Array.isArray(prereqArray[prereqArray.length - 1])) {
-            prereqString = prereqString + combineWithOr((prereqArray[prereqArray.length - 1]))
-        } else {
-            prereqString = prereqString + " and " + prereqArray[prereqArray.length - 1]
-        }
-    } else {
-        if (Array.isArray(prereqArray[prereqArray.length - 1])) {
-            prereqString = combineWithOr((prereqArray[prereqArray.length - 1]))
-        } else {
-            prereqString = prereqArray[prereqArray.length - 1]
-        }
+    if(typeof prereqArray == "string"){
+        return prereqArray
     }
+    else{
+        // console.log(typeof prereqArray)
+        tryDis = prereqArray.arrayDis        
+        tryCon = prereqArray.arrayCon
+        console.log("tryDis", tryDis)
+        console.log("tryCon", tryCon)
+        // console.log("typeof tryDis != undefined",typeof tryDis != undefined)
+        // console.log("typeof tryDis ",typeof tryDis )
+        if(tryDis != undefined){return combineWithOr(tryDis)}
+        if(tryCon != undefined){return combineWithAnd(tryCon)}
 
-
+    }
 
     return prereqString
 }
 
-function combineWithOr(prereqSubArray) {
-    var prereqSubString = ""
-    console.log(prereqSubArray)
-    console.log(prereqSubArray.length)
+function combineWithAnd(prereqSubArray) {
+    console.log("prereqSubArray (and)", prereqSubArray)
 
-    if (prereqSubArray.length > 1) {
-        prereqSubString = "("
-        for (var i = 0; i < (prereqSubArray.length - 1); i++) {
-            prereqSubString = prereqSubString + prereqSubArray[i] + " or "
-        }
-        prereqSubString = prereqSubString + prereqSubArray[prereqSubArray.length - 1] + ")"
-        console.log("multi element: ", prereqSubString)
-
-    } else if ((prereqSubArray.length == 1) && (Array.isArray(prereqSubArray[0]))) {
-        prereqSubString = combineWithOr(prereqSubArray[0])
-        console.log("single nested element: ", prereqSubString)
-        console.log("single nested element: ", prereqSubArray[0])
-        console.log("single nested element: ", prereqSubArray)
-    } else {
-        prereqSubString = prereqSubArray[0]
-        console.log("non nested, single element: ", prereqSubString)
-        console.log("non nested, single element: ", prereqSubArray[0])
+    if(typeof prereqSubArray == "string"){
+        return prereqSubArray
     }
+    else if (prereqSubArray.length > 1) {
 
-    // console.log(prereqSubString)
+        processedEl = unnestToString(prereqSubArray[0])
+        var prereqSubString = "(" + processedEl
+
+        for (var i = 1; i < (prereqSubArray.length - 1); i++) {
+            processedEl = unnestToString(prereqSubArray[i])
+            prereqSubString = prereqSubString + " and " + processedEl
+        }
+        prereqSubString = prereqSubString + ")"
+    }
+    else if (prereqSubArray.length == 1) {
+        return combineWithOr(prereqSubArray[0])
+    }
+}
+
+function combineWithOr(prereqSubArray) {
+    console.log("prereqSubArray (or)", prereqSubArray)
+
+    if(typeof prereqSubArray == "string"){
+        return prereqSubArray
+    }
+    else if (prereqSubArray.length > 1) {
+
+        processedEl = unnestToString(prereqSubArray[0])
+        var prereqSubString = "(" + processedEl
+
+        for (var i = 1; i < (prereqSubArray.length - 1); i++) {
+            processedEl = unnestToString(prereqSubArray[i])
+            prereqSubString = prereqSubString + " or " + processedEl
+        }
+        prereqSubString = prereqSubString + ")"
+    }
+    else if (prereqSubArray.length == 1) {
+        return combineWithOr(prereqSubArray[0])
+    }
 
     return prereqSubString
 
