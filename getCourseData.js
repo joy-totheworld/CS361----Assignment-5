@@ -26,8 +26,8 @@ function getData() {
 
     // getting HTML for each page
     var courseArrayAggregate = []
-    // for (var i = 38; i < 39; i += 1) {
-    for (var i = 0; i < linkStrings.length; i += 1) {
+    for (var i = 38; i < 39; i += 1) {
+      // for (var i = 0; i < linkStrings.length; i += 1) {
       setTimeout(() => { }, 500);
       // console.log(linkStrings[i])
 
@@ -46,8 +46,8 @@ function getData() {
         var classHTMLArray = [...deptHTML.matchAll(regClassHTML)]
 
 
-        // for (var classArrayIdx = 0; classArrayIdx < 2; classArrayIdx += 1) {
-        for (var classArrayIdx = 0; classArrayIdx < classHTMLArray.length; classArrayIdx += 1) {
+        for (var classArrayIdx = 0; classArrayIdx < 2; classArrayIdx += 1) {
+          // for (var classArrayIdx = 0; classArrayIdx < classHTMLArray.length; classArrayIdx += 1) {
           // create class object for each course lising of the department page
 
           // course ID and Name
@@ -104,8 +104,8 @@ function getData() {
                   coursePrereqStringArray = coursePrereqStringArray.filter(isEmpty)
                   // console.log()
                   // console.log("coursePrereqString:", coursePrereqString)
-                  courseArrayDept[classArrayIdx].prereqs = processPrereqString(coursePrereqString, courseNamesArray[0])
-                  // courseArrayDept[classArrayIdx].prereqs = processPrereqString(" ((BI 211orBI 211H) and (BI 212orBI 212H) and (BI 213orBI 213H)) or ((BI 221orBI 221H) and (BI 222orBI 222H) and (BI 223orBI 223H)) andZ 361(may be taken concurrently)")
+                  // courseArrayDept[classArrayIdx].prereqs = processPrereqString(coursePrereqString, courseNamesArray[0])
+                  courseArrayDept[classArrayIdx].prereqs = processPrereqString("(CH 121(may be taken concurrently)   orCH 201(may be taken concurrently)  ) or ((CH 231(may be taken concurrently)   orCH 231H(may be taken concurrently)  ) and (CH 261(may be taken concurrently)  orCH 261H(may be taken concurrently)  orCH 271(may be taken concurrently) ))")
 
 
                 }
@@ -417,19 +417,19 @@ function disjunctionCheck(stringD) {
 function processAsStack(sourceArray, originalstring) {
   sourceStack = sourceArray.flat()
   console.log(sourceStack)
-  
-  for (let stackIdx = 1; stackIdx  < (sourceStack.length-1); stackIdx ++) {
-    if(sourceStack[stackIdx] == "and"){
-      newEl = new Conjunction(sourceStack[stackIdx-1], sourceStack[stackIdx+1])
-      sourceStack.splice(stackIdx-1,3,newEl)
-      stackIdx --
+
+  for (let stackIdx = 1; stackIdx < (sourceStack.length - 1); stackIdx++) {
+    if (sourceStack[stackIdx] == "and") {
+      newEl = new Conjunction(sourceStack[stackIdx - 1], sourceStack[stackIdx + 1])
+      sourceStack.splice(stackIdx - 1, 3, newEl)
+      stackIdx--
     }
-    else if(sourceStack[stackIdx] == "or"){
-      newEl = new Disjunction(sourceStack[stackIdx-1], sourceStack[stackIdx+1])
-      sourceStack.splice(stackIdx-1,3,newEl)
-      stackIdx --
-    }    
-    else if(stackIdx >= (sourceStack.length-1)){
+    else if (sourceStack[stackIdx] == "or") {
+      newEl = new Disjunction(sourceStack[stackIdx - 1], sourceStack[stackIdx + 1])
+      sourceStack.splice(stackIdx - 1, 3, newEl)
+      stackIdx--
+    }
+    else if (stackIdx >= (sourceStack.length - 1)) {
       break
     }
   }
@@ -438,8 +438,11 @@ function processAsStack(sourceArray, originalstring) {
 
 function recursivePass(mixedArray, originalstring) {
   for (let j = 0; j < mixedArray.length; j++) {
-    // console.log()
-    // console.log("j: ", j)
+    mixedArray = mixedArray.filter(isEmpty)
+    console.log()
+    console.log("j: ", j)
+    console.log("mixedArray:", mixedArray)
+
 
     if (typeof mixedArray[j] == "string") {
 
@@ -454,17 +457,18 @@ function recursivePass(mixedArray, originalstring) {
       }
 
 
-      // console.log("mixedArray[j]:", mixedArray[j])
-      // console.log("close:", lookForClosingPar)
-      // console.log("open:", lookForOpeningPar)
+      console.log("mixedArray[j]:", mixedArray[j])
+      console.log("close:", lookForClosingPar)
+      console.log("open:", lookForOpeningPar)
 
       if ((lookForOpeningPar == null) && (lookForClosingPar != null)) {
-        // console.log("only close in string seg")
+        console.log("only close in string seg")
         included = []
         conjunction = false
         disjunction = false
         nextIdx = -1
 
+        originalLen = mixedArray[j].length
         // assembling conjunction or disjunction leading up to first ")"
         if (lookForClosingPar.index > 0) {
           currEl = mixedArray[j].substring(0, lookForClosingPar.index)
@@ -483,13 +487,51 @@ function recursivePass(mixedArray, originalstring) {
           mixedArray[j] = mixedArray[j].substring(1)
         }
 
-        // creating element for any remaining substring after first ")"
-        if (lookForClosingPar.index < (mixedArray[j].length - 1)) {
-          mixedArray[j] = mixedArray[j].substring(lookForClosingPar.index + 1)
+        // checking for any remaining substring after first ")"
+        if (mixedArray[j].substring(lookForClosingPar.index + 1).match(/[(]/) != null) {
+          spliceIdx = j + 1
+
+          if (lookForClosingPar.index > 0) {
+            beforeClose = mixedArray[j].substring(0, lookForClosingPar.index - 1)
+            mixedArray.splice(spliceIdx, 0, beforeClose)
+            spliceIdx++
+          }
+
+          remaining = mixedArray[j].substring(lookForClosingPar.index + 1)
+          lookForClosingPar = remaining.match(/[(]/)
+          while (lookForClosingPar != null) {
+            leftstartidx = lookForClosingPar.index
+            console.log("additional", ")" + mixedArray[j].substring(leftstartidx, lookForClosingPar.index - 1))
+            mixedArray.splice(spliceIdx, 0, ")" + mixedArray[j].substring(leftstartidx, lookForClosingPar.index - 1))
+            spliceIdx++
+            remaining = remaining.substring(lookForClosingPar.index + 1)
+            lookForClosingPar = remaining.match(/[(]/)
+          }
+
+          console.log("final", "(" + remaining.substring(leftstartidx))
+
+          mixedArray.splice(spliceIdx, 0, "(" + remaining.substring(leftstartidx))
+          mixedArray.splice(j, 1)
+          j = spliceIdx
         }
         else {
-          deleted = mixedArray.splice(j, 1)
-          // console.log("Splicing out: ", deleted)
+          spliceIdx = j
+          idxBeforeSplice = j
+          beforeClose = mixedArray[j].substring(0, lookForClosingPar.index - 1)
+          afterClose = mixedArray[j].substring(lookForClosingPar.index)
+
+          if (lookForClosingPar.index > 0){
+            mixedArray.splice(spliceIdx, 1, beforeClose)
+            spliceIdx++
+            console.log("beforeClose", beforeClose)
+            console.log("after close insert: ", mixedArray)
+          }
+
+          mixedArray.splice(spliceIdx, 0, afterClose)
+          spliceIdx++
+          console.log("afterClose", afterClose)
+          console.log("mixedArray5: ", mixedArray)
+          j = spliceIdx
         }
 
         for (let p = j - 1; p > -1; p--) {
@@ -555,6 +597,7 @@ function recursivePass(mixedArray, originalstring) {
           else if (disjunction == true) {
             newDis = new Disjunction(included.filter(isEmpty))
             mixedArray.splice(nextIdx, 0, newDis)
+            console.log("spot a ")
           }
 
           j = nextIdx
@@ -567,6 +610,8 @@ function recursivePass(mixedArray, originalstring) {
           else if (disjunction == true) {
             newDis = new Disjunction(included.filter(isEmpty))
             mixedArray.push(newDis)
+            console.log("spot a ")
+
           }
           j = 1
         }
@@ -574,7 +619,7 @@ function recursivePass(mixedArray, originalstring) {
       }
       else if ((lookForOpeningPar != null) && (lookForClosingPar != null)) {
         if (lookForClosingPar.index < lookForOpeningPar.index) {
-          // console.log("close then open in string seg")
+          console.log("close then open in string seg")
           included = []
           conjunction = false
           disjunction = false
@@ -582,10 +627,12 @@ function recursivePass(mixedArray, originalstring) {
 
 
           mixedArray[j] = mixedArray[j].substring(lookForClosingPar.index + 1)
-
+          console.log("after replace:", mixedArray)
           // assembling conjunction or disjunction leading up to first "("
           for (let q = j - 1; q > -1; q--) {
-
+            // console.log(q)
+            // console.log(j)
+            // console.log(q<j)
             currEl = mixedArray[q]
 
             if (typeof currEl == "string") {
@@ -618,14 +665,14 @@ function recursivePass(mixedArray, originalstring) {
                 q = -1
                 break
               }
-              else if(currEl.indexOf("(") > -1){
+              else if (currEl.indexOf("(") > -1) {
                 nextIdx = q
 
                 if (currEl.trim == "(") {
                   deleted = mixedArray.splice(q, 1)
                 }
-                else{
-                  mixedArray[q] = mixedArray[q].substring(0,( currEl.indexOf("(")-1))
+                else {
+                  mixedArray[q] = mixedArray[q].substring(0, (currEl.indexOf("(") - 1))
                 }
 
                 q = -1
@@ -652,23 +699,23 @@ function recursivePass(mixedArray, originalstring) {
             // console.log("originalstring:", originalstring)
             // console.log("originalname:", originalname)
 
-            replacedOpening = mixedArray[nextIdx]
+            // replacedOpening = mixedArray[nextIdx]
 
-            if (typeof replacedOpening == "string") {
-              openingClosingQuerry = replacedOpening.match(/[)]/)
-              // console.log("openingClosingQuerry", openingClosingQuerry)
-              replacedOpening = replacedOpening.substring(lookForClosingPar.index + 1)
+            // if (typeof replacedOpening == "string") {
+            //   openingClosingQuerry = replacedOpening.match(/[)]/)
+            //   // console.log("openingClosingQuerry", openingClosingQuerry)
+            //   replacedOpening = replacedOpening.substring(lookForClosingPar.index + 1)
 
-              if (openingClosingQuerry == null) {
-                mixedArray[nextIdx] = ""
-              }
-              if (replacedOpening != "") {
-                mixedArray[nextIdx] = mixedArray[nextIdx].substring(lookForClosingPar.index + 1)
-              }
-              else {
-                mixedArray.splice(nextIdx, 1)
-              }
-            }
+            //   if (openingClosingQuerry == null) {
+            //     mixedArray[nextIdx] = ""
+            //   }
+            //   if (replacedOpening != "") {
+            //     mixedArray[nextIdx] = mixedArray[nextIdx].substring(lookForClosingPar.index + 1)
+            //   }
+            //   else {
+            //     mixedArray.splice(nextIdx, 1)
+            //   }
+            // }
 
             for (var incIdx; incIdx < included.length; incIdx++) {
               if (typeof mixedArray[incIdx] == "string") {
@@ -682,7 +729,7 @@ function recursivePass(mixedArray, originalstring) {
               // console.log("mixedArray after con insert ", mixedArray)
             }
             else if (disjunction == true) {
-              newDis = new Disjunction(included)
+              newDis = new Disjunction(included.filter(isEmpty))
               mixedArray.splice(nextIdx, 0, newDis)
               // console.log("mixedArray after dis insert ", mixedArray)
 
@@ -721,29 +768,55 @@ function recursivePass(mixedArray, originalstring) {
         }
       }
       else if ((lookForOpeningPar != null) && (lookForClosingPar == null)) {
-        // console.log("only open in string seg")
+        console.log("only open in string seg")
         leftstartidx = lookForOpeningPar.index
+        console.log("mixedArray before: ", mixedArray)
 
-        spliceIdx = j + 1
+
         if (lookForOpeningPar.index > 0) {
-          beforeOpen = mixedArray[j].substring(0, lookForOpeningPar.index - 1)
-          mixedArray.splice(spliceIdx, 0, beforeOpen)
-          spliceIdx++
 
           // check for addtional opening pars
-          remaining = mixedArray[j].substring(lookForOpeningPar.index + 1)
-          lookForOpeningPar = remaining.match(/[(]/)
-          while (lookForOpeningPar != null) {
-            leftstartidx = lookForOpeningPar.index
-            mixedArray.splice(spliceIdx, 0, "(" + mixedArray[j].substring(leftstartidx, lookForOpeningPar.index - 1))
+          if (mixedArray[j].substring(lookForOpeningPar.index + 1).match(/[(]/) != null) {
+            spliceIdx = j + 1
+
+            beforeOpen = mixedArray[j].substring(0, lookForOpeningPar.index - 1)
+            mixedArray.splice(spliceIdx, 0, beforeOpen)
             spliceIdx++
-            remaining = remaining.substring(lookForOpeningPar.index + 1)
+
+            remaining = mixedArray[j].substring(lookForOpeningPar.index + 1)
             lookForOpeningPar = remaining.match(/[(]/)
+            while (lookForOpeningPar != null) {
+              leftstartidx = lookForOpeningPar.index
+              console.log("additional", "(" + mixedArray[j].substring(leftstartidx, lookForOpeningPar.index - 1))
+              mixedArray.splice(spliceIdx, 0, "(" + mixedArray[j].substring(leftstartidx, lookForOpeningPar.index - 1))
+              spliceIdx++
+              remaining = remaining.substring(lookForOpeningPar.index + 1)
+              lookForOpeningPar = remaining.match(/[(]/)
+            }
+
+            console.log("final", "(" + remaining.substring(leftstartidx))
+
+            mixedArray.splice(spliceIdx, 0, "(" + remaining.substring(leftstartidx))
+            mixedArray.splice(j, 1)
+            j = spliceIdx
+          }
+          else {
+            spliceIdx = j
+            beforeOpen = mixedArray[j].substring(0, lookForOpeningPar.index - 1)
+            afterOpen = mixedArray[j].substring(lookForOpeningPar.index)
+
+            mixedArray.splice(spliceIdx, 1, beforeOpen)
+            spliceIdx++
+            console.log("beforeOpen", beforeOpen)
+            console.log("after open insert: ", mixedArray)
+
+            mixedArray.splice(spliceIdx, 0, afterOpen)
+            spliceIdx++
+            console.log("afterOpen", afterOpen)
+            console.log("mixedArray5: ", mixedArray)
+            j = spliceIdx
           }
 
-          mixedArray.splice(spliceIdx, 0, "(" + remaining.substring(leftstartidx))
-          mixedArray.splice(j, 1)
-          j = spliceIdx
         }
         // console.log("mixedArray5: ", mixedArray)
         // console.log()
