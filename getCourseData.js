@@ -339,7 +339,7 @@ function conjunctionCheck(stringC) {
         return [stringC.substring(0, 3), stringC.substring(3)]
       }
       else if (stringC.indexOf("and") > 0) {
-        return [stringC.substring(0, (stringC.indexOf("and") - 1)), stringC.substring((stringC.indexOf("and")))]
+        return [stringC.substring(0, (stringC.indexOf("and"))), stringC.substring((stringC.indexOf("and")))]
       }
       else {
         console.log("!!!!!!!!!!!!!!!!!!!!!")
