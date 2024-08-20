@@ -26,8 +26,8 @@ function getData() {
 
     // getting HTML for each page
     var courseArrayAggregate = []
-    for (var i = 38; i < 39; i += 1) {
-    // for (var i = 0; i < linkStrings.length; i += 1) {
+    // for (var i = 38; i < 39; i += 1) {
+    for (var i = 0; i < linkStrings.length; i += 1) {
       setTimeout(() => { }, 500);
       // console.log(linkStrings[i])
 
