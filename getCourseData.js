@@ -26,10 +26,10 @@ function getData() {
 
     // getting HTML for each page
     var courseArrayAggregate = []
-    for (var i = 38; i < 39; i += 1) {
-      // for (var i = 0; i < linkStrings.length; i += 1) {
-      setTimeout(() => { }, 500);
-      // console.log(linkStrings[i])
+    // for (var i = 38; i < 39; i += 1) {
+    for (var i = 0; i < linkStrings.length; i += 1) {
+      setTimeout(() => { }, 1000);
+      console.log("getting course data from: ",linkStrings[i])
 
       var deptPromise = fetch(linkStrings[i]).then((response) => {
         if (response.ok) {
@@ -46,8 +46,8 @@ function getData() {
         var classHTMLArray = [...deptHTML.matchAll(regClassHTML)]
 
 
-        for (var classArrayIdx = 0; classArrayIdx < 2; classArrayIdx += 1) {
-          // for (var classArrayIdx = 0; classArrayIdx < classHTMLArray.length; classArrayIdx += 1) {
+        // for (var classArrayIdx = 0; classArrayIdx < 2; classArrayIdx += 1) {
+        for (var classArrayIdx = 0; classArrayIdx < classHTMLArray.length; classArrayIdx += 1) {
           // create class object for each course lising of the department page
 
           // course ID and Name
@@ -244,7 +244,7 @@ function unnest(nestedString, name) {
   var trySplitByParen = nestedString.split(/\(([^()]+)\)/g)
   if ((Array.isArray(trySplitByParen)) && (trySplitByParen.length > 1)) {
     tempArray = trySplitByParen.filter(isEmpty)
-    console.log("*********************")
+    // console.log("*********************")
     // console.log("inParenthesisArray Before: ", nestedString.match(/\(([^()]+)\)/g))
     inParenthesisArray = nestedString.match(/\(([^()]+)\)/g)
     for (let i = 0; i < inParenthesisArray.length; i++) {
@@ -292,7 +292,7 @@ function unnest(nestedString, name) {
     tempArray = processAsStack(tempArray, originalstring)
 
 
-    console.log("after pass:", tempArray)
+    // console.log("after pass:", tempArray)
 
   }
   return tempArray
@@ -416,7 +416,7 @@ function disjunctionCheck(stringD) {
 
 function processAsStack(sourceArray, originalstring) {
   sourceStack = sourceArray.flat()
-  console.log(sourceStack)
+  // console.log(sourceStack)
 
   for (let stackIdx = 1; stackIdx < (sourceStack.length - 1); stackIdx++) {
     if (sourceStack[stackIdx] == "and") {
@@ -439,9 +439,9 @@ function processAsStack(sourceArray, originalstring) {
 function recursivePass(mixedArray, originalstring) {
   for (let j = 0; j < mixedArray.length; j++) {
     mixedArray = mixedArray.filter(isEmpty)
-    console.log()
-    console.log("j: ", j)
-    console.log("mixedArray:", mixedArray)
+    // console.log()
+    // console.log("j: ", j)
+    // console.log("mixedArray:", mixedArray)
 
 
     if (typeof mixedArray[j] == "string") {
@@ -457,12 +457,12 @@ function recursivePass(mixedArray, originalstring) {
       }
 
 
-      console.log("mixedArray[j]:", mixedArray[j])
-      console.log("close:", lookForClosingPar)
-      console.log("open:", lookForOpeningPar)
+      // console.log("mixedArray[j]:", mixedArray[j])
+      // console.log("close:", lookForClosingPar)
+      // console.log("open:", lookForOpeningPar)
 
       if ((lookForOpeningPar == null) && (lookForClosingPar != null)) {
-        console.log("only close in string seg")
+        // console.log("only close in string seg")
         included = []
         conjunction = false
         disjunction = false
@@ -488,6 +488,8 @@ function recursivePass(mixedArray, originalstring) {
         }
 
         // checking for any remaining substring after first ")"
+        beforeSpliceIdx = j
+
         if (mixedArray[j].substring(lookForClosingPar.index + 1).match(/[(]/) != null) {
           spliceIdx = j + 1
 
@@ -520,21 +522,17 @@ function recursivePass(mixedArray, originalstring) {
           beforeClose = mixedArray[j].substring(0, lookForClosingPar.index - 1)
           afterClose = mixedArray[j].substring(lookForClosingPar.index)
 
-          if (lookForClosingPar.index > 0){
+          if (lookForClosingPar.index > 0) {
             mixedArray.splice(spliceIdx, 1, beforeClose)
             spliceIdx++
-            console.log("beforeClose", beforeClose)
-            console.log("after close insert: ", mixedArray)
           }
 
           mixedArray.splice(spliceIdx, 0, afterClose)
           spliceIdx++
-          console.log("afterClose", afterClose)
-          console.log("mixedArray5: ", mixedArray)
           j = spliceIdx
         }
 
-        for (let p = j - 1; p > -1; p--) {
+        for (let p = beforeSpliceIdx - 1; p > -1; p--) {
 
           currEl = mixedArray[p]
 
@@ -555,10 +553,9 @@ function recursivePass(mixedArray, originalstring) {
 
               // add to temporary, remove from source
               currEl = currEl.substring(currEl.match(/[(]/).index + 1)
-              if (currEl != "") {
-                included.unshift(currEl)
-                deleted = mixedArray.splice(p, 1)
-              }
+              included.unshift(currEl)
+              deleted = mixedArray.splice(p, 1)
+
               p = -1
               break
             }
@@ -597,7 +594,6 @@ function recursivePass(mixedArray, originalstring) {
           else if (disjunction == true) {
             newDis = new Disjunction(included.filter(isEmpty))
             mixedArray.splice(nextIdx, 0, newDis)
-            console.log("spot a ")
           }
 
           j = nextIdx
@@ -610,8 +606,6 @@ function recursivePass(mixedArray, originalstring) {
           else if (disjunction == true) {
             newDis = new Disjunction(included.filter(isEmpty))
             mixedArray.push(newDis)
-            console.log("spot a ")
-
           }
           j = 1
         }
@@ -619,7 +613,7 @@ function recursivePass(mixedArray, originalstring) {
       }
       else if ((lookForOpeningPar != null) && (lookForClosingPar != null)) {
         if (lookForClosingPar.index < lookForOpeningPar.index) {
-          console.log("close then open in string seg")
+          // console.log("close then open in string seg")
           included = []
           conjunction = false
           disjunction = false
@@ -627,7 +621,6 @@ function recursivePass(mixedArray, originalstring) {
 
 
           mixedArray[j] = mixedArray[j].substring(lookForClosingPar.index + 1)
-          console.log("after replace:", mixedArray)
           // assembling conjunction or disjunction leading up to first "("
           for (let q = j - 1; q > -1; q--) {
             // console.log(q)
@@ -650,18 +643,13 @@ function recursivePass(mixedArray, originalstring) {
 
               // stop when "(" is found
               if (currEl.match(/[(]/) != null) {
-                // console.log("test1")
                 nextIdx = q
 
                 // add to temporary, remove from source
                 currEl = currEl.substring(currEl.match(/[(]/).index + 1)
-                if (currEl != "") {
-                  included.unshift(currEl)
-                  deleted = mixedArray.splice(q, 1)
-                }
-                else if (currEl.trim() == "(") {
-                  deleted = mixedArray.splice(q, 1)
-                }
+                included.unshift(currEl)
+                deleted = mixedArray.splice(q, 1)
+
                 q = -1
                 break
               }
@@ -747,15 +735,7 @@ function recursivePass(mixedArray, originalstring) {
               mixedArray.upshift(newCon)
             }
             else if (disjunction == true) {
-              console.log(mixedArray.length)
-              console.log(nextIdx)
-              console.log(originalstring)
-              console.log("mixedArray", mixedArray)
-              console.log("included", included)
-
               newDis = new Disjunction(included.filter(isEmpty))
-              // console.log(newDis.arrayDis)
-
               mixedArray.upshift(newDis)
             }
             j = 1
@@ -768,10 +748,8 @@ function recursivePass(mixedArray, originalstring) {
         }
       }
       else if ((lookForOpeningPar != null) && (lookForClosingPar == null)) {
-        console.log("only open in string seg")
+        // console.log("only open in string seg")
         leftstartidx = lookForOpeningPar.index
-        console.log("mixedArray before: ", mixedArray)
-
 
         if (lookForOpeningPar.index > 0) {
 
@@ -787,14 +765,14 @@ function recursivePass(mixedArray, originalstring) {
             lookForOpeningPar = remaining.match(/[(]/)
             while (lookForOpeningPar != null) {
               leftstartidx = lookForOpeningPar.index
-              console.log("additional", "(" + mixedArray[j].substring(leftstartidx, lookForOpeningPar.index - 1))
+              // console.log("additional", "(" + mixedArray[j].substring(leftstartidx, lookForOpeningPar.index - 1))
               mixedArray.splice(spliceIdx, 0, "(" + mixedArray[j].substring(leftstartidx, lookForOpeningPar.index - 1))
               spliceIdx++
               remaining = remaining.substring(lookForOpeningPar.index + 1)
               lookForOpeningPar = remaining.match(/[(]/)
             }
 
-            console.log("final", "(" + remaining.substring(leftstartidx))
+            // console.log("final", "(" + remaining.substring(leftstartidx))
 
             mixedArray.splice(spliceIdx, 0, "(" + remaining.substring(leftstartidx))
             mixedArray.splice(j, 1)
@@ -807,19 +785,13 @@ function recursivePass(mixedArray, originalstring) {
 
             mixedArray.splice(spliceIdx, 1, beforeOpen)
             spliceIdx++
-            console.log("beforeOpen", beforeOpen)
-            console.log("after open insert: ", mixedArray)
 
             mixedArray.splice(spliceIdx, 0, afterOpen)
             spliceIdx++
-            console.log("afterOpen", afterOpen)
-            console.log("mixedArray5: ", mixedArray)
             j = spliceIdx
           }
 
         }
-        // console.log("mixedArray5: ", mixedArray)
-        // console.log()
 
       }
       else if ((lookForOpeningPar == null) && (lookForClosingPar == null)) {
