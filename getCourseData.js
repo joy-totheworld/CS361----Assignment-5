@@ -420,12 +420,12 @@ function processAsStack(sourceArray, originalstring) {
 
   for (let stackIdx = 1; stackIdx < (sourceStack.length - 1); stackIdx++) {
     if (sourceStack[stackIdx] == "and") {
-      newEl = new Conjunction(sourceStack[stackIdx - 1], sourceStack[stackIdx + 1])
+      newEl = new Conjunction([sourceStack[stackIdx - 1], sourceStack[stackIdx + 1]])
       sourceStack.splice(stackIdx - 1, 3, newEl)
       stackIdx--
     }
     else if (sourceStack[stackIdx] == "or") {
-      newEl = new Disjunction(sourceStack[stackIdx - 1], sourceStack[stackIdx + 1])
+      newEl = new Disjunction([sourceStack[stackIdx - 1], sourceStack[stackIdx + 1]])
       sourceStack.splice(stackIdx - 1, 3, newEl)
       stackIdx--
     }
