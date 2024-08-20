@@ -59,9 +59,10 @@ function removeSelection() {
 
     for (var i = 0; i < allPlanned.length; i++) {
         console.log(allPlanned[i])
+        console.log(allPlanned[i].dataset.id)
         if (allPlanned[i].dataset.id == removalID) {
             console.log("found element to remove: ", allPlanned[i])
-            removalIdx = allPlanned[i].dataset.parentidx
+            removalIdx = allPlanned[i].dataset.parentIdx
 
         }
     }
@@ -257,19 +258,19 @@ function unnestToString(prereqArray) {
     //     }
     // }
 
-    if(typeof prereqArray == "string"){
+    if (typeof prereqArray == "string") {
         return prereqArray
     }
-    else{
+    else {
         // console.log(typeof prereqArray)
-        tryDis = prereqArray.arrayDis        
+        tryDis = prereqArray.arrayDis
         tryCon = prereqArray.arrayCon
         console.log("tryDis", tryDis)
         console.log("tryCon", tryCon)
         // console.log("typeof tryDis != undefined",typeof tryDis != undefined)
         // console.log("typeof tryDis ",typeof tryDis )
-        if(tryDis != undefined){return combineWithOr(tryDis)}
-        if(tryCon != undefined){return combineWithAnd(tryCon)}
+        if (tryDis != undefined) { return combineWithOr(tryDis) }
+        if (tryCon != undefined) { return combineWithAnd(tryCon) }
 
     }
 
@@ -279,48 +280,60 @@ function unnestToString(prereqArray) {
 function combineWithAnd(prereqSubArray) {
     console.log("prereqSubArray (and)", prereqSubArray)
 
-    if(typeof prereqSubArray == "string"){
+    if (typeof prereqSubArray == "string") {
         return prereqSubArray
     }
-    else if (prereqSubArray.length > 1) {
+    else if (prereqSubArray.length > 0) {
+        prereqSubString = "("
 
-        processedEl = unnestToString(prereqSubArray[0])
-        var prereqSubString = "(" + processedEl
+        if (typeof prereqSubArray[0] == "string") {
+            prereqSubString = prereqSubString + prereqSubArray[0]
+        }
+        else {
+            prereqSubString = prereqSubString + unnestToString(prereqSubArray[0])
+        }
 
-        for (var i = 1; i < (prereqSubArray.length - 1); i++) {
-            processedEl = unnestToString(prereqSubArray[i])
-            prereqSubString = prereqSubString + " and " + processedEl
+        for (var i = 1; i < (prereqSubArray.length); i++) {
+            if (typeof prereqSubArray[i] == "string") {
+                prereqSubString = prereqSubString + " and " + prereqSubArray[i]
+            }
+            else {
+                prereqSubString = prereqSubString + " and " + unnestToString(prereqSubArray[i])
+            }
         }
         prereqSubString = prereqSubString + ")"
-    }
-    else if (prereqSubArray.length == 1) {
-        return combineWithOr(prereqSubArray[0])
+        return prereqSubString
     }
 }
 
 function combineWithOr(prereqSubArray) {
-    console.log("prereqSubArray (or)", prereqSubArray)
+    console.log("prereqSubArray (and)", prereqSubArray)
 
-    if(typeof prereqSubArray == "string"){
+    if (typeof prereqSubArray == "string") {
         return prereqSubArray
     }
-    else if (prereqSubArray.length > 1) {
+    else if (prereqSubArray.length > 0) {
+        prereqSubString = "("
+        
+        if (typeof prereqSubArray[0] == "string") {
+            prereqSubString = prereqSubString + prereqSubArray[0]
+        }
+        else {
+            prereqSubString = prereqSubString + unnestToString(prereqSubArray[0])
+        }
 
-        processedEl = unnestToString(prereqSubArray[0])
-        var prereqSubString = "(" + processedEl
+        for (var i = 1; i < (prereqSubArray.length); i++) {
 
-        for (var i = 1; i < (prereqSubArray.length - 1); i++) {
-            processedEl = unnestToString(prereqSubArray[i])
-            prereqSubString = prereqSubString + " or " + processedEl
+            if (typeof prereqSubArray[i] == "string") {
+                prereqSubString = prereqSubString + " or " + prereqSubArray[i]
+            }
+            else {
+                prereqSubString = prereqSubString + " or " + unnestToString(prereqSubArray[i])
+            }
         }
         prereqSubString = prereqSubString + ")"
+        return prereqSubString
     }
-    else if (prereqSubArray.length == 1) {
-        return combineWithOr(prereqSubArray[0])
-    }
-
-    return prereqSubString
-
 }
 
 function addTermSelections() {
