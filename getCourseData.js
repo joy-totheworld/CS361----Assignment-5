@@ -533,66 +533,150 @@ function unnest(nestedString, name) {
     // process array for "and" elements outside of parenthesis
     containsAnd = false
     containsOr = false
-    for (let j = 0; j < tempArray.length; j++) {
-      inQuestion = tempArray[j]
-      inQuestionArray = tempArray
+    inQuestion = []
+    inQuestionArray = tempArray
 
-      if (typeof tempArray[j] == "string") {
-        if ((tempArray[j].indexOf("and")) > -1) {
+
+    for (let TFIdx = 0; TFIdx < tempArray.length; TFIdx++) {
+
+      if (typeof tempArray[TFIdx] == "string") {
+        
+        if ((tempArray[TFIdx].indexOf("and")) > -1) {
           containsAnd = true
-          if (tempArray[j].trim() == "and") {
-            // console.log("just and: ", tempArray[j])
-            tempArray.splice(j, 1)
-          }
-          else if ((tempArray[j].length - tempArray[j].indexOf("and") < 5)) {
-            // console.log("and at end of string: ", tempArray[j])
-            split = tempArray[j].split("and")
-            tempArray[j] = split[0]
-          }
-          else if (tempArray[j].indexOf("and") < 5) {
-            // console.log("and at begining of string: ", tempArray[j])
-            split = tempArray[j].split("and")
-            tempArray[j] = split[1]
-          }
-          tempArray.filter(isEmpty)
         }
-        else if ((tempArray[j].indexOf("or")) > -1) {
+        else if ((tempArray[TFIdx].indexOf("or")) > -1) {
           containsOr = true
-          if (tempArray[j].trim() == "or") {
-            // console.log("just or: ", tempArray[j])
-            tempArray.splice(j, 1)
-          }
-          else if ((tempArray[j].length - tempArray[j].indexOf("or") < 4)) {
-            // console.log("and at end of string: ", tempArray[j])
-            split = tempArray[j].split("or")
-            tempArray[j] = split[0]
-          }
-          else if (tempArray[j].indexOf("or") < 4) {
-            // console.log("and at begining of string: ", tempArray[j])
-            split = tempArray[j].split("or")
-            tempArray[j] = split[1]
-          }
-          tempArray.filter(isEmpty)
         }
       }
     }
 
+    if (containsAnd && !containsOr) {
+      for (let j = 0; j < tempArray.length; j++) {
+  
+        if ((typeof tempArray[j] == "string")) {
+          
+          if ((tempArray[j].indexOf("and")) > -1) {
+            inQuestion.push(tempArray[j])
+
+            if (tempArray[j].trim() == "and") {
+              // console.log("just and: ", tempArray[j])
+              tempArray.splice(j, 1)
+            }
+            else if ((tempArray[j].length - tempArray[j].indexOf("and") < 5)) {
+              // console.log("and at end of string: ", tempArray[j])
+              split = tempArray[j].split("and")
+              tempArray[j] = split[0]
+            }
+            else if (tempArray[j].indexOf("and") < 5) {
+              // console.log("and at begining of string: ", tempArray[j])
+              split = tempArray[j].split("and")
+              tempArray[j] = split[1]
+            }
+            tempArray.filter(isEmpty)
+          }
+        }
+      }
+    }
+
+    if (containsOr && !containsAnd) {
+      for (let j = 0; j < tempArray.length; j++) {  
+        if ((typeof tempArray[j] == "string")) {
+          
+          if ((tempArray[j].indexOf("or")) > -1) {
+            inQuestion.push(tempArray[j])
+            if (tempArray[j].trim() == "or") {
+              // console.log("just or: ", tempArray[j])
+              tempArray.splice(j, 1)
+            }
+            else if ((tempArray[j].length - tempArray[j].indexOf("or") < 4)) {
+              // console.log("and at end of string: ", tempArray[j])
+              split = tempArray[j].split("or")
+              tempArray[j] = split[0]
+            }
+            else if (tempArray[j].indexOf("or") < 4) {
+              // console.log("and at begining of string: ", tempArray[j])
+              split = tempArray[j].split("or")
+              tempArray[j] = split[1]
+            }
+            tempArray.filter(isEmpty)
+          }
+        }
+      }
+    }
 
     if (containsAnd && containsOr) {
-      console.log("ERROR, parenthesis unexpectedly contain both : 'and', 'or'.")
-      console.log("originalname:", originalname)
-      console.log("originalstring:", originalstring)
-      console.log("inQuestion:", inQuestion)
-      console.log("inQuestionArray:", inQuestionArray)
-      // console.log("tempArray6: ", tempArray)
+
+      // processing conjunctions first 
+      for (let TFIdx = 0; TFIdx < tempArray.length; TFIdx++) {
+
+        if (typeof tempArray[TFIdx] == "string") {
+        
+          if ((tempArray[TFIdx].indexOf("or")) > -1) {
+            console.log("sending to conjunction check: ", tempArray[TFIdx])
+            console.log(tempArray)
+            console.log("original string: ", originalstring)
+            tempArray[TFIdx] = conjunctionCheck(tempArray[TFIdx])
+          }
+        }
+      }
+
+      // recheck if all elements can now be combined with a conjunction
+      containsAnd2 = false
+      containsOr2 = false
+      for (let TFIdx2 = 0; TFIdx2 < tempArray.length; TFIdx2++) {
+
+        if (typeof tempArray[TFIdx2] == "string") {
+          
+          if ((tempArray[TFIdx2].indexOf("and")) > -1) {
+            containsAnd2 = true
+          }
+          else if ((tempArray[TFIdx2].indexOf("or")) > -1) {
+            containsOr2 = true
+          }
+        }
+      }
+      if (containsAnd2 && !containsOr2) {
+        for (let j = 0; j < tempArray.length; j++) {
+    
+          if ((typeof tempArray[j] == "string")) {
+            
+            if ((tempArray[j].indexOf("and")) > -1) {
+              inQuestion.push(tempArray[j])
+  
+              if (tempArray[j].trim() == "and") {
+                // console.log("just and: ", tempArray[j])
+                tempArray.splice(j, 1)
+              }
+              else if ((tempArray[j].length - tempArray[j].indexOf("and") < 5)) {
+                // console.log("and at end of string: ", tempArray[j])
+                split = tempArray[j].split("and")
+                tempArray[j] = split[0]
+              }
+              else if (tempArray[j].indexOf("and") < 5) {
+                // console.log("and at begining of string: ", tempArray[j])
+                split = tempArray[j].split("and")
+                tempArray[j] = split[1]
+              }
+              tempArray.filter(isEmpty)
+            }
+          }
+        }
+        prereqArrayUnnest = [new Conjuction(tempArray.filter(isEmpty))]
+        // console.log("RESOLVED CONFLICT WITH DISJUNCTION CHECK. :)")
+      }
+      else{
+        console.log("FAILED TO RESOLVE CONFLICT WITH DISJUNCTION CHECK")
+        console.log("array after unnest contains both : 'and', 'or'.")
+      }
+
       console.log()
     }
     else if (containsAnd) {
-      prereqArrayUnnest = [new Conjuction(tempArray)]
+      prereqArrayUnnest = [new Conjuction(tempArray.filter(isEmpty))]
 
     }
     else if (containsOr) {
-      prereqArrayUnnest = [new Disjunction(tempArray)]
+      prereqArrayUnnest = [new Disjunction(tempArray.filter(isEmpty))]
     }
     else {
       prereqArrayUnnest = tempArray
@@ -669,6 +753,7 @@ function disjunctionCheck(stringD) {
     } else {
       console.log("WTF WTF WTF WTF")
       console.log('stringD.split("or"): ', stringD.split("or"))
+      console.log('stringD: ', stringD)
     }
 
   }
