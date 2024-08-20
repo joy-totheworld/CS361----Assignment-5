@@ -104,8 +104,8 @@ function getData() {
                   coursePrereqStringArray = coursePrereqStringArray.filter(isEmpty)
                   // console.log()
                   // console.log("coursePrereqString:", coursePrereqString)
-                  // courseArrayDept[classArrayIdx].prereqs = processPrereqString(coursePrereqString, courseNamesArray[0])
-                  courseArrayDept[classArrayIdx].prereqs = processPrereqString("(CH 121(may be taken concurrently)   orCH 201(may be taken concurrently)  ) or ((CH 231(may be taken concurrently)   orCH 231H(may be taken concurrently)  ) and (CH 261(may be taken concurrently)  orCH 261H(may be taken concurrently)  orCH 271(may be taken concurrently) ))")
+                  courseArrayDept[classArrayIdx].prereqs = processPrereqString(coursePrereqString, courseNamesArray[0])
+                  // courseArrayDept[classArrayIdx].prereqs = processPrereqString("(CH 121(may be taken concurrently)   orCH 201(may be taken concurrently)  ) or ((CH 231(may be taken concurrently)   orCH 231H(may be taken concurrently)  ) and (CH 261(may be taken concurrently)  orCH 261H(may be taken concurrently)  orCH 271(may be taken concurrently) ))")
 
 
                 }
