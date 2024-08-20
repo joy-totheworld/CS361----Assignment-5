@@ -26,8 +26,8 @@ function getData() {
 
     // getting HTML for each page
     var courseArrayAggregate = []
-    // for (var i = 157; i < 158; i += 1) {
-    for (var i = 0; i < linkStrings.length; i += 1) {
+    for (var i = 38; i < 39; i += 1) {
+    // for (var i = 0; i < linkStrings.length; i += 1) {
       setTimeout(() => { }, 500);
       // console.log(linkStrings[i])
 
@@ -44,6 +44,8 @@ function getData() {
         var deptHTML = deptResponseText.replace(/(?:\r\n|\r|\n)/g, "")
         // console.log(deptHTML)
         var classHTMLArray = [...deptHTML.matchAll(regClassHTML)]
+
+        
         // for (var classArrayIdx = 0; classArrayIdx < 2; classArrayIdx += 1) {
         for (var classArrayIdx = 0; classArrayIdx < classHTMLArray.length; classArrayIdx += 1) {
           // create class object for each course lising of the department page
@@ -163,7 +165,7 @@ function isEmpty(value) {
     return (value !== "");
   }
   else {
-    return false
+    return true
   }
 }
 
@@ -172,7 +174,7 @@ function isBetter(value) {
     return (value.trim() !== "better");
   }
   else {
-    return false
+    return true
   }
 }
 
@@ -182,7 +184,7 @@ function isConcurrent(value) {
     return (value.trim() !== "may be taken concurrently");
   }
   else {
-    return false
+    return true
   }
 }
 
@@ -192,7 +194,7 @@ function isNotMathTest(value) {
     return (value.includes("ALEKS") == false);
   }
   else {
-    return false
+    return true
   }
 }
 
@@ -205,7 +207,7 @@ function processPrereqString(inputString, coursename) {
 
   else {
     prereqArray = [conjunctionCheck(inputString)]
-    // console.log("+++++++++++++++++++++++")
+    console.log("+++++++++++++++++++++++")
   }
 
   // console.log("prereqArray1: ", prereqArray)
@@ -220,7 +222,7 @@ function unnest(nestedString, name) {
   var trySplitByParen = nestedString.split(/\(([^()]+)\)/g)
   if ((Array.isArray(trySplitByParen)) && (trySplitByParen.length > 1)) {
     tempArray = trySplitByParen.filter(isEmpty)
-    // console.log("*********************")
+    console.log("*********************")
     // console.log("inParenthesisArray Before: ", nestedString.match(/\(([^()]+)\)/g))
     inParenthesisArray = nestedString.match(/\(([^()]+)\)/g)
     for (let i = 0; i < inParenthesisArray.length; i++) {
@@ -251,21 +253,22 @@ function unnest(nestedString, name) {
       tempArray = tempArray.filter(isEmpty)
 
     }
+    console.log("tempArray before :", tempArray)
 
     // process array for nested parenthesis
     for (let j = 0; j < tempArray.length; j++) {
       // console.log()
-      // console.log("j: ", j)
+      console.log("j: ", j)
 
       if (typeof tempArray[j] == "string") {
         lookForOpeningPar = tempArray[j].match(/[(]/)
         lookForClosingPar = tempArray[j].match(/[)]/)
 
-        // console.log("close:", lookForClosingPar)
-        // console.log("open:", lookForOpeningPar)
+        console.log("close:", lookForClosingPar)
+        console.log("open:", lookForOpeningPar)
 
         if ((lookForOpeningPar == null) && (lookForClosingPar != null)) {
-          // console.log("only close in string seg")
+          console.log("only close in string seg")
           included = []
           conjunction = false
           disjunction = false
@@ -372,11 +375,11 @@ function unnest(nestedString, name) {
             }
             j = 1
           }
-          // console.log("tempArray3: ", tempArray)
+          console.log("tempArray3: ", tempArray)
         }
         else if ((lookForOpeningPar != null) && (lookForClosingPar != null)) {
           if (lookForClosingPar.index < lookForOpeningPar.index) {
-            // console.log("close then open in string seg")
+            console.log("close then open in string seg")
             included = []
             conjunction = false
             disjunction = false
@@ -462,7 +465,7 @@ function unnest(nestedString, name) {
               }
               j = 1
             }
-            // console.log("tempArray4: ", tempArray)
+            console.log("tempArray4: ", tempArray)
           }
           else if (lookForClosingPar.index > lookForOpeningPar.index) {
             console.log("open then close in string seg")
@@ -470,7 +473,7 @@ function unnest(nestedString, name) {
           }
         }
         else if ((lookForOpeningPar != null) && (lookForClosingPar == null)) {
-          // console.log("only open in string seg")
+          console.log("only open in string seg")
           leftstartidx = lookForOpeningPar.index
 
           spliceIdx = j + 1
@@ -495,17 +498,25 @@ function unnest(nestedString, name) {
           tempArray.splice(j, 1)
           j = spliceIdx
 
-          // console.log("tempArray5: ", tempArray)
+          console.log("tempArray5: ", tempArray)
           // console.log()
 
         }
       }
+      console.log("tempArray end of j: ", tempArray)
+      console.log("originalstring:", originalstring)
+
+      console.log()
+
     }
 
     // process array for "and" elements outside of parenthesis
     containsAnd = false
     containsOr = false
     for (let j = 0; j < tempArray.length; j++) {
+      inQuestion = tempArray[j]
+      inQuestionArray = tempArray
+
       if (typeof tempArray[j] == "string") {
         if ((tempArray[j].indexOf("and")) > -1) {
           containsAnd = true
@@ -525,13 +536,7 @@ function unnest(nestedString, name) {
           }
           tempArray.filter(isEmpty)
         }
-      }
-    }
-
-    // process array for "or" elements outside of parenthesis
-    for (let j = 0; j < tempArray.length; j++) {
-      if (typeof tempArray[j] == "string") {
-        if ((tempArray[j].indexOf("or")) > -1) {
+        else if ((tempArray[j].indexOf("or")) > -1) {
           containsOr = true
           if (tempArray[j].trim() == "or") {
             // console.log("just or: ", tempArray[j])
@@ -554,8 +559,13 @@ function unnest(nestedString, name) {
 
 
     if (containsAnd && containsOr) {
-      // console.log("ERROR, parenthesis unexpectedly contain both : 'and', 'or'.")
-      // console.log("tempArray6: ", tempArray)
+      console.log("ERROR, parenthesis unexpectedly contain both : 'and', 'or'.")
+      console.log("originalname:", originalname)
+      console.log("originalstring:", originalstring)
+      console.log("inQuestion:", inQuestion)
+      console.log("inQuestionArray:", inQuestionArray)
+      console.log("tempArray6: ", tempArray)
+      console.log()
     }
     else if (containsAnd) {
       prereqArrayUnnest = [new Conjuction(tempArray)]
