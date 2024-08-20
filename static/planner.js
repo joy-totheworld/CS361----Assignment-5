@@ -11,6 +11,14 @@ function addedClass(courseID, courseName, prereqs, idx) {
     this.parentIdx = idx
 }
 
+function Conjuction(arrayCon) {
+    this.arrayCon = arrayCon
+}
+
+function Disjunction(arrayDis) {
+    this.arrayDis = arrayDis
+}
+
 var addButtons = []
 addButtons = document.getElementsByClassName("add-class-button")
 // referenced stack overflow for this loop: 
@@ -150,8 +158,8 @@ function addSelections() {
             // console.log(courseID.textContent)
             var classDetailArray;
             for (var i = 0; i < allClasses.length; i++) {
-                console.log("allClasses[i].courseID: ", allClasses[i].courseID)
-                console.log("courseID.textContent: ", courseID.textContent)
+                // console.log("allClasses[i].courseID: ", allClasses[i].courseID)
+                // console.log("courseID.textContent: ", courseID.textContent)
                 if (allClasses[i].courseID == courseID.textContent) {
                     classDetailArray = allClasses[i]
                     console.log("MATCH")
@@ -348,8 +356,10 @@ function getData(url, cb) {
 var i = 0
 var allClasses = []
 var addedClasses = []
-getData("/classDataMTH", (data) => data.forEach((element) => addClass(element.courseID, element.courseName, element.prereqs)))
-getData("/classDataCS", (data) => data.forEach((element) => addClass(element.courseID, element.courseName, element.prereqs)))
+getData("/classData", (data) => data.forEach((element) => addClass(element.courseID, element.courseName, element.prereqs)))
+
+// getData("/classDataMTH", (data) => data.forEach((element) => addClass(element.courseID, element.courseName, element.prereqs)))
+// getData("/classDataCS", (data) => data.forEach((element) => addClass(element.courseID, element.courseName, element.prereqs)))
 // console.log(allClasses)
 
 
@@ -419,7 +429,8 @@ function displaySubmitWarning() {
     var submit2 = document.createElement("button")
     submit2.textContent = "Submit"
     submit2.classList.add("confirm-submit")
-    submit2.onclick = function() {javascript:window.location.href='/review'
+    submit2.onclick = function () {
+        javascript: window.location.href = '/review'
     };
 
     var cancelButton = document.getElementById("continue-button")
@@ -520,5 +531,5 @@ function showDetails() {
 
 function startProgram() {
     clearPlan()
-    javascript:window.location.href=''
+    javascript: window.location.href = ''
 }

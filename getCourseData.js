@@ -7,114 +7,137 @@ getData()
 function getData() {
   // credit for following function, referenced:
   // https://stackoverflow.com/questions/38235715/fetch-reject-promise-and-catch-the-error-if-status-is-not-ok
-  fetch("https://catalog.oregonstate.edu/courses/").then((response) => {
+  var catalogPromise = fetch("https://catalog.oregonstate.edu/courses/").then((response) => {
     if (response.ok) {
       return response.text();
     }
     throw new Error('Something went wrong');
   })
-    .then((responseText) => {
-      // getting array of urls
-      var regURLel = /<li><a href=".courses.[a-zA-Z]*.">/gm
-      var found = [...responseText.matchAll(regURLel)]
-      linkStrings = []
-      for (var i = 0; i < found.length; i += 1) {
-        linkStrings.push(found[i][0])
-        linkStrings[i] = "https://catalog.oregonstate.edu" + linkStrings[i].substring(13, (linkStrings[i].length - 2))
-      }
-      console.log(linkStrings);
+  catalogPromise.then((responseText) => {
+    // getting array of urls
+    var regURLel = /<li><a href=".courses.[a-zA-Z]*.">/gm
+    var found = [...responseText.matchAll(regURLel)]
+    linkStrings = []
+    for (var i = 0; i < found.length; i += 1) {
+      linkStrings.push(found[i][0])
+      linkStrings[i] = "https://catalog.oregonstate.edu" + linkStrings[i].substring(13, (linkStrings[i].length - 2))
+    }
+    // console.log(linkStrings);
 
-      // getting HTML for each page
-      var courseArrayAggregate = []
-      for (var i = 38; i < 50; i += 1) {
-        // for (var i = 0; i < linkStrings.length; i += 1) {
-        setTimeout(() => { }, 500);
-        console.log(linkStrings[i])
-        fetch(linkStrings[i]).then((response) => {
-          if (response.ok) {
-            return response.text();
-          }
-          throw new Error('Something went wrong');
-        })
-          .then((deptResponseText) => {
-            var courseArrayDept = []
-            // console.log(deptResponseText.replace(/(?:\r\n|\r|\n)/g,""))
-            var regClassHTML = /<h2 class="courseblocktitle"><strong>.+?(?=<div class="courseblock">)/gm
-            var deptHTML = deptResponseText.replace(/(?:\r\n|\r|\n)/g, "")
-            // console.log(deptHTML)
-            var classHTMLArray = [...deptHTML.matchAll(regClassHTML)]
-            for (var j = 0; j < 2; j += 1) {
-              // for (var j = 0; j < classHTMLArray.length; j += 1) {
-              // create class object for each course lising of the department page
+    // getting HTML for each page
+    var courseArrayAggregate = []
+    // for (var i = 157; i < 158; i += 1) {
+    for (var i = 0; i < linkStrings.length; i += 1) {
+      setTimeout(() => { }, 500);
+      // console.log(linkStrings[i])
 
-              // course ID and Name
-              regCourseBlockTitle = /<h2 class="courseblocktitle"><strong>.+?(?=<.h2>)/gm
-              var courseNameString = classHTMLArray[j][0].match(regCourseBlockTitle)[0]
-              courseNameString = courseNameString.substring(37, courseNameString.length - 9)
-              var courseNamesArray = courseNameString.split(",");
-              courseNamesArray.pop()
-              courseArrayDept.push(new Class(courseNamesArray[0], courseNamesArray[1], []))
+      var deptPromise = fetch(linkStrings[i]).then((response) => {
+        if (response.ok) {
+          return response.text();
+        }
+        throw new Error('Something went wrong');
+      })
+      deptPromise.then((deptResponseText) => {
+        var courseArrayDept = []
+        // console.log(deptResponseText.replace(/(?:\r\n|\r|\n)/g,""))
+        var regClassHTML = /<h2 class="courseblocktitle"><strong>.+?(?=<div class="courseblock">)/gm
+        var deptHTML = deptResponseText.replace(/(?:\r\n|\r|\n)/g, "")
+        // console.log(deptHTML)
+        var classHTMLArray = [...deptHTML.matchAll(regClassHTML)]
+        // for (var classArrayIdx = 0; classArrayIdx < 2; classArrayIdx += 1) {
+        for (var classArrayIdx = 0; classArrayIdx < classHTMLArray.length; classArrayIdx += 1) {
+          // create class object for each course lising of the department page
 
-              // course prereqs
-              var regCoursePrereqBlock = /<p class="courseblockextra noindent">.+?(?=<.p>)/gm
-              var coursePrereqSourceStrings = classHTMLArray[j][0].match(regCoursePrereqBlock)
+          // course ID and Name
+          regCourseBlockTitle = /<h2 class="courseblocktitle"><strong>.+?(?=<.h2>)/gm
+          // console.log(classHTMLArray[classArrayIdx][0].match(regCourseBlockTitle)[0])
+          var courseHTML = classHTMLArray[classArrayIdx]
+          if (courseHTML != undefined) {
+            var courseNameString = classHTMLArray[classArrayIdx][0].match(regCourseBlockTitle)[0]
+            courseNameString = courseNameString.substring(37, courseNameString.length - 9)
+            var courseNamesArray = courseNameString.split(",");
+            courseNamesArray.pop()
+            courseArrayDept.push(new Class(courseNamesArray[0], courseNamesArray[1], []))
 
-              if (coursePrereqSourceStrings !== null) {
+            // course prereqs
+            var regCoursePrereqBlock = /<p class="courseblockextra noindent">.+?(?=<.p>)/gm
+            var coursePrereqSourceStrings = classHTMLArray[classArrayIdx][0].match(regCoursePrereqBlock)
 
-                // can be multiple array items for reccomended courses, equivilents, and how many times a course is repeatable
-                for (var l = 0; l < coursePrereqSourceStrings.length; l += 1) {
 
-                  // if statement to filter out elements on non-prerequisite topics
-                  if (coursePrereqSourceStrings[l].includes("Prerequisite")) {
+            if (coursePrereqSourceStrings !== null) {
 
-                    var regPrereqString = />(?!<).+?(?=<)/gm
-                    var coursePrereqStringArray = (coursePrereqSourceStrings[l] + "<").match(regPrereqString)
-                    var coursePrereqString = ""
+              // can be multiple array items for reccomended courses, equivilents, and how many times a course is repeatable
+              for (var l = 0; l < coursePrereqSourceStrings.length; l += 1) {
 
-                    for (var k = 0; k < coursePrereqStringArray.length; k += 1) {
+                // if statement to filter out elements on non-prerequisite topics
+                if (coursePrereqSourceStrings[l].includes("Prerequisite")) {
 
-                      coursePrereqStringArray[k] = coursePrereqStringArray[k].substring(1)
-                      coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("or better", "").trim()
-                      coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("with C-", "").trim()
-                      coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("with C", "").trim()
-                      coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("[C-]", "").trim()
-                      coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("[C]", "").trim()
-                      if ((coursePrereqStringArray[k].includes("Prerequisite:") == false) && (coursePrereqStringArray[k] != " ")) {
-                        coursePrereqString = coursePrereqString + coursePrereqStringArray[k]
-                      }
+                  var regPrereqString = />(?!<).+?(?=<)/gm
+                  var coursePrereqStringArray = (coursePrereqSourceStrings[l] + "<").match(regPrereqString)
+                  var coursePrereqString = ""
+
+                  for (var k = 0; k < coursePrereqStringArray.length; k += 1) {
+
+                    coursePrereqStringArray[k] = coursePrereqStringArray[k].substring(1)
+                    coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("or better", "").trim()
+                    coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("with C-", "").trim()
+                    coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("with C", "").trim()
+                    coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("[C-]", "").trim()
+                    coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("[C]", "").trim()
+                    coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("with D-", "").trim()
+                    coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("with D", "").trim()
+                    coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("[D-]", "").trim()
+                    coursePrereqStringArray[k] = coursePrereqStringArray[k].replaceAll("[D]", "").trim()
+                    if ((coursePrereqStringArray[k].includes("Prerequisite:") == false) && (coursePrereqStringArray[k] != " ")) {
+                      coursePrereqString = coursePrereqString + coursePrereqStringArray[k]
                     }
-                    // console.log()
-                    // console.log("coursePrereqString:", coursePrereqString)
-                    courseArrayDept[j].prereqs = processPrereqString(coursePrereqString)
                   }
+                  coursePrereqStringArray = coursePrereqStringArray.filter(isConcurrent)
+                  coursePrereqStringArray = coursePrereqStringArray.filter(isNotMathTest)
+                  coursePrereqStringArray = coursePrereqStringArray.filter(isEmpty)
+                  // console.log()
+                  // console.log("coursePrereqString:", coursePrereqString)
+                  courseArrayDept[classArrayIdx].prereqs = processPrereqString(coursePrereqString, courseNamesArray[0])
+
                 }
-
-                // coursePrereqStringArray[k]= coursePrereqStringArray[k][0]
               }
-              // console.log(coursePrereqString)
-
-              // console.log(coursePrereqStringArray)
-              // console.log()
-              // courseArrayDept.push()
-
             }
-            // console.log(courseArrayDept)
-            console.log("courseArrayDept:", courseArrayDept)
-            courseArrayAggregate = courseArrayAggregate.concat(courseArrayDept)
-            console.log("courseArrayAggregate1:", courseArrayAggregate)
+          }
+        }
 
-          })
-          .catch((error) => {
-            console.log(error)
-          });
+        // console.log("courseArrayDept:", courseArrayDept)
+        courseArrayAggregate = courseArrayAggregate.concat(courseArrayDept)
+        // console.log("Writing department course data to file. ")
+        fs.writeFileSync("./classDataAll.json", JSON.stringify(courseArrayAggregate));
 
-      }
-      console.log("courseArrayAggregate2:", courseArrayAggregate)
+      })
+        .catch((error) => {
+          console.log(error)
+        });
 
-    })
+      // deptPromise.then((data) => {
+      //   console.log("DATA DATA DATA", data);
+      //   // console.log("courseArrayAggregate3:", data.courseArrayAggregate);
+      // });
+
+    }
+    // deptPromise.then((data) => {
+    //   console.log("DATA DATA DATA", data);
+    //   // console.log("courseArrayAggregate3:", data.courseArrayAggregate);
+    // });
+    // console.log("courseArrayAggregate2:", courseArrayAggregate)
+
+  })
     .catch((error) => {
       console.log(error)
     });
+
+  catalogPromise.then((data) => {
+    console.log("catalog data fetch complete");
+    // console.log("DATA DATA DATA", data);
+    // console.log("courseArrayAggregate3:", data.courseArrayAggregate);
+  });
+
 }
 /////////////////////////////////////////////////////////////////////////////
 // helper functions below
@@ -126,35 +149,58 @@ function Class(courseID, courseName, prereqs) {
   this.prereqs = prereqs;
 }
 
-function Conjuction(array) {
-  this.array = array
+function Conjuction(arrayCon) {
+  this.arrayCon = arrayCon
 }
 
-function Disjunction(array) {
-  this.array = array
+function Disjunction(arrayDis) {
+  this.arrayDis = arrayDis
 }
 
 function isEmpty(value) {
-  return (value !== "");
+  if (typeof value == "string") {
+
+    return (value !== "");
+  }
+  else {
+    return false
+  }
 }
 
 function isBetter(value) {
-  return (value.trim() !== "better");
+  if (typeof value == "string") {
+    return (value.trim() !== "better");
+  }
+  else {
+    return false
+  }
 }
 
 function isConcurrent(value) {
-  return (value.trim() !== "may be taken concurrently");
+  if (typeof value == "string") {
+
+    return (value.trim() !== "may be taken concurrently");
+  }
+  else {
+    return false
+  }
 }
 
 function isNotMathTest(value) {
-  return (value.includes("ALEKS") == false);
+  if (typeof value == "string") {
+
+    return (value.includes("ALEKS") == false);
+  }
+  else {
+    return false
+  }
 }
 
-function processPrereqString(inputString) {
+function processPrereqString(inputString, coursename) {
   var prereqArray = []
   var trySplitByParen = inputString.split(/\(([^()]+)\)/g)
   if ((Array.isArray(trySplitByParen)) && (trySplitByParen.length > 1)) {
-    prereqArray = unnest(inputString)
+    prereqArray = unnest(inputString, coursename)
   }
 
   else {
@@ -166,7 +212,9 @@ function processPrereqString(inputString) {
   return prereqArray
 }
 
-function unnest(nestedString) {
+function unnest(nestedString, name) {
+  originalstring = nestedString
+  originalname = name
   prereqArrayUnnest = []
   // console.log("nestedString: ", nestedString)
   var trySplitByParen = nestedString.split(/\(([^()]+)\)/g)
@@ -185,11 +233,28 @@ function unnest(nestedString) {
           tempArray[k] = processedElement
         }
       }
+      for (let z = 0; z < tempArray.length; z++) {
+        if (typeof tempArray[z] == "string") {
+          tempArray[z] = tempArray[z].replaceAll("or better", "").trim()
+          tempArray[z] = tempArray[z].replaceAll("with C-", "").trim()
+          tempArray[z] = tempArray[z].replaceAll("with C", "").trim()
+          tempArray[z] = tempArray[z].replaceAll("[C-]", "").trim()
+          tempArray[z] = tempArray[z].replaceAll("[C]", "").trim()
+          tempArray[z] = tempArray[z].replaceAll("with D-", "").trim()
+          tempArray[z] = tempArray[z].replaceAll("with D", "").trim()
+          tempArray[z] = tempArray[z].replaceAll("[D-]", "").trim()
+          tempArray[z] = tempArray[z].replaceAll("[D]", "").trim()
+        }
+      }
+      tempArray = tempArray.filter(isConcurrent)
+      tempArray = tempArray.filter(isNotMathTest)
+      tempArray = tempArray.filter(isEmpty)
+
     }
 
     // process array for nested parenthesis
     for (let j = 0; j < tempArray.length; j++) {
-      console.log()
+      // console.log()
       // console.log("j: ", j)
 
       if (typeof tempArray[j] == "string") {
@@ -200,7 +265,7 @@ function unnest(nestedString) {
         // console.log("open:", lookForOpeningPar)
 
         if ((lookForOpeningPar == null) && (lookForClosingPar != null)) {
-          console.log("only close in string seg")
+          // console.log("only close in string seg")
           included = []
           conjunction = false
           disjunction = false
@@ -268,15 +333,23 @@ function unnest(nestedString) {
               deleted = tempArray.splice(p, 1)
             }
           }
-          if (tempArray.length > 0) {
-            replacedOpening = tempArray[nextIdx].substring(lookForClosingPar.index + 1)
-            if (replacedOpening != "") {
-              tempArray[nextIdx] = tempArray[nextIdx].substring(lookForClosingPar.index + 1)
-            }
-            else {
-              tempArray.splice(nextIdx, 1)
-            }
+          if (tempArray.length >= nextIdx) {
+            // console.log("nextIdx", nextIdx)
+            // console.log("tempArray.length", tempArray.length)
+            // console.log("tempArray", tempArray)
+            // console.log("originalstring:", originalstring)
+            // console.log("originalname:", originalname)
 
+            replacedOpening = tempArray[nextIdx]
+            if (typeof replacedOpening == "string") {
+              replacedOpening = replacedOpening.substring(lookForClosingPar.index + 1)
+              if (replacedOpening != "") {
+                tempArray[nextIdx] = tempArray[nextIdx].substring(lookForClosingPar.index + 1)
+              }
+              else {
+                tempArray.splice(nextIdx, 1)
+              }
+            }
             if (conjunction == true) {
               newCon = new Conjuction(included)
               tempArray.splice(nextIdx, 0, newCon)
@@ -299,16 +372,16 @@ function unnest(nestedString) {
             }
             j = 1
           }
-          console.log("tempArray3: ", tempArray)
+          // console.log("tempArray3: ", tempArray)
         }
         else if ((lookForOpeningPar != null) && (lookForClosingPar != null)) {
           if (lookForClosingPar.index < lookForOpeningPar.index) {
-            console.log("close then open in string seg")
+            // console.log("close then open in string seg")
             included = []
             conjunction = false
             disjunction = false
             nextIdx = -1
-            // assembling conjunction or disjunction leading up to first ")"
+            // assembling conjunction or disjunction leading up to first "("
             for (let q = j - 1; q > -1; q--) {
 
               currEl = tempArray[q]
@@ -334,7 +407,7 @@ function unnest(nestedString) {
                     included.unshift(currEl)
                     deleted = tempArray.splice(q, 1)
                   }
-                  p = -1
+                  q = -1
                   break
                 }
                 else {
@@ -349,15 +422,24 @@ function unnest(nestedString) {
               }
             }
 
-            if (tempArray.length > 0) {
-              replacedOpening = tempArray[nextIdx].substring(lookForClosingPar.index + 1)
-              if (replacedOpening != "") {
-                tempArray[nextIdx] = tempArray[nextIdx].substring(lookForClosingPar.index + 1)
-              }
-              else {
-                tempArray.splice(nextIdx, 1)
-              }
+            if ((tempArray.length > 0) && (nextIdx > -1)) {
+              // console.log("nextIdx",nextIdx)
+              // console.log("tempArray.length", tempArray.length)
+              // console.log("tempArray", tempArray)
+              // console.log("originalstring:", originalstring)
+              // console.log("originalname:", originalname)
 
+              replacedOpening = tempArray[nextIdx]
+
+              if (typeof replacedOpening == "string") {
+                replacedOpening = replacedOpening.substring(lookForClosingPar.index + 1)
+                if (replacedOpening != "") {
+                  tempArray[nextIdx] = tempArray[nextIdx].substring(lookForClosingPar.index + 1)
+                }
+                else {
+                  tempArray.splice(nextIdx, 1)
+                }
+              }
               if (conjunction == true) {
                 newCon = new Conjuction(included)
                 tempArray.splice(nextIdx, 0, newCon)
@@ -380,7 +462,7 @@ function unnest(nestedString) {
               }
               j = 1
             }
-            console.log("tempArray4: ", tempArray)
+            // console.log("tempArray4: ", tempArray)
           }
           else if (lookForClosingPar.index > lookForOpeningPar.index) {
             console.log("open then close in string seg")
@@ -388,7 +470,7 @@ function unnest(nestedString) {
           }
         }
         else if ((lookForOpeningPar != null) && (lookForClosingPar == null)) {
-          console.log("only open in string seg")
+          // console.log("only open in string seg")
           leftstartidx = lookForOpeningPar.index
 
           spliceIdx = j + 1
@@ -413,8 +495,8 @@ function unnest(nestedString) {
           tempArray.splice(j, 1)
           j = spliceIdx
 
-          console.log("tempArray5: ", tempArray)
-          console.log()
+          // console.log("tempArray5: ", tempArray)
+          // console.log()
 
         }
       }
@@ -472,8 +554,8 @@ function unnest(nestedString) {
 
 
     if (containsAnd && containsOr) {
-      console.log("ERROR, parenthesis unexpectedly contain both : 'and', 'or'.")
-      console.log("tempArray6: ", tempArray)
+      // console.log("ERROR, parenthesis unexpectedly contain both : 'and', 'or'.")
+      // console.log("tempArray6: ", tempArray)
     }
     else if (containsAnd) {
       prereqArrayUnnest = [new Conjuction(tempArray)]
@@ -505,8 +587,15 @@ function conjunctionCheck(stringC) {
         split[u] = split[u].replaceAll("or better", "").trim()
         split[u] = split[u].replaceAll("[C-]", "").trim()
         split[u] = split[u].replaceAll("[C]", "").trim()
+        split[u] = split[u].replaceAll("with D-", "").trim()
+        split[u] = split[u].replaceAll("with D", "").trim()
+        split[u] = split[u].replaceAll("[D-]", "").trim()
+        split[u] = split[u].replaceAll("[D]", "").trim()
         split[u] = disjunctionCheck(split[u])
       }
+      split = split.filter(isEmpty)
+      split = split.filter(isNotMathTest)
+      split = split.filter(isConcurrent)
       processedForConjunctions = new Conjuction(split)
 
     } else {
@@ -540,6 +629,10 @@ function disjunctionCheck(stringD) {
         split[w] = split[w].replaceAll("or better", "").trim()
         split[w] = split[w].replaceAll("[C-]", "").trim()
         split[w] = split[w].replaceAll("[C]", "").trim()
+        split[w] = split[w].replaceAll("with D-", "").trim()
+        split[w] = split[w].replaceAll("with D", "").trim()
+        split[w] = split[w].replaceAll("[D-]", "").trim()
+        split[w] = split[w].replaceAll("[D]", "").trim()
         split[w] = conjunctionCheck(split[w])
       }
       processedForDisjunctions = new Disjunction(split)

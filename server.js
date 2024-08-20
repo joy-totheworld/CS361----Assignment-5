@@ -90,8 +90,6 @@ function combineWithOr(prereqSubArray) {
 
 var fs = require('fs');
 var bodyParser = require('body-parser')
-var classDataCS = require("./classData/CSData.json")
-var classDataMTH = require("./classData/MTHData.json")
 
 var classDataAggregate = [];
 var classDataAdded = require("./addedClassData.json")
@@ -99,12 +97,12 @@ var classDataAdded = require("./addedClassData.json")
 var classDataMissing = { "classes": [] }
 var classDataMisordered = { "classes": [] }
 
-const dataNamesAggregate = fs.readdirSync("./classData");
-for (const name of dataNamesAggregate) {
-    currJSON = require("./classData/" + name)
-    classDataAggregate = classDataAggregate.concat(currJSON);
-    // fs.writeFileSync("./classDataAggregate.json", JSON.stringify(classDataAggregate));
-}
+const classDataAll = require("./classDataAll.json")
+// for (const name of dataNamesAggregate) {
+//     currJSON = require("./classData/" + name)
+//     classDataAggregate = classDataAggregate.concat(currJSON);
+//     // fs.writeFileSync("./classDataAggregate.json", JSON.stringify(classDataAggregate));
+// }
 
 
 // middleware
@@ -131,6 +129,10 @@ app.post('/CLEARPLAN', function (req, res, next) {
     classDataAdded = { "classes": [] }
     classDataMissing = { "classes": [] }
     classDataMisordered = { "classes": [] }
+})
+
+app.get('/classData', function (req, res, next) {
+    res.status(200).json(JSON.stringify(classDataAll));
 })
 
 app.get('', function (req, res, next) {
@@ -205,9 +207,7 @@ app.post('/URLFORPREREQS', function (req, res, next) {
 
 })
 
-// app.get('/classDataCS', function (req, res, next) {
-//     res.status(200).json(JSON.stringify(classDataCS));
-// })
+
 
 // app.get('/classDataMTH', function (req, res, next) {
 //     res.status(200).json(JSON.stringify(classDataMTH));
