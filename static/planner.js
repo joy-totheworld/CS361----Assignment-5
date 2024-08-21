@@ -4,11 +4,12 @@ function Class(courseID, courseName, prereqs) {
     this.prereqs = prereqs;
 }
 
-function addedClass(courseID, courseName, prereqs, idx) {
+function addedClass(courseID, courseName, prereqs, idx, date) {
     this.courseID = courseID;
     this.courseName = courseName;
     this.prereqs = prereqs;
     this.parentIdx = idx
+    this.date = date
 }
 
 function Conjuction(arrayCon) {
@@ -128,6 +129,11 @@ function addSelections() {
             if (termContainers[i].dataset.id == openTermID) {
                 selectedTermContainer = termContainers[i]
                 parentIdx = i
+                termDates = termContainers[i].getElementsByClassName("term-date")
+                date = termDates[0].value
+                if (date == "All Prior Years"){
+                    date = '2000-01-01'
+                }
                 // console.log("selected term container: ", selectedTermContainer)
             }
         }
@@ -146,6 +152,7 @@ function addSelections() {
         classDiv.dataset.id = selectedClass.dataset.id;
         classDiv.dataset.name = selectedClass.dataset.name;
         classDiv.dataset.parentIdx = parentIdx
+        classDiv.dataset.date = date
         classDiv.classList.add("planned-class");
         classDiv.addEventListener("click", function () {
             var detailTextContainer = document.getElementById("detail-text-container");
@@ -202,7 +209,7 @@ function addSelections() {
             }
         }
 
-        var newAddedClass = new addedClass(classDetailArray.courseID, classDetailArray.courseName, classDetailArray.prereqs, parentIdx)
+        var newAddedClass = new addedClass(classDetailArray.courseID, classDetailArray.courseName, classDetailArray.prereqs, parentIdx, date)
         var newClass = new Class(classDetailArray.courseID, classDetailArray.courseName, classDetailArray.prereqs)
         console.log(newAddedClass)
         addedClasses.push(newAddedClass)

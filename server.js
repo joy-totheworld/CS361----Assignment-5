@@ -4,12 +4,147 @@ var exphbs = require("express-handlebars")
 app.engine("handlebars", exphbs.engine({ defaultLayout: "main" }))
 app.set("view engine", "handlebars")
 var hbs = exphbs.create({});
+const zmq = require('zeromq');
 
 hbs.handlebars.registerHelper('idxChecker', function (targetidx, classidx) {
     return targetidx == classidx;
 });
 
-const zmq = require('zeromq');
+var fs = require('fs');
+var bodyParser = require('body-parser')
+
+var classDataAggregate = [];
+var classDataAdded = require("./addedClassData.json")
+
+var classDataMissing = { "classes": [] }
+var classDataMisordered = { "classes": [] }
+
+const classDataAll = require("./classDataAll.json")
+
+// middleware
+app.use(express.static('static'))
+app.use(express.json())
+
+app.listen(3000, function () {
+    console.log("== Server is listening on port 3000");
+});
+
+app.post('/POSTTOSERVER', function (req, res, next) {
+    classDataAdded.classes.push(req.body);
+    console.log(req.body)
+    fs.writeFileSync("./addedClassData.json", JSON.stringify(classDataAdded));
+    res.status(200).json(JSON.stringify(classDataAdded));
+    // console.log(classDataAdded)
+})
+
+app.post('/CLEARPLAN', function (req, res, next) {
+    fs.writeFileSync("./addedClassData.json", '{"classes":[]}');
+    fs.writeFileSync("./misorderedClasses.json", '{"classes":[]}');
+    fs.writeFileSync("./missingClasses.json", '{"classes":[]}');
+    res.status(200);
+    classDataAdded = { "classes": [] }
+    classDataMissing = { "classes": [] }
+    classDataMisordered = { "classes": [] }
+})
+
+app.get('/classData', function (req, res, next) {
+    res.status(200).json(JSON.stringify(classDataAll));
+})
+
+app.get('/REQREPORT', async (req, res) => {
+    request = {
+        'data': classDataAdded.classes,
+        'start_date': '2010-01-01',
+        'end_date': '2080-01-01'
+    }
+    var resultJSON = await callReportGenerator(request)
+    res.status(200).json(JSON.stringify(resultJSON));
+})
+
+app.get('', function (req, res, next) {
+    res.status(200).render("home")
+})
+
+app.get('/classdata', function (req, res, next) {
+    res.status(200).render("classdata")
+})
+
+app.get('/home.html', function (req, res, next) {
+    res.status(200).render("home")
+})
+
+app.get('/review', async (req, res) => {
+    var resultJSON = await callPrereqChecker()
+    // console.log("resultJSON: ", resultJSON)
+    console.log("resultJSON.misorderedClasses: ", resultJSON.misorderedClasses)
+    console.log("resultJSON.missingClasses: ", resultJSON.missingClasses)
+    for (var i = 0; i < (resultJSON.misorderedClasses.length); i++) {
+        if (Array.isArray(resultJSON.misorderedClasses[i].misorderedPrereq)) {
+            resultJSON.misorderedClasses[i].misorderedPrereqs = unnestToString(resultJSON.misorderedClasses[i].misorderedPrereqs)
+        }
+    }
+    for (var i = 0; i < (resultJSON.missingClasses.length); i++) {
+        if (Array.isArray(resultJSON.missingClasses[i].courseID)) {
+            resultJSON.missingClasses[i].courseID = unnestToString(resultJSON.missingClasses[i].courseID)
+        }
+    }
+
+    res.status(200).render("review", {
+        misorderedClasses: resultJSON.misorderedClasses,
+        missingClasses: resultJSON.missingClasses
+    })
+})
+
+app.get('/review.html', async (req, res) => {
+    var resultJSON = await callPrereqChecker()
+    // console.log("resultJSON: ", resultJSON)
+    console.log("resultJSON.misorderedClasses: ", resultJSON.misorderedClasses)
+    console.log("resultJSON.missingClasses: ", resultJSON.missingClasses)
+
+    res.status(200).render("review", {
+        misorderedClasses: resultJSON.misorderedClasses,
+        missingClasses: resultJSON.missingClasses
+    })
+})
+
+app.get('/planner', function (req, res, next) {
+    res.status(200).render("planner", {
+        classes: classDataAggregate,
+        addedClasses: classDataAdded.classes
+    })
+})
+
+app.get('/planner.html', function (req, res, next) {
+    res.status(200).render("planner", {
+        classes: classDataAggregate,
+        addedClasses: classDataAdded.classes
+    })
+})
+
+app.post('/URLFORPREREQS', function (req, res, next) {
+    // console.log("POST request body: ", req.body.courseArray);
+    res.status(200).send()
+    fs.writeFileSync("./classData/CSData.json", JSON.stringify(req.body.courseArray));
+    for (const name of dataNamesAggregate) {
+        currJSON = require("./classData/" + name)
+        classDataAggregate = classDataAggregate.concat(currJSON);
+        // fs.writeFileSync("./classDataAggregate.json", JSON.stringify(classDataAggregate));
+    }
+})
+
+async function callReportGenerator(request) {
+    const sock = new zmq.Request();
+    sock.connect('tcp://localhost:5555');
+
+    await sock.send(JSON.stringify(request));
+    const [result] = await sock.receive();
+    console.log('Received ', result.toString());
+
+    return JSON.parse(result.toString());
+}
+
+
+
 async function callPrereqChecker() {
     const sock = new zmq.Request();
     sock.connect('tcp://localhost:4444');
@@ -87,154 +222,3 @@ function combineWithOr(prereqSubArray) {
     return prereqSubString
 
 }
-
-var fs = require('fs');
-var bodyParser = require('body-parser')
-
-var classDataAggregate = [];
-var classDataAdded = require("./addedClassData.json")
-
-var classDataMissing = { "classes": [] }
-var classDataMisordered = { "classes": [] }
-
-const classDataAll = require("./classDataAll.json")
-// for (const name of dataNamesAggregate) {
-//     currJSON = require("./classData/" + name)
-//     classDataAggregate = classDataAggregate.concat(currJSON);
-//     // fs.writeFileSync("./classDataAggregate.json", JSON.stringify(classDataAggregate));
-// }
-
-
-// middleware
-app.use(express.static('static'))
-app.use(express.json())
-
-app.listen(3000, function () {
-    console.log("== Server is listening on port 3000");
-});
-
-app.post('/POSTTOSERVER', function (req, res, next) {
-    classDataAdded.classes.push(req.body);
-    console.log(req.body)
-    fs.writeFileSync("./addedClassData.json", JSON.stringify(classDataAdded));
-    res.status(200).json(JSON.stringify(classDataAdded));
-    // console.log(classDataAdded)
-})
-
-app.post('/CLEARPLAN', function (req, res, next) {
-    fs.writeFileSync("./addedClassData.json", '{"classes":[]}');
-    fs.writeFileSync("./misorderedClasses.json", '{"classes":[]}');
-    fs.writeFileSync("./missingClasses.json", '{"classes":[]}');
-    res.status(200);
-    classDataAdded = { "classes": [] }
-    classDataMissing = { "classes": [] }
-    classDataMisordered = { "classes": [] }
-})
-
-app.get('/classData', function (req, res, next) {
-    res.status(200).json(JSON.stringify(classDataAll));
-})
-
-app.get('', function (req, res, next) {
-    res.status(200).render("home")
-})
-
-app.get('/classdata', function (req, res, next) {
-    res.status(200).render("classdata")
-})
-
-app.get('/home.html', function (req, res, next) {
-    res.status(200).render("home")
-})
-
-app.get('/review', async (req, res) => {
-    var resultJSON = await callPrereqChecker()
-    // console.log("resultJSON: ", resultJSON)
-    console.log("resultJSON.misorderedClasses: ", resultJSON.misorderedClasses)
-    console.log("resultJSON.missingClasses: ", resultJSON.missingClasses)
-    for (var i = 0; i < (resultJSON.misorderedClasses.length); i++) {
-        if (Array.isArray(resultJSON.misorderedClasses[i].misorderedPrereq)) {
-            resultJSON.misorderedClasses[i].misorderedPrereqs = unnestToString(resultJSON.misorderedClasses[i].misorderedPrereqs)
-        }
-    }
-    for (var i = 0; i < (resultJSON.missingClasses.length); i++) {
-        if (Array.isArray(resultJSON.missingClasses[i].courseID)) {
-            resultJSON.missingClasses[i].courseID = unnestToString(resultJSON.missingClasses[i].courseID)
-        }
-    }
-
-    res.status(200).render("review", {
-        misorderedClasses: resultJSON.misorderedClasses,
-        missingClasses: resultJSON.missingClasses
-    })
-})
-
-app.get('/review.html', async (req, res) => {
-    var resultJSON = await callPrereqChecker()
-    // console.log("resultJSON: ", resultJSON)
-    console.log("resultJSON.misorderedClasses: ", resultJSON.misorderedClasses)
-    console.log("resultJSON.missingClasses: ", resultJSON.missingClasses)
-
-    res.status(200).render("review", {
-        misorderedClasses: resultJSON.misorderedClasses,
-        missingClasses: resultJSON.missingClasses
-    })
-})
-
-app.get('/planner', function (req, res, next) {
-    res.status(200).render("planner", {
-        classes: classDataAggregate,
-        addedClasses: classDataAdded.classes
-    })
-})
-
-app.get('/planner.html', function (req, res, next) {
-    res.status(200).render("planner", {
-        classes: classDataAggregate,
-        addedClasses: classDataAdded.classes
-    })
-})
-
-app.post('/URLFORPREREQS', function (req, res, next) {
-    // console.log("POST request body: ", req.body.courseArray);
-    res.status(200).send()
-    fs.writeFileSync("./classData/CSData.json", JSON.stringify(req.body.courseArray));
-    for (const name of dataNamesAggregate) {
-        currJSON = require("./classData/" + name)
-        classDataAggregate = classDataAggregate.concat(currJSON);
-        // fs.writeFileSync("./classDataAggregate.json", JSON.stringify(classDataAggregate));
-    }
-
-})
-
-
-
-// app.get('/classDataMTH', function (req, res, next) {
-//     res.status(200).json(JSON.stringify(classDataMTH));
-// })
-
-
-// app.post('/CSDATA', function (req, res, next) {
-//     // console.log("POST request body: ", req.body.courseArray);
-//     res.status(200).send()
-//     fs.writeFileSync("./classData/CSData.json", JSON.stringify(req.body.courseArray));
-//     for (const name of dataNamesAggregate) {
-//         currJSON = require("./classData/" + name)
-//         classDataAggregate = classDataAggregate.concat(currJSON);
-//         // fs.writeFileSync("./classDataAggregate.json", JSON.stringify(classDataAggregate));
-//     }
-
-// })
-
-// app.post('/MTHDATA', function (req, res, next) {
-//     // console.log("POST request body: ", req.body.courseArray);
-//     res.status(200).send()
-//     fs.writeFileSync("./classData/MTHData.json", JSON.stringify(req.body.courseArray));
-//     const dataNamesAggregate = fs.readdirSync("./classData");
-//     for (const name of dataNamesAggregate) {
-//         currJSON = require("./classData/" + name)
-//         classDataAggregate = classDataAggregate.concat(currJSON);
-//         // fs.writeFileSync("./classDataAggregate.json", JSON.stringify(classDataAggregate));
-//     }
-// 
-// })
