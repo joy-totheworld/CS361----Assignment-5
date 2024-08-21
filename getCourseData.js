@@ -16,7 +16,7 @@ async function runServer() {
     //   allClassJSON = more
     //   more = fs.readFileSync('./classDataAll.json')
     // }
-    console.log(allClassJSON)
+    // console.log(allClassJSON)
     await sock.send(allClassJSON)
   }
 }
@@ -659,22 +659,64 @@ function recursivePass(mixedArray, originalstring) {
                 currEl = currEl.replaceAll("or", "").trim()
               }
 
-              // stop when "(" is found
+              // stop when element containing "(" is found
               if (currEl.match(/[(]/) != null) {
+                // console.log("found at ", q)
                 nextIdx = q
 
-                // add to temporary, remove from source
-                currEl = currEl.substring(currEl.match(/[(]/).index + 1)
-                included.unshift(currEl)
-                deleted = mixedArray.splice(q, 1)
+                nextEl = currEl.substring(currEl.match(/[(]/).index + 1)
 
-                q = -1
+                // case where first "(" is only one in element, with no text after
+                if (currEl.trim() == "(") {
+                  deleted = mixedArray.splice(q, 1)
+                }
+                // case where first "(" is not the only one in element
+                else if (nextEl.match(/[(]/) != null) {
+                  // stop at last '(' in element
+                  lastDefinedSubstring = ''
+                  while (nextEl.match(/[(]/) != null) {
+                    lastDefinedSubstring = nextEl
+                    nextEl = nextEl.substring(currEl.match(/[(]/).index + 1)
+                  }
+
+                  // replace source element with trimmed version removing last "("
+                  if (lastDefinedSubstring.trim() == "(") {
+                    // console.log("mixedArray[q]", mixedArray[q])
+                    // console.log("currEl.trim().substring(0, currEl.length -1)", currEl.trim().substring(0, currEl.length - 1))
+                    mixedArray[q].splice = currEl.trim().substring(0, currEl.length - 1)
+                  }
+                  else {
+                  // add to substring after last "(" to temporary
+                    // console.log("lastDefinedSubstring.trim", lastDefinedSubstring.trim())
+                    // console.log("lastDefinedSubstring.trim().substring(1)", lastDefinedSubstring.trim().substring(1))
+                    included.unshift(lastDefinedSubstring.trim().substring(1))
+                    console.log(currEl.match(/lastDefinedSubstring/))
+
+                  // replace source with substring before last "("
+                    findSplitString = currEl.match(/[(]/) + "EndEnd"
+                    lastMatchString = lastDefinedSubstring + "EndEnd"
+                    // console.log("currEl.substring(0, currEl.match(lastMatchString))", currEl.substring(0, currEl.match(lastMatchString)-1))
+                    // console.log("currEl", currEl)
+                    mixedArray[q] = currEl.substring(0, currEl.match(lastMatchString))
+                  }
+
+
+                }
+                // case where first "(" is only one in element, with text after
+                else {
+                  // add to substring after "(" to temporary, remove element from source
+                  afterSubstring = currEl.substring(currEl.match(/[(]/).index + 1)
+                  included.unshift(afterSubstring)
+                  deleted = mixedArray.splice(q, 1)
+                  // console.log(included)
+                }
+
                 break
               }
               else if (currEl.indexOf("(") > -1) {
                 nextIdx = q
 
-                if (currEl.trim == "(") {
+                if (currEl.trim() == "(") {
                   deleted = mixedArray.splice(q, 1)
                 }
                 else {

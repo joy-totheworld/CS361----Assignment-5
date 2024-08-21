@@ -156,7 +156,7 @@ async function callGetCourseData() {
     console.log('sending')
     await sock.send("");
     const [result] = await sock.receive();
-    // console.log('Received ', result.toString());
+    console.log('Received ', result.toString());
 
     return JSON.parse(result.toString());
 }
