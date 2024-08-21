@@ -237,27 +237,6 @@ function addSelections() {
 function unnestToString(prereqArray) {
     var prereqString = ""
     console.log(prereqArray)
-    // if (prereqArray.length > 1) {
-    //     for (var i = 0; i < (prereqArray.length - 1); i++) {
-    //         if (Array.isArray(prereqArray[i])) {
-    //             prereqString = prereqString + combineWithOr((prereqArray[i])) + " and "
-    //         } else {
-    //             prereqString = prereqString + prereqArray[i] + " and "
-    //         }
-    //     }
-    //     if (Array.isArray(prereqArray[prereqArray.length - 1])) {
-    //         prereqString = prereqString + combineWithOr((prereqArray[prereqArray.length - 1]))
-    //     } else {
-    //         prereqString = prereqString + " and " + prereqArray[prereqArray.length - 1]
-    //     }
-    // } else {
-    //     if (Array.isArray(prereqArray[prereqArray.length - 1])) {
-    //         prereqString = combineWithOr((prereqArray[prereqArray.length - 1]))
-    //     } else {
-    //         prereqString = prereqArray[prereqArray.length - 1]
-    //     }
-    // }
-
     if (typeof prereqArray == "string") {
         return prereqArray
     }
@@ -271,9 +250,7 @@ function unnestToString(prereqArray) {
         // console.log("typeof tryDis ",typeof tryDis )
         if (tryDis != undefined) { return combineWithOr(tryDis) }
         if (tryCon != undefined) { return combineWithAnd(tryCon) }
-
     }
-
     return prereqString
 }
 

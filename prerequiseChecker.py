@@ -20,29 +20,146 @@ def processDisjunction(inputList, allCourses):
                     matchidx = j
     return [found, matchidx]
 
+def combineWithAnd(prereqSubArray) :
+    print("prereqSubArray (and)", prereqSubArray)
 
-def processString(inputList):
-    processed = inputList
-    # processing strings
-    for i in range(len(inputList)):
-        if isinstance(inputList[i], list):
-            processed[i] = processString(inputList[i])
+    if isinstance(prereqSubArray, str):
+        return prereqSubArray
+    
+    elif (len(prereqSubArray) > 0):
+        prereqSubString = "("
+
+        if isinstance(prereqSubArray[0], str):
+            prereqSubString = prereqSubString + prereqSubArray[0]
         else:
-            processed[i]["courseID"] = inputList[i]["courseID"].replace("\xa0", " ")
-            processed[i]["prereqs"] = processPrereqString(inputList[i]["prereqs"])
+            prereqSubString = prereqSubString + processPrereqString(prereqSubArray[0])
+            
+        for i in range(len(prereqSubArray)):
+            if isinstance(prereqSubArray[i], str):
+                prereqSubString = prereqSubString + " and " +  prereqSubArray[i]
+            else:
+                prereqSubString = prereqSubString + " and " + processPrereqString(prereqSubArray[i])
+                
+        prereqSubString = prereqSubString + ")"
+        return prereqSubString
+
+def combineWithOr(prereqSubArray) :
+    print("prereqSubArray (and)", prereqSubArray)
+
+    if isinstance(prereqSubArray, str):
+        return prereqSubArray
+    
+    elif (len(prereqSubArray) > 0):
+        prereqSubString = "("
+
+        if isinstance(prereqSubArray[0], str):
+            prereqSubString = prereqSubString + prereqSubArray[0]
+        else:
+            prereqSubString = prereqSubString + processPrereqString(prereqSubArray[0])
+            
+        for i in range(len(prereqSubArray)):
+            if isinstance(prereqSubArray[i], str):
+                prereqSubString = prereqSubString + " or " +  prereqSubArray[i]
+            else:
+                prereqSubString = prereqSubString + " or " + processPrereqString(prereqSubArray[i])
+                
+        prereqSubString = prereqSubString + ")"
+        return prereqSubString
+    
+def processStrings(plannedArray):
+    processed = plannedArray
+    # print("plannedArray", plannedArray)
+    # print("len(plannedArray)", len(plannedArray))
+    
+    for stringsIdx in range(len(plannedArray)):
+        # print("plannedArray[i]", plannedArray[stringsIdx])
+
+        typePrereq = set(list(plannedArray[stringsIdx].keys()))
+        booID = "courseID" in typePrereq
+        booPrereqs = "prereqs" in typePrereq
+            
+        if (booID):
+            # print("ID logic works")
+            processed[stringsIdx]["courseID"] = plannedArray[stringsIdx]["courseID"].replace("\xa0", " ")
+        if (booPrereqs):
+            # print("Prereqs logic works: ",plannedArray[stringsIdx]["prereqs"])
+            prereqArr = plannedArray[stringsIdx]["prereqs"]
+            if (len(prereqArr)> 0 ):
+                processed[stringsIdx]["prereqs"] = processPrereqString(plannedArray[stringsIdx]["prereqs"][0])
     return processed
 
-def processPrereqString(inputList):
-    processed = inputList
-    # processing strings
-    for i in range(len(inputList)):
-        if isinstance(inputList[i], list):
-            processed[i] = processPrereqString(inputList[i])
-            print("recurse on: ", inputList[i])
-        else:
-            print("processing: ", inputList[i])
-            processed[i] = inputList[i].replace("\xa0", " ")
-    return processed
+def processPrereqString(plannedArray):
+    # print("processPrereqString argument: ",plannedArray)
+    if isinstance(plannedArray, str):
+        return plannedArray.replace("\xa0", " ")
+    else:
+        typePrereq = set(list(plannedArray.keys()))
+        tryCon = "arrayCon" in typePrereq
+        tryDis = "arrayDis" in typePrereq
+        
+        if (tryCon):
+            for i in range(len(plannedArray["arrayCon"])):
+                plannedArray["arrayCon"][i] = processPrereqString(plannedArray["arrayCon"][i])
+            return plannedArray
+        elif (tryDis):
+            for i in range(len(plannedArray["arrayDis"])):
+                plannedArray["arrayDis"][i] = processPrereqString(plannedArray["arrayDis"][i])
+            return plannedArray
+        
+def lookForMatchInPlanned(prereqObj, requiredFor, parentIdx,plannedArray):
+    found = False
+    prior = False
+    missingClasses = []
+    misorderedClasses = []
+    
+
+    
+    if isinstance(prereqObj, str):
+        for i in range(len(plannedArray)):
+            if (prereqObj.strip() == plannedArray[i]["courseID"].strip()):
+                found = True
+                if (plannedArray[i]["parentIdx"] < parentIdx):
+                    prior == True
+                
+        if (found == False):
+            missingClasses.append({"courseID": prereqObj, "requiredFor": requiredFor})
+        elif (prior == False):
+            misorderedClasses.append({"misorderedPrereqs":prereqObj, "requiredFor": requiredFor})
+        return [missingClasses, misorderedClasses, found, prior]
+    elif isinstance(prereqObj, list):
+        return [[],[], False, False]
+    else: 
+        # print(prereqObj)
+        typePrereq = set(list(prereqObj.keys()))
+        tryCon = "arrayCon" in typePrereq
+        tryDis = "arrayDis" in typePrereq
+        if (tryCon):
+            unnest = prereqObj["arrayCon"]
+            for j in range(len(unnest)):
+                processedCon = lookForMatchInPlanned(unnest[j], requiredFor, parentIdx, plannedArray)
+                missingClasses = missingClasses + processedCon[0]
+                misorderedClasses = misorderedClasses + processedCon[1]
+        elif (tryDis):
+            unnest = prereqObj["arrayDis"]
+            foundAny = False
+            priorAny = True
+            subMissing = []
+            subMisordered = []
+            for j in range(len(unnest)):
+                processedDis = lookForMatchInPlanned(unnest[j], requiredFor, parentIdx, plannedArray)
+                foundSub = processedDis[2]
+                priorSub = processedDis[3]
+                if (found):
+                    foundAny = True
+                if (prior):
+                    priorAny = True
+                subMissing = subMissing + processedDis[0]
+                subMisordered = subMisordered + processedDis[1]
+            if (foundAny == False):
+                missingClasses = subMissing
+            elif (priorAny == False):
+                misorderedClasses = [subMisordered]
+        return [missingClasses, misorderedClasses, found, prior]
         
 while True:
     plannedClasses = []
@@ -51,112 +168,30 @@ while True:
 
     message = socket.recv_json()
     # message = message.replace("\xa0", " ")
-    print('message["planned"]: ', message["planned"])
+    # print('message["planned"]: ', message["planned"])
+    # print()
     plannedClasses = message["planned"]
-    
         
-    processString(plannedClasses)
+    plannedClasses = processStrings(plannedClasses)
         
-    print()
+    # print()
     print('plannedClasses: ', plannedClasses)
-    print()
-    print('len(plannedClasses): ', len(plannedClasses))
-    print('plannedClasses[0]: ', plannedClasses[0])
+    # print()
+    print('len(plannedClasses): ', len(plannedClasses))    
     
-    
-    # looking for missing and misordered prereqs
+    # looking for missing and misordered prereqs for each planned class
     for i in range(len(plannedClasses)):
-        for j in range (len(plannedClasses[i]["prereqs"])):
-            found = False
-            prior = False
-            if isinstance(plannedClasses[i]["prereqs"][j], list):
-                    matchidx = 99999999
-                    foundArray = processDisjunction(plannedClasses[i]["prereqs"][j], plannedClasses)
-                    if (foundArray[0] == True):
-                        found = True
-                        matchidx = foundArray[1]
-                        # (idx of requiring class > idx of required class) for true
-                        if (plannedClasses[i]["parentIdx"] > matchidx):
-                            prior = True
-                    plannedClasses[i]["prereqs"][j] = plannedClasses[i]["prereqs"][j][0]
-            else:
-                for k in range(len(plannedClasses)):
-                    if (plannedClasses[i]["prereqs"][j] == plannedClasses[k]["courseID"]):
-                        found = True
-                        # print("plannedClasses[k]: ", plannedClasses[k])
-                        # (idx of requiring class > idx of required class) for true
-                        if (plannedClasses[i]["parentIdx"] > plannedClasses[k]["parentIdx"]):
-                            prior = True
-            if (found == False):
-                missingClasses.append({"courseID": plannedClasses[i]["prereqs"][j], "requiredFor": plannedClasses[i]["courseID"]})
-            elif (prior == False):
-                misorderedClasses.append({"misorderedPrereqs":plannedClasses[i]["prereqs"][j], "requiredFor": plannedClasses[i]["courseID"]})
-                # print(plannedClasses[i]["prereqs"][j], " is a misordered req for ", plannedClasses[i]["courseID"])
-                # print(plannedClasses[i]["parentIdx"], " is the term idx of ", plannedClasses[i]["courseID"])
-                # print('misorderedClasses: ', misorderedClasses)
-                
+        accumulator = lookForMatchInPlanned(plannedClasses[i]["prereqs"], plannedClasses[i]["courseID"], plannedClasses[i]["parentIdx"], plannedClasses)
+        missingClasses = missingClasses+accumulator[0]
+        misorderedClasses = misorderedClasses+accumulator[1]    
     
     print()
     print('missingClasses: ', missingClasses)
     print()
     print('misorderedClasses: ', misorderedClasses)
     print()
-    print('json.dumps: ', json.dumps({"missingClasses": missingClasses, "misorderedClasses": misorderedClasses}))
+    print('json reply: ', json.dumps({"missingClasses": missingClasses, "misorderedClasses": misorderedClasses}))
     socket.send_string(json.dumps({"missingClasses": missingClasses, "misorderedClasses": misorderedClasses}))
-    
-    
-                
-                
-                
-          
-        
-
-    # if (message["sender"] == "task-manager"):
-    #     taskManagerSubscriptions = message["services"]
-    # elif (message["sender"] == "subscription-tracker"):
-    #     subscriptionTrackerSubscriptions = message["services"]
-
-    # for i in range(len(subscriptionTrackerSubscriptions)):
-    #     used = 0
-    #     for j in range(len(taskManagerSubscriptions)):
-    #         if (subscriptionTrackerSubscriptions[i]==taskManagerSubscriptions[j]):
-    #             UsedSubscriptions.append(subscriptionTrackerSubscriptions[i])
-    #             used = 1
-    #             j = len(taskManagerSubscriptions)
-        
-    #     if (used == 0):
-    #         UnusedSubscriptions.append(subscriptionTrackerSubscriptions[i])
-
-    # for j in range(len(taskManagerSubscriptions)):
-    #     exsisting = 0
-    #     for i in range(len(subscriptionTrackerSubscriptions)):
-    #         if (subscriptionTrackerSubscriptions[i]==taskManagerSubscriptions[j]):
-    #             exsisting = 1
-    #             i = len(subscriptionTrackerSubscriptions)
-        
-    #     if (exsisting == 0):
-    #         NeededSubscriptions.append(taskManagerSubscriptions[j])
-
-    # print("UsedSubscriptions: ")
-    # print(UsedSubscriptions)
-    # print("UnusedSubscriptions: ")
-    # print(UnusedSubscriptions)
-    # print("NeededSubscriptions: ")
-    # print(NeededSubscriptions)
-    
-    # if (message["requested"] == "Used"):
-    #     print("Sent UsedSubscriptions")
-    #     socket.send_json({"error": "no", "subscriptions": UsedSubscriptions})
-    # elif (message["requested"] == "Unused"):
-    #     print("Sent UnusedSubscriptions")
-    #     socket.send_json({"error": "no", "subscriptions": UnusedSubscriptions})
-    # elif (message["requested"] == "Needed"):
-    #     print("Sent NeededSubscriptions")
-    #     socket.send_json({"error": "no", "subscriptions": NeededSubscriptions})
-    # else:
-    #     print("Sent Error")
-    #     socket.send_json({"error": "yes", "subscriptions": []})
-        
         
 
 

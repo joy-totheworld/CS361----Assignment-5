@@ -10,3 +10,11 @@ function addedClass(courseID, courseName, prereqs, idx) {
     this.prereqs = prereqs;
     this.parentIdx = idx
 }
+
+function Conjuction(arrayCon) {
+    this.arrayCon = arrayCon
+}
+
+function Disjunction(arrayDis) {
+    this.arrayDis = arrayDis
+}
