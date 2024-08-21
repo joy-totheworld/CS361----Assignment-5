@@ -18,8 +18,8 @@ var classDataAdded = require("./addedClassData.json")
 
 var classDataMissing = { "classes": [] }
 var classDataMisordered = { "classes": [] }
-
-const classDataAll = require("./classDataAll.json")
+classDataAll = []
+// const classDataAll = require("./classDataAll.json")
 
 // middleware
 app.use(express.static('static'))
@@ -59,6 +59,12 @@ app.get('/REQREPORT', async (req, res) => {
     }
     var resultJSON = await callReportGenerator(request)
     res.status(200).json(JSON.stringify(resultJSON));
+})
+
+app.post('/UPDATECOURSEDATA', async (req, res,next) => {
+    var allCourseJSON = await callGetCourseData()
+    classDataAll = allCourseJSON
+    res.status(200).json(JSON.stringify(allCourseJSON));
 })
 
 app.get('', function (req, res, next) {
@@ -143,6 +149,17 @@ async function callReportGenerator(request) {
     return JSON.parse(result.toString());
 }
 
+async function callGetCourseData() {
+    const sock = new zmq.Request();
+    sock.connect('tcp://localhost:6666');
+
+    console.log('sending')
+    await sock.send("");
+    const [result] = await sock.receive();
+    // console.log('Received ', result.toString());
+
+    return JSON.parse(result.toString());
+}
 
 
 async function callPrereqChecker() {

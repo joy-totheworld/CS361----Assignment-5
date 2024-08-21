@@ -1,8 +1,27 @@
 var fs = require('fs');
 var bodyParser = require('body-parser');
 const { lookupService } = require('dns/promises');
+const zmq = require('zeromq');
 
-getData()
+async function runServer() {
+  const sock = new zmq.Reply();
+  await sock.bind('tcp://localhost:6666');
+
+  while (true) {
+    const [result] = await sock.receive();
+    getData()
+    allClassJSON = fs.readFileSync('./classDataAll.json')
+    // more = allClassJSON
+    // while (more != ""){
+    //   allClassJSON = more
+    //   more = fs.readFileSync('./classDataAll.json')
+    // }
+    console.log(allClassJSON)
+    await sock.send(allClassJSON)
+  }
+}
+
+runServer()
 
 function getData() {
   // credit for following function, referenced:
@@ -29,7 +48,7 @@ function getData() {
     // for (var i = 38; i < 39; i += 1) {
     for (var i = 0; i < linkStrings.length; i += 1) {
       setTimeout(() => { }, 1000);
-      console.log("getting course data from: ",linkStrings[i])
+      console.log("getting course data from: ", linkStrings[i])
 
       var deptPromise = fetch(linkStrings[i]).then((response) => {
         if (response.ok) {
@@ -413,7 +432,6 @@ function disjunctionCheck(stringD) {
 }
 
 
-
 function processAsStack(sourceArray, originalstring) {
   sourceStack = sourceArray.flat()
   // console.log(sourceStack)
@@ -735,6 +753,9 @@ function recursivePass(mixedArray, originalstring) {
               mixedArray.upshift(newCon)
             }
             else if (disjunction == true) {
+              console.log(mixedArray.length)
+              console.log(nextIdx)
+              console.log(originalstring)
               newDis = new Disjunction(included.filter(isEmpty))
               mixedArray.upshift(newDis)
             }
